@@ -1,0 +1,288 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{D9D6E242-F8AF-46E4-B9FD-80ECBC20BA3E}</UniqueIdentifier>
+      <Extensions>qrc;*</Extensions>
+      <ParseFiles>false</ParseFiles>
+    </Filter>
+    <Filter Include="Generated Files">
+      <UniqueIdentifier>{71ED8ED8-ACB9-4CE9-BBE1-E00B30144E11}</UniqueIdentifier>
+      <Extensions>moc;h;cpp</Extensions>
+      <SourceControlFiles>False</SourceControlFiles>
+    </Filter>
+    <Filter Include="Generated Files\Debug">
+      <UniqueIdentifier>{8136be58-daff-444e-bb6d-d8f6e9c3fc66}</UniqueIdentifier>
+      <Extensions>cpp;moc</Extensions>
+      <SourceControlFiles>False</SourceControlFiles>
+    </Filter>
+    <Filter Include="Generated Files\Release">
+      <UniqueIdentifier>{10b07fe3-9182-4aec-85cf-c23b88b37637}</UniqueIdentifier>
+      <Extensions>cpp;moc</Extensions>
+      <SourceControlFiles>False</SourceControlFiles>
+    </Filter>
+    <Filter Include="Common">
+      <UniqueIdentifier>{a709ed22-9f2b-4b2a-8d52-710a368e991c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="PluginButtons">
+      <UniqueIdentifier>{80e5e6ba-10b6-4a2c-8d0e-2fd091d2d476}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="RengaEvents">
+      <UniqueIdentifier>{4c1dd609-4b16-4bbd-972b-6d64abe8ebfe}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MainDialog">
+      <UniqueIdentifier>{de4773aa-7ad9-4d53-bcd0-ce13f200b958}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="FilterDialog">
+      <UniqueIdentifier>{a622ed2b-990f-4f5b-bd90-f02e4da20cc6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GroupDialog">
+      <UniqueIdentifier>{60afe6f3-9bad-4226-9308-2c0269909827}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ModelObjects">
+      <UniqueIdentifier>{1826503f-5be1-4919-b670-e263f242ba5a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="FilterData">
+      <UniqueIdentifier>{a82d6f78-5092-452e-8174-2d3a79e90a9a}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="RengaStringToQString.cpp">
+      <Filter>Common</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_PluginToolButtons.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_PluginToolButtons.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="PluginToolButtons.cpp">
+      <Filter>PluginButtons</Filter>
+    </ClCompile>
+    <ClCompile Include="stdafx.cpp" />
+    <ClCompile Include="GeneratedFiles\Debug\moc_FiltersButtonHandler.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_FiltersButtonHandler.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="FiltersButtonHandler.cpp">
+      <Filter>PluginButtons</Filter>
+    </ClCompile>
+    <ClCompile Include="RengaEventsHandler.cpp">
+      <Filter>RengaEvents</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_RengaEventsHandler.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_RengaEventsHandler.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\qrc_resource.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GroupDialog.cpp">
+      <Filter>GroupDialog</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_GroupDialog.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_GroupDialog.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="ObjectPropertyBuilder.cpp">
+      <Filter>ModelObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjectPropertyBuilderFactory.cpp">
+      <Filter>ModelObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="BeamPropertyBuilder.cpp">
+      <Filter>ModelObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="ColumnPropertyBuilder.cpp">
+      <Filter>ModelObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="DoorPropertyBuilder.cpp">
+      <Filter>ModelObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="FloorPropertyBuilder.cpp">
+      <Filter>ModelObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="IsolatedFoundationPropertyBuilder.cpp">
+      <Filter>ModelObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="LevelPropertyBuilder.cpp">
+      <Filter>ModelObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="OpeningPropertyBuilder.cpp">
+      <Filter>ModelObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="RailingPropertyBuilder.cpp">
+      <Filter>ModelObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="RampPropertyBuilder.cpp">
+      <Filter>ModelObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="RoofPropertyBuilder.cpp">
+      <Filter>ModelObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="RoomPropertyBuilder.cpp">
+      <Filter>ModelObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="StairPropertyBuilder.cpp">
+      <Filter>ModelObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="WallFoundationPropertyBuilder.cpp">
+      <Filter>ModelObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="WallPropertyBuilder.cpp">
+      <Filter>ModelObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="WindowPropertyBuilder.cpp">
+      <Filter>ModelObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_FiltersPlugin.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_FiltersPlugin.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="FiltersPlugin.cpp" />
+    <ClCompile Include="MainDialog.cpp">
+      <Filter>MainDialog</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_MainDialog.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_MainDialog.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="FilterDialog.cpp">
+      <Filter>FilterDialog</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_FilterDialog.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_FilterDialog.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="FilterData.cpp">
+      <Filter>FilterData</Filter>
+    </ClCompile>
+    <ClCompile Include="NameGenerator.cpp">
+      <Filter>FilterData</Filter>
+    </ClCompile>
+    <ClCompile Include="TypeData.cpp">
+      <Filter>FilterData</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="RengaStringToQString.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="stdafx.h" />
+    <ClInclude Include="GeneratedFiles\ui_MainDialog.h">
+      <Filter>Generated Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GeneratedFiles\ui_FilterDialog.h">
+      <Filter>Generated Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GeneratedFiles\ui_GroupDialog.h">
+      <Filter>Generated Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjectPropertyBuilder.h">
+      <Filter>ModelObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjectPropertyBuilderFactory.h">
+      <Filter>ModelObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="BeamPropertyBuilder.h">
+      <Filter>ModelObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="ColumnPropertyBuilder.h">
+      <Filter>ModelObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="DoorPropertyBuilder.h">
+      <Filter>ModelObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="FloorPropertyBuilder.h">
+      <Filter>ModelObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="IsolatedFoundationPropertyBuilder.h">
+      <Filter>ModelObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="LevelPropertyBuilder.h">
+      <Filter>ModelObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="OpeningPropertyBuilder.h">
+      <Filter>ModelObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="RailingPropertyBuilder.h">
+      <Filter>ModelObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="RampPropertyBuilder.h">
+      <Filter>ModelObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="RoofPropertyBuilder.h">
+      <Filter>ModelObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="RoomPropertyBuilder.h">
+      <Filter>ModelObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="StairPropertyBuilder.h">
+      <Filter>ModelObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="WallFoundationPropertyBuilder.h">
+      <Filter>ModelObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="WallPropertyBuilder.h">
+      <Filter>ModelObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="WindowPropertyBuilder.h">
+      <Filter>ModelObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="NameGenerator.h">
+      <Filter>FilterData</Filter>
+    </ClInclude>
+    <ClInclude Include="TypeData.h">
+      <Filter>FilterData</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="PluginToolButtons.h">
+      <Filter>PluginButtons</Filter>
+    </CustomBuild>
+    <CustomBuild Include="FiltersButtonHandler.h">
+      <Filter>PluginButtons</Filter>
+    </CustomBuild>
+    <CustomBuild Include="RengaEventsHandler.h">
+      <Filter>RengaEvents</Filter>
+    </CustomBuild>
+    <CustomBuild Include="Resources\resource.qrc">
+      <Filter>Resource Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="Resources\ui\MainDialog.ui">
+      <Filter>Resource Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="Resources\ui\FilterDialog.ui">
+      <Filter>Resource Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="Resources\ui\GroupDialog.ui">
+      <Filter>Resource Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="GroupDialog.h">
+      <Filter>GroupDialog</Filter>
+    </CustomBuild>
+    <CustomBuild Include="FiltersPlugin.h" />
+    <CustomBuild Include="MainDialog.h">
+      <Filter>MainDialog</Filter>
+    </CustomBuild>
+    <CustomBuild Include="FilterDialog.h">
+      <Filter>FilterDialog</Filter>
+    </CustomBuild>
+    <CustomBuild Include="FilterData.h">
+      <Filter>FilterData</Filter>
+    </CustomBuild>
+  </ItemGroup>
+</Project>

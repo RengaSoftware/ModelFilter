@@ -1,0 +1,871 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainDialog</class>
+ <widget class="QDialog" name="MainDialog">
+  <property name="windowModality">
+   <enum>Qt::ApplicationModal</enum>
+  </property>
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>317</width>
+    <height>582</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>WindowName</string>
+  </property>
+  <property name="modal">
+   <bool>true</bool>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <property name="spacing">
+    <number>11</number>
+   </property>
+   <property name="leftMargin">
+    <number>11</number>
+   </property>
+   <property name="topMargin">
+    <number>2</number>
+   </property>
+   <property name="rightMargin">
+    <number>11</number>
+   </property>
+   <property name="bottomMargin">
+    <number>11</number>
+   </property>
+   <item>
+    <layout class="QVBoxLayout" name="FiltersListLayout">
+     <property name="spacing">
+      <number>2</number>
+     </property>
+     <item>
+      <layout class="QHBoxLayout" name="buttonsLayout">
+       <property name="spacing">
+        <number>0</number>
+       </property>
+       <property name="sizeConstraint">
+        <enum>QLayout::SetFixedSize</enum>
+       </property>
+       <item>
+        <widget class="QPushButton" name="addButton">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>32</width>
+           <height>32</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>32</width>
+           <height>32</height>
+          </size>
+         </property>
+         <property name="focusPolicy">
+          <enum>Qt::StrongFocus</enum>
+         </property>
+         <property name="toolTip">
+          <string>addToolTip</string>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QPushButton{
+background-color: rgba(0, 0, 0, 0);
+border: none;
+}
+
+QPushButton:checked {
+border: 1px solid rgb(88, 158, 229);
+background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 rgb(218, 236, 252), stop:1 rgb(196, 224, 252));
+}
+
+QPushButton:hover:!pressed{
+background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 rgb(236, 244, 252), stop:1 rgb(220, 236, 252));
+border: 1px solid rgb(126, 180, 234);
+}
+
+QPushButton:hover:pressed {
+border: 1px solid rgb(88, 158, 229);
+background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 rgb(218, 236, 252), stop:1 rgb(196, 224, 252));
+}
+
+QPushButton:checked:hover {
+border: 1px solid rgb(88, 158, 229);
+background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 rgb(218, 236, 252), stop:1 rgb(196, 224, 252));
+}
+
+QPushButton:focus{
+background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 rgb(236, 244, 252), stop:1 rgb(220, 236, 252));
+border: 1px solid rgb(126, 180, 234);
+}
+
+QPushButton:checked:focus{
+border: 1px solid rgb(88, 158, 229);
+background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 rgb(218, 236, 252), stop:1 rgb(196, 224, 252));
+}
+
+QPushButton:checked:hover:focus{
+border: 1px solid rgb(88, 158, 229);
+background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 rgb(218, 236, 252), stop:1 rgb(196, 224, 252));
+}</string>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+         <property name="icon">
+          <iconset resource="../resource.qrc">
+           <normaloff>:/icons/Add.png</normaloff>:/icons/Add.png</iconset>
+         </property>
+         <property name="iconSize">
+          <size>
+           <width>24</width>
+           <height>24</height>
+          </size>
+         </property>
+         <property name="autoDefault">
+          <bool>false</bool>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="copyButton">
+         <property name="enabled">
+          <bool>false</bool>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>32</width>
+           <height>32</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>32</width>
+           <height>32</height>
+          </size>
+         </property>
+         <property name="focusPolicy">
+          <enum>Qt::StrongFocus</enum>
+         </property>
+         <property name="toolTip">
+          <string>copyToolTip</string>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QPushButton{
+background-color: rgba(0, 0, 0, 0);
+border: none;
+}
+
+QPushButton:checked {
+border: 1px solid rgb(88, 158, 229);
+background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 rgb(218, 236, 252), stop:1 rgb(196, 224, 252));
+}
+
+QPushButton:hover:!pressed{
+background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 rgb(236, 244, 252), stop:1 rgb(220, 236, 252));
+border: 1px solid rgb(126, 180, 234);
+}
+
+QPushButton:hover:pressed {
+border: 1px solid rgb(88, 158, 229);
+background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 rgb(218, 236, 252), stop:1 rgb(196, 224, 252));
+}
+
+QPushButton:checked:hover {
+border: 1px solid rgb(88, 158, 229);
+background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 rgb(218, 236, 252), stop:1 rgb(196, 224, 252));
+}
+
+QPushButton:focus{
+background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 rgb(236, 244, 252), stop:1 rgb(220, 236, 252));
+border: 1px solid rgb(126, 180, 234);
+}
+
+QPushButton:checked:focus{
+border: 1px solid rgb(88, 158, 229);
+background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 rgb(218, 236, 252), stop:1 rgb(196, 224, 252));
+}
+
+QPushButton:checked:hover:focus{
+border: 1px solid rgb(88, 158, 229);
+background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 rgb(218, 236, 252), stop:1 rgb(196, 224, 252));
+}</string>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+         <property name="icon">
+          <iconset resource="../resource.qrc">
+           <normaloff>:/icons/Copy.png</normaloff>:/icons/Copy.png</iconset>
+         </property>
+         <property name="iconSize">
+          <size>
+           <width>24</width>
+           <height>24</height>
+          </size>
+         </property>
+         <property name="autoDefault">
+          <bool>false</bool>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="editButton">
+         <property name="enabled">
+          <bool>false</bool>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>32</width>
+           <height>32</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>32</width>
+           <height>32</height>
+          </size>
+         </property>
+         <property name="focusPolicy">
+          <enum>Qt::StrongFocus</enum>
+         </property>
+         <property name="toolTip">
+          <string>editToolTip</string>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QPushButton{
+background-color: rgba(0, 0, 0, 0);
+border: none;
+}
+
+QPushButton:checked {
+border: 1px solid rgb(88, 158, 229);
+background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 rgb(218, 236, 252), stop:1 rgb(196, 224, 252));
+}
+
+QPushButton:hover:!pressed{
+background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 rgb(236, 244, 252), stop:1 rgb(220, 236, 252));
+border: 1px solid rgb(126, 180, 234);
+}
+
+QPushButton:hover:pressed {
+border: 1px solid rgb(88, 158, 229);
+background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 rgb(218, 236, 252), stop:1 rgb(196, 224, 252));
+}
+
+QPushButton:checked:hover {
+border: 1px solid rgb(88, 158, 229);
+background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 rgb(218, 236, 252), stop:1 rgb(196, 224, 252));
+}
+
+QPushButton:focus{
+background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 rgb(236, 244, 252), stop:1 rgb(220, 236, 252));
+border: 1px solid rgb(126, 180, 234);
+}
+
+QPushButton:checked:focus{
+border: 1px solid rgb(88, 158, 229);
+background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 rgb(218, 236, 252), stop:1 rgb(196, 224, 252));
+}
+
+QPushButton:checked:hover:focus{
+border: 1px solid rgb(88, 158, 229);
+background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 rgb(218, 236, 252), stop:1 rgb(196, 224, 252));
+}</string>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+         <property name="icon">
+          <iconset resource="../resource.qrc">
+           <normaloff>:/icons/Edit.png</normaloff>:/icons/Edit.png</iconset>
+         </property>
+         <property name="iconSize">
+          <size>
+           <width>24</width>
+           <height>24</height>
+          </size>
+         </property>
+         <property name="autoDefault">
+          <bool>false</bool>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="deleteButton">
+         <property name="enabled">
+          <bool>false</bool>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>32</width>
+           <height>32</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>32</width>
+           <height>32</height>
+          </size>
+         </property>
+         <property name="focusPolicy">
+          <enum>Qt::StrongFocus</enum>
+         </property>
+         <property name="toolTip">
+          <string>deleteToolTip</string>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QPushButton{
+background-color: rgba(0, 0, 0, 0);
+border: none;
+}
+
+QPushButton:checked {
+border: 1px solid rgb(88, 158, 229);
+background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 rgb(218, 236, 252), stop:1 rgb(196, 224, 252));
+}
+
+QPushButton:hover:!pressed{
+background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 rgb(236, 244, 252), stop:1 rgb(220, 236, 252));
+border: 1px solid rgb(126, 180, 234);
+}
+
+QPushButton:hover:pressed {
+border: 1px solid rgb(88, 158, 229);
+background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 rgb(218, 236, 252), stop:1 rgb(196, 224, 252));
+}
+
+QPushButton:checked:hover {
+border: 1px solid rgb(88, 158, 229);
+background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 rgb(218, 236, 252), stop:1 rgb(196, 224, 252));
+}
+
+QPushButton:focus{
+background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 rgb(236, 244, 252), stop:1 rgb(220, 236, 252));
+border: 1px solid rgb(126, 180, 234);
+}
+
+QPushButton:checked:focus{
+border: 1px solid rgb(88, 158, 229);
+background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 rgb(218, 236, 252), stop:1 rgb(196, 224, 252));
+}
+
+QPushButton:checked:hover:focus{
+border: 1px solid rgb(88, 158, 229);
+background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 rgb(218, 236, 252), stop:1 rgb(196, 224, 252));
+}</string>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+         <property name="icon">
+          <iconset resource="../resource.qrc">
+           <normaloff>:/icons/Delete.png</normaloff>:/icons/Delete.png</iconset>
+         </property>
+         <property name="iconSize">
+          <size>
+           <width>24</width>
+           <height>24</height>
+          </size>
+         </property>
+         <property name="autoDefault">
+          <bool>false</bool>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="Line" name="line">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>5</width>
+           <height>24</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>5</width>
+           <height>24</height>
+          </size>
+         </property>
+         <property name="contextMenuPolicy">
+          <enum>Qt::PreventContextMenu</enum>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">color:rgb(203, 210, 216);</string>
+         </property>
+         <property name="frameShadow">
+          <enum>QFrame::Plain</enum>
+         </property>
+         <property name="lineWidth">
+          <number>1</number>
+         </property>
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="importButton">
+         <property name="minimumSize">
+          <size>
+           <width>32</width>
+           <height>32</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>32</width>
+           <height>32</height>
+          </size>
+         </property>
+         <property name="focusPolicy">
+          <enum>Qt::StrongFocus</enum>
+         </property>
+         <property name="toolTip">
+          <string>importToolTip</string>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QPushButton{
+background-color: rgba(0, 0, 0, 0);
+border: none;
+}
+
+QPushButton:checked {
+border: 1px solid rgb(88, 158, 229);
+background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 rgb(218, 236, 252), stop:1 rgb(196, 224, 252));
+}
+
+QPushButton:hover:!pressed{
+background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 rgb(236, 244, 252), stop:1 rgb(220, 236, 252));
+border: 1px solid rgb(126, 180, 234);
+}
+
+QPushButton:hover:pressed {
+border: 1px solid rgb(88, 158, 229);
+background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 rgb(218, 236, 252), stop:1 rgb(196, 224, 252));
+}
+
+QPushButton:checked:hover {
+border: 1px solid rgb(88, 158, 229);
+background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 rgb(218, 236, 252), stop:1 rgb(196, 224, 252));
+}
+
+QPushButton:focus{
+background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 rgb(236, 244, 252), stop:1 rgb(220, 236, 252));
+border: 1px solid rgb(126, 180, 234);
+}
+
+QPushButton:checked:focus{
+border: 1px solid rgb(88, 158, 229);
+background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 rgb(218, 236, 252), stop:1 rgb(196, 224, 252));
+}
+
+QPushButton:checked:hover:focus{
+border: 1px solid rgb(88, 158, 229);
+background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 rgb(218, 236, 252), stop:1 rgb(196, 224, 252));
+}</string>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+         <property name="icon">
+          <iconset resource="../resource.qrc">
+           <normaloff>:/icons/Import.png</normaloff>:/icons/Import.png</iconset>
+         </property>
+         <property name="iconSize">
+          <size>
+           <width>24</width>
+           <height>24</height>
+          </size>
+         </property>
+         <property name="autoDefault">
+          <bool>false</bool>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="exportButton">
+         <property name="enabled">
+          <bool>false</bool>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>32</width>
+           <height>32</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>32</width>
+           <height>32</height>
+          </size>
+         </property>
+         <property name="focusPolicy">
+          <enum>Qt::StrongFocus</enum>
+         </property>
+         <property name="toolTip">
+          <string>exportToolTip</string>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QPushButton{
+background-color: rgba(0, 0, 0, 0);
+border: none;
+}
+
+QPushButton:checked {
+border: 1px solid rgb(88, 158, 229);
+background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 rgb(218, 236, 252), stop:1 rgb(196, 224, 252));
+}
+
+QPushButton:hover:!pressed{
+background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 rgb(236, 244, 252), stop:1 rgb(220, 236, 252));
+border: 1px solid rgb(126, 180, 234);
+}
+
+QPushButton:hover:pressed {
+border: 1px solid rgb(88, 158, 229);
+background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 rgb(218, 236, 252), stop:1 rgb(196, 224, 252));
+}
+
+QPushButton:checked:hover {
+border: 1px solid rgb(88, 158, 229);
+background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 rgb(218, 236, 252), stop:1 rgb(196, 224, 252));
+}
+
+QPushButton:focus{
+background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 rgb(236, 244, 252), stop:1 rgb(220, 236, 252));
+border: 1px solid rgb(126, 180, 234);
+}
+
+QPushButton:checked:focus{
+border: 1px solid rgb(88, 158, 229);
+background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 rgb(218, 236, 252), stop:1 rgb(196, 224, 252));
+}
+
+QPushButton:checked:hover:focus{
+border: 1px solid rgb(88, 158, 229);
+background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 rgb(218, 236, 252), stop:1 rgb(196, 224, 252));
+}</string>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+         <property name="icon">
+          <iconset resource="../resource.qrc">
+           <normaloff>:/icons/Export.png</normaloff>:/icons/Export.png</iconset>
+         </property>
+         <property name="iconSize">
+          <size>
+           <width>24</width>
+           <height>24</height>
+          </size>
+         </property>
+         <property name="autoDefault">
+          <bool>false</bool>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <spacer name="horizontalSpacer">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>40</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+      </layout>
+     </item>
+     <item>
+      <widget class="QListView" name="listView">
+       <property name="minimumSize">
+        <size>
+         <width>0</width>
+         <height>100</height>
+        </size>
+       </property>
+       <property name="focusPolicy">
+        <enum>Qt::StrongFocus</enum>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QListView {
+    show-decoration-selected: 1; 
+}
+
+QListView::item:selected {
+    background-color: #3399FF;
+	color: #FFFFFF;
+}
+
+QListView::item:selected:hover {
+    background-color: #3399FF;
+	color: #FFFFFF;
+}
+
+QListView::item:hover {
+    background-color: #FFFFFF;
+}</string>
+       </property>
+       <property name="editTriggers">
+        <set>QAbstractItemView::NoEditTriggers</set>
+       </property>
+       <property name="tabKeyNavigation">
+        <bool>true</bool>
+       </property>
+       <property name="selectionBehavior">
+        <enum>QAbstractItemView::SelectRows</enum>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <widget class="QGroupBox" name="ActionsGroupBoxLayout">
+     <property name="enabled">
+      <bool>true</bool>
+     </property>
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>0</width>
+       <height>0</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>16777215</width>
+       <height>100</height>
+      </size>
+     </property>
+     <property name="title">
+      <string>Chosen objects</string>
+     </property>
+     <property name="checkable">
+      <bool>false</bool>
+     </property>
+     <layout class="QVBoxLayout" name="verticalLayout_2">
+      <property name="topMargin">
+       <number>9</number>
+      </property>
+      <item>
+       <widget class="QRadioButton" name="izolateRadioButton">
+        <property name="text">
+         <string>Izolate</string>
+        </property>
+        <property name="checked">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QRadioButton" name="hideRadioButton">
+        <property name="text">
+         <string>Hide</string>
+        </property>
+        <property name="checked">
+         <bool>false</bool>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" name="DialogButtonsLayout">
+     <property name="spacing">
+      <number>7</number>
+     </property>
+     <property name="sizeConstraint">
+      <enum>QLayout::SetMinimumSize</enum>
+     </property>
+     <property name="leftMargin">
+      <number>0</number>
+     </property>
+     <property name="topMargin">
+      <number>0</number>
+     </property>
+     <property name="rightMargin">
+      <number>0</number>
+     </property>
+     <property name="bottomMargin">
+      <number>0</number>
+     </property>
+     <item>
+      <spacer name="spacer">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>131</width>
+         <height>31</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <widget class="QPushButton" name="okButton">
+       <property name="minimumSize">
+        <size>
+         <width>80</width>
+         <height>27</height>
+        </size>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">
+                  QPushButton {
+                  background-color: white;
+                  border: 1px solid rgb(169, 180, 190);
+                  border-radius: 2px;
+                  padding: 2px;
+                  }
+
+                  QPushButton:hover {
+                  background-color: qlineargradient(spread:pad, x1:1, y1:0.0, x2:1, y2:1, stop:0  rgb(255, 255, 255), stop:1 rgb(231, 235, 238));
+                  border: 1px solid rgb(136, 136, 136);
+                  border-radius: 2px;
+                  }
+
+
+                  QPushButton:pressed {
+                  background-color: qlineargradient(spread:pad, x1:1, y1:0.0, x2:1, y2:1, stop:0 rgb(220, 224, 228), stop:1 rgb(201, 208, 214));
+                  border: 1px solid rgb(169, 180, 190);
+                  border-radius: 2px;
+                  }
+
+                  QPushButton:disabled {
+                  background-color: rgb(231, 235, 238);
+                  border: 1px solid  rgb(169, 180, 190);
+                  border-radius: 2px;
+                  }</string>
+       </property>
+       <property name="text">
+        <string>OK</string>
+       </property>
+       <property name="default">
+        <bool>false</bool>
+       </property>
+       <property name="flat">
+        <bool>false</bool>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="closeButton">
+       <property name="minimumSize">
+        <size>
+         <width>80</width>
+         <height>27</height>
+        </size>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">
+                  QPushButton {
+                  background-color: white;
+                  border: 1px solid rgb(169, 180, 190);
+                  border-radius: 2px;
+                  padding: 2px;
+                  }
+
+                  QPushButton:hover {
+                  background-color: qlineargradient(spread:pad, x1:1, y1:0.0, x2:1, y2:1, stop:0  rgb(255, 255, 255), stop:1 rgb(231, 235, 238));
+                  border: 1px solid rgb(136, 136, 136);
+                  border-radius: 2px;
+                  }
+
+
+                  QPushButton:pressed {
+                  background-color: qlineargradient(spread:pad, x1:1, y1:0.0, x2:1, y2:1, stop:0 rgb(220, 224, 228), stop:1 rgb(201, 208, 214));
+                  border: 1px solid rgb(169, 180, 190);
+                  border-radius: 2px;
+                  }
+
+                  QPushButton:disabled {
+                  background-color: rgb(231, 235, 238);
+                  border: 1px solid  rgb(169, 180, 190);
+                  border-radius: 2px;
+                  }</string>
+       </property>
+       <property name="text">
+        <string>Close</string>
+       </property>
+       <property name="default">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+  </layout>
+ </widget>
+ <tabstops>
+  <tabstop>addButton</tabstop>
+  <tabstop>copyButton</tabstop>
+  <tabstop>editButton</tabstop>
+  <tabstop>deleteButton</tabstop>
+  <tabstop>importButton</tabstop>
+  <tabstop>exportButton</tabstop>
+  <tabstop>izolateRadioButton</tabstop>
+  <tabstop>hideRadioButton</tabstop>
+  <tabstop>okButton</tabstop>
+  <tabstop>closeButton</tabstop>
+ </tabstops>
+ <resources>
+  <include location="../resource.qrc"/>
+ </resources>
+ <connections>
+  <connection>
+   <sender>closeButton</sender>
+   <signal>clicked()</signal>
+   <receiver>MainDialog</receiver>
+   <slot>reject()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>462</x>
+     <y>557</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>179</x>
+     <y>282</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>okButton</sender>
+   <signal>clicked()</signal>
+   <receiver>MainDialog</receiver>
+   <slot>accept()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>177</x>
+     <y>555</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>158</x>
+     <y>290</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+</ui>
