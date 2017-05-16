@@ -29,16 +29,19 @@ public:
   GroupDialog(QDialog* parent, const GroupData& groupData);
   ~GroupDialog();
 
-private slots:
+  GroupData getGroupDescription();
+
+  private slots:
   void onAddButton();
   void onDeleteButton();
   void onTypeBoxIndexChanged(const int changedIndex);
   void onPropertyBoxIndexChanged(const int changedIndex);
 
-public:
-  GroupData getGroupDescription();
-
 private:
+  void buildProperties(const GroupData& groupData);
+  void setTypeBox(const rengaapi::ObjectType& groupType);
+  void itemCountChanged(bool isZero);
+
   void loadTypeBox();
 
   void loadPropertyBox();
