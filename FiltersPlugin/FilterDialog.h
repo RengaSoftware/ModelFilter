@@ -37,12 +37,14 @@ private slots:
   void onDeleteButton();
 
 private:
-  void showGroupDialog(GroupDialog* pGroupDialog, QStandardItem* pParentItem = nullptr);
   QStandardItem* getCurrentGroupItem();
+  QStandardItem* buildGroupItem(const GroupData& data);
+  void setGroupItem(const QStandardItem* groupItem);
+  std::list<GroupData>::iterator findGroupData(const int position);
+  void enableButtons(bool isEnable);
 
 private:
   std::unique_ptr<Ui::FilterDialog> m_pUi;
   std::unique_ptr<QStandardItemModel> m_pTreeModel;
-  // TODO: should be FilterData instead of std::vector<GroupData> - this dialog is responsible for FilterData creation
-  std::vector<GroupData> m_groupDataArray;
+  FilterData mData;
 };

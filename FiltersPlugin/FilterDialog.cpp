@@ -48,15 +48,13 @@ FilterDialog::FilterDialog(QDialog* parent)
   connect(m_pUi->editButton, SIGNAL(clicked()), this, SLOT(onEditButton()));
   connect(m_pUi->deleteButton, SIGNAL(clicked()), this, SLOT(onDeleteButton()));
 
-  // TODO: extract method
-  m_pUi->okButton->setEnabled(false);
-  m_pUi->editButton->setEnabled(false);
-  m_pUi->deleteButton->setEnabled(false);
+  enableButtons(false);
 }
 
 FilterDialog::FilterDialog(QDialog * parent, const FilterData& filterData)
   : FilterDialog(parent)
 {
+  mData = filterData;
   setWindowTitle(QApplication::translate("FilterDialog", "EditWindowName"));
   m_pUi->lineEdit->setText(filterData.m_filterName);
 
@@ -76,7 +74,6 @@ FilterDialog::FilterDialog(QDialog * parent, const FilterData& filterData)
       });
     }
     m_pTreeModel->appendRow(groupItem);
-    m_groupDataArray.push_back(groupData);
   }
   m_pUi->treeView->setCurrentIndex(m_pTreeModel->index(0, 0));
 
@@ -95,29 +92,59 @@ FilterDialog::~FilterDialog()
 
 FilterData FilterDialog::getFilterDescription()
 {
-  // TODO: FilterData - should be the state of dialog, this dialog is responsible for FilterData creation
-  FilterData result(m_pUi->lineEdit->text());
-  for (auto& groupData : m_groupDataArray)
-    result.m_groupList.push_back(groupData);
-  return result;
+  mData.m_filterName = m_pUi->lineEdit->text();
+  return mData;
 }
 
 void FilterDialog::onAddButton()
 {
   std::unique_ptr<GroupDialog> pGroupDialog(new GroupDialog(this));
-  showGroupDialog(pGroupDialog.get());
+  int exitValue = pGroupDialog->exec();
+  if (exitValue != QDialog::Accepted)
+    return;
+
+  // store GroupData
+  GroupData groupData = pGroupDialog->getGroupDescription();
+  mData.m_groupList.push_back(groupData);
+
+  // add group to the tree
+  QStandardItem* groupItem = buildGroupItem(groupData);
+  m_pTreeModel->appendRow(groupItem);
+
+  // expand tree and select new group
+  setGroupItem(groupItem);
+
+  // set buttons
+  enableButtons(true);
 }
 
 void FilterDialog::onEditButton()
 {
+  // get GroupData of selected group
   QStandardItem* pGroupItem = getCurrentGroupItem();
+  const int itemRow = pGroupItem->row();
+  assert(itemRow < mData.m_groupList.size());
+  auto groupDataIt = findGroupData(itemRow);
 
-  // get groupData of selected group
-  GroupData groupData = m_groupDataArray[pGroupItem->row()];
+  // show Dialog
+  std::unique_ptr<GroupDialog> pGroupDialog(new GroupDialog(this, *groupDataIt));
+  int exitValue = pGroupDialog->exec();
+  if (exitValue != QDialog::Accepted)
+    return;
 
-  // show GroupDialog
-  std::unique_ptr<GroupDialog> pGroupDialog(new GroupDialog(this, groupData));
-  showGroupDialog(pGroupDialog.get(), pGroupItem);
+  // store new GroupData
+  *groupDataIt = pGroupDialog->getGroupDescription();
+
+  // replace group item in the tree
+  QStandardItem* groupItem = buildGroupItem(*groupDataIt);
+  m_pTreeModel->removeRow(itemRow);
+  m_pTreeModel->insertRow(itemRow, groupItem);
+
+  // expand tree and select modified group
+  setGroupItem(groupItem);
+
+  // set buttons
+  enableButtons(true);
 }
 
 void FilterDialog::onDeleteButton()
@@ -128,77 +155,14 @@ void FilterDialog::onDeleteButton()
   m_pTreeModel->removeRow(parentRow);
 
   // remove GroupData
-  // TODO: same as in MainDialog - do not synchronize container (m_groupDataArray) with UI
-  std::swap(m_groupDataArray[parentRow], m_groupDataArray[m_groupDataArray.size() - 1]);
-  m_groupDataArray.pop_back();
+  auto it = findGroupData(parentRow);
+  mData.m_groupList.erase(it);
 
   // set buttons
-  if (m_pTreeModel->rowCount() == 0)
-  {
-    m_pUi->okButton->setEnabled(false);
-    m_pUi->editButton->setEnabled(false);
-    m_pUi->deleteButton->setEnabled(false);
-  }
-  else
+  enableButtons(m_pTreeModel->rowCount() > 0);
+  if (m_pTreeModel->rowCount() > 0)
   {
     m_pUi->treeView->setCurrentIndex(m_pTreeModel->index(std::min(parentRow, m_pTreeModel->rowCount() - 1), 0));
-  }
-}
-
-void FilterDialog::showGroupDialog(GroupDialog* pGroupDialog, QStandardItem* pParentItem)
-{
-  int exitValue = pGroupDialog->exec();
-  if (exitValue == QDialog::Accepted)
-  {
-    // set group item
-    QStandardItem* groupItem = new QStandardItem();
-    GroupData groupData = pGroupDialog->getGroupDescription();
-    TypeDataArray typeDataArray;
-    groupItem->setText(typeDataArray.getObjectTypeName(groupData.m_groupType));
-
-    // build tree from groupData
-    ObjectPropertyBuilderFactory factory;
-    std::unique_ptr<ObjectPropertyBuilder> pBuilder(factory.createBuilder(groupData.m_groupType));
-    for (auto property : groupData.m_propertyList)
-    {
-      // TODO: extract method
-      groupItem->appendRow({
-        new QStandardItem(property.m_property.m_propertyName),
-        new QStandardItem(pBuilder->getOperatorName(property.m_operatorType)),
-        new QStandardItem(property.m_value)
-      });
-    }
-
-    // TODO: move this responsibility out of here, function should just create GroupData, functions above should do all stuff about editing/adding
-    // add group to the tree
-    if (pParentItem != nullptr)
-    {
-      const int parentItemRow = m_pTreeModel->indexFromItem(pParentItem).row();
-      m_pTreeModel->removeRow(parentItemRow);
-      m_pTreeModel->insertRow(parentItemRow, groupItem);
-      m_groupDataArray[parentItemRow] = groupData;
-    }
-    else
-    {
-      m_pTreeModel->appendRow(groupItem);
-      m_groupDataArray.push_back(groupData);
-    }
-
-    // TODO: extract method
-    // expand tree and select modified group
-    const QModelIndex groupItemIndex = m_pTreeModel->indexFromItem(groupItem);
-    m_pUi->treeView->expand(groupItemIndex);
-    m_pUi->treeView->setCurrentIndex(groupItemIndex);
-
-    // TODO: extract method
-    // set buttons
-    m_pUi->okButton->setEnabled(true);
-    m_pUi->editButton->setEnabled(true);
-    m_pUi->deleteButton->setEnabled(true);
-  }
-  else
-  {
-    assert(exitValue == QDialog::Rejected);
   }
 }
 
@@ -221,4 +185,42 @@ QStandardItem * FilterDialog::getCurrentGroupItem()
   }
 
   return pItem;
+}
+
+QStandardItem* FilterDialog::buildGroupItem(const GroupData& data) {
+  // build tree from GroupData
+  QStandardItem* groupItem = new QStandardItem();
+  TypeDataArray typeDataArray;
+  groupItem->setText(typeDataArray.getObjectTypeName(data.m_groupType));
+
+  ObjectPropertyBuilderFactory factory;
+  std::unique_ptr<ObjectPropertyBuilder> pBuilder(factory.createBuilder(data.m_groupType));
+  for (auto property : data.m_propertyList)
+  {
+    groupItem->appendRow({
+      new QStandardItem(property.m_property.m_propertyName),
+      new QStandardItem(pBuilder->getOperatorName(property.m_operatorType)),
+      new QStandardItem(property.m_value)
+    });
+  }
+
+  return groupItem;
+}
+
+void FilterDialog::setGroupItem(const QStandardItem* groupItem) {
+  const QModelIndex groupItemIndex = m_pTreeModel->indexFromItem(groupItem);
+  m_pUi->treeView->expand(groupItemIndex);
+  m_pUi->treeView->setCurrentIndex(groupItemIndex);
+}
+
+std::list<GroupData>::iterator FilterDialog::findGroupData(const int position) {
+  std::list<GroupData>::iterator it = mData.m_groupList.begin();
+  std::advance(it, position);
+  return it;
+}
+
+void FilterDialog::enableButtons(bool isEnable) {
+  m_pUi->okButton->setEnabled(isEnable);
+  m_pUi->editButton->setEnabled(isEnable);
+  m_pUi->deleteButton->setEnabled(isEnable);
 }

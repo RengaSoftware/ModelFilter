@@ -131,8 +131,12 @@ struct GroupData {
 };
 
 struct FilterData {
-  FilterData::FilterData(const QString& name)
-    : m_filterName(name)
+  FilterData::FilterData()
+  {}
+
+  FilterData::FilterData(const FilterData& copy)
+    : m_filterName(copy.m_filterName)
+    , m_groupList(copy.m_groupList)
   {}
 
   static FilterData importData(QFile* filterFile);
