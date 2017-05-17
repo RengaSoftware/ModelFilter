@@ -21,13 +21,13 @@ class RengaEventsHandler;
 class PluginToolButtons;
 
 
-class FiltersPlugin : public QObject, public plugins::IPlugin
+class ModelFilterPlugin : public QObject, public plugins::IPlugin
 {
   Q_OBJECT
 
 public:
-  FiltersPlugin();
-  ~FiltersPlugin();
+  ModelFilterPlugin();
+  ~ModelFilterPlugin();
 
   // plugins::IPlugin
   bool initialize(const wchar_t* pluginPath);

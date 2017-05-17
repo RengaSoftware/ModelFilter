@@ -8,7 +8,7 @@
 
 #include "stdafx.h"
 #include "MainDialog.h"
-#include "FiltersPlugin.h"
+#include "ModelFilterPlugin.h"
 #include "PluginToolButtons.h"
 #include "RengaEventsHandler.h"
 
@@ -17,8 +17,8 @@
 #include <RengaAPI/Localization.h>
 #include <RengaAPI/Message.h>
 
-static const QString russianLocaleFileName = "filtersplugin_ru.qm";
-static const QString englishLocaleFileName = "filtersplugin_en.qm";
+static const QString russianLocaleFileName = "ModelFilterPlugin_ru.qm";
+static const QString englishLocaleFileName = "ModelFilterPlugin_en.qm";
 static const QString defaultLocaleFileName = englishLocaleFileName;
 
 static const QString c_russianLocale = "ru_RU";
@@ -27,7 +27,7 @@ static const QString c_englishLocale = "en_EN";
 static const rengabase::String c_loadLocalizationFileError = L"Cannot open localization file.";
 static const rengabase::String c_error = L"Error";
 
-FiltersPlugin::FiltersPlugin()
+ModelFilterPlugin::ModelFilterPlugin()
 {
 #ifdef _DEBUG
   //   NOTE: To debug a plugin you should create a debug QApplication in the plugin, 
@@ -45,10 +45,10 @@ FiltersPlugin::FiltersPlugin()
 #endif
 }
 
-FiltersPlugin::~FiltersPlugin()
+ModelFilterPlugin::~ModelFilterPlugin()
 {}
 
-bool FiltersPlugin::initialize(const wchar_t* pluginPath)
+bool ModelFilterPlugin::initialize(const wchar_t* pluginPath)
 {
   if (!loadTranslator(pluginPath))
     return false;
@@ -61,13 +61,13 @@ bool FiltersPlugin::initialize(const wchar_t* pluginPath)
   return true;
 }
 
-void FiltersPlugin::stop()
+void ModelFilterPlugin::stop()
 {
   m_pPluginToolButtons.reset(nullptr);
   m_pMainDialog.reset(nullptr);
 }
 
-QString FiltersPlugin::translationFileName()
+QString ModelFilterPlugin::translationFileName()
 {
   // get application locale
   QString appLocale = rengaStringToQString(rengaapi::Localization::currentLocale_());
@@ -81,7 +81,7 @@ QString FiltersPlugin::translationFileName()
     return defaultLocaleFileName;
 }
 
-bool FiltersPlugin::loadTranslator(const std::wstring& pluginPath)
+bool ModelFilterPlugin::loadTranslator(const std::wstring& pluginPath)
 {
   // load QTranslator
   if (!m_translator.load(translationFileName(), QString::fromStdWString(pluginPath)))
@@ -96,22 +96,22 @@ bool FiltersPlugin::loadTranslator(const std::wstring& pluginPath)
   }
 }
 
-void FiltersPlugin::subscribeOnRengaEvents()
+void ModelFilterPlugin::subscribeOnRengaEvents()
 {
   m_pRengaEventsHandler.reset(new RengaEventsHandler());
   connect(m_pRengaEventsHandler.get(), SIGNAL(projectAboutToClose()), this, SLOT(onProjectAboutToClose()));
 }
 
-void FiltersPlugin::addPluginButtons(const std::wstring& pluginPath)
+void ModelFilterPlugin::addPluginButtons(const std::wstring& pluginPath)
 {
   m_pPluginToolButtons.reset(new PluginToolButtons(pluginPath));
   connect(m_pPluginToolButtons.get(), SIGNAL(filterButtonClicked()), this, SLOT(onFilterButtonClicked()));
 }
 
-void FiltersPlugin::onFilterButtonClicked()
+void ModelFilterPlugin::onFilterButtonClicked()
 {
   int result = m_pMainDialog->exec();
 }
 
-void FiltersPlugin::onProjectAboutToClose()
+void ModelFilterPlugin::onProjectAboutToClose()
 {}

@@ -1,8 +1,8 @@
 <RengaPlugin>
-	<Name>Filters plugin</Name>
+	<Name>Model filter plugin</Name>
 	<Version>1.0</Version>
 	<Vendor>Renga Software</Vendor>
 	<Copyright>Copyright “Renga Software” LLC, 2017. All rights reserved.</Copyright>
 	<RequiredAPIVersion>0.1</RequiredAPIVersion>
-	<PluginFilename>FiltersPlugin.rne</PluginFilename>
+	<PluginFilename>ModelFilterPlugin.rne</PluginFilename>
 </RengaPlugin>

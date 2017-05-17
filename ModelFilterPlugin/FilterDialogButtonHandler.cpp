@@ -6,19 +6,10 @@
 // UNINTERRUPTED OR ERROR FREE.
 //
 
-#pragma once
-#include <QtCore/QObject>
+#include "stdafx.h"
+#include "FilterDialogButtonHandler.h"
 
-#include <RengaAPI/IInvokable.h>
-
-class FilterButtonHandler : public QObject, public rengaapi::IInvokable
+void FilterDialogButtonHandler::invoke()
 {
-  Q_OBJECT
-
-public:
-  // rengaapi::IInvokable
-  void invoke();
-
-signals:
-  void buttonClicked();
-};
+  emit buttonClicked();
+}

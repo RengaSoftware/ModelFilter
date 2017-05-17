@@ -13,7 +13,7 @@
 #include <RengaAPI/Image.h>
 #include <RengaAPI/Toolbutton.h>
 
-class FilterButtonHandler;
+class FilterDialogButtonHandler;
 
 class PluginToolButtons : public QObject
 {
@@ -30,5 +30,5 @@ private:
   bool loadIcon(const std::wstring& iconPath, rengaapi::Image::Format iconFormat, rengaapi::Image& outIcon) const;
 
 private:
-  std::unique_ptr<FilterButtonHandler> m_pFilterButtonHandler;
+  std::unique_ptr<FilterDialogButtonHandler> m_pFilterButtonHandler;
 };

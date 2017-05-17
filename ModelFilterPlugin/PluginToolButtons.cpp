@@ -8,7 +8,7 @@
 
 #include "stdafx.h"
 #include "PluginToolButtons.h"
-#include "FiltersButtonHandler.h"
+#include "FilterDialogButtonHandler.h"
 
 #include <RengaAPI/ToolButtonGroup.h>
 #include <RengaAPI/UIControls.h>
@@ -33,7 +33,7 @@ PluginToolButtons::PluginToolButtons(const std::wstring& pluginPath)
 
 rengaapi::ToolButton PluginToolButtons::createFilterButton(const std::wstring& pluginPath)
 {
-  m_pFilterButtonHandler.reset(new FilterButtonHandler());
+  m_pFilterButtonHandler.reset(new FilterDialogButtonHandler());
   
   rengaapi::ToolButton toolButton;
   toolButton.setClickHandler(m_pFilterButtonHandler.get());

@@ -7,7 +7,6 @@
 //
 
 #include "stdafx.h"
-#include "FiltersPlugin.h"
-//#include <vld.h>
+#include "ModelFilterPlugin.h"
 
-EXPORT_PLUGIN(FiltersPlugin)
+EXPORT_PLUGIN(ModelFilterPlugin)

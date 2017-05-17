@@ -60,15 +60,6 @@
       <Filter>PluginButtons</Filter>
     </ClCompile>
     <ClCompile Include="stdafx.cpp" />
-    <ClCompile Include="GeneratedFiles\Debug\moc_FiltersButtonHandler.cpp">
-      <Filter>Generated Files\Debug</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Release\moc_FiltersButtonHandler.cpp">
-      <Filter>Generated Files\Release</Filter>
-    </ClCompile>
-    <ClCompile Include="FiltersButtonHandler.cpp">
-      <Filter>PluginButtons</Filter>
-    </ClCompile>
     <ClCompile Include="RengaEventsHandler.cpp">
       <Filter>RengaEvents</Filter>
     </ClCompile>
@@ -142,13 +133,6 @@
     <ClCompile Include="WindowPropertyBuilder.cpp">
       <Filter>ModelObjects</Filter>
     </ClCompile>
-    <ClCompile Include="GeneratedFiles\Debug\moc_FiltersPlugin.cpp">
-      <Filter>Generated Files\Debug</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Release\moc_FiltersPlugin.cpp">
-      <Filter>Generated Files\Release</Filter>
-    </ClCompile>
-    <ClCompile Include="FiltersPlugin.cpp" />
     <ClCompile Include="MainDialog.cpp">
       <Filter>MainDialog</Filter>
     </ClCompile>
@@ -175,6 +159,22 @@
     </ClCompile>
     <ClCompile Include="TypeData.cpp">
       <Filter>FilterData</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_ModelFilterPlugin.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_ModelFilterPlugin.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="ModelFilterPlugin.cpp" />
+    <ClCompile Include="GeneratedFiles\Debug\moc_FilterDialogButtonHandler.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_FilterDialogButtonHandler.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="FilterDialogButtonHandler.cpp">
+      <Filter>PluginButtons</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -253,9 +253,6 @@
     <CustomBuild Include="PluginToolButtons.h">
       <Filter>PluginButtons</Filter>
     </CustomBuild>
-    <CustomBuild Include="FiltersButtonHandler.h">
-      <Filter>PluginButtons</Filter>
-    </CustomBuild>
     <CustomBuild Include="RengaEventsHandler.h">
       <Filter>RengaEvents</Filter>
     </CustomBuild>
@@ -274,7 +271,6 @@
     <CustomBuild Include="GroupDialog.h">
       <Filter>GroupDialog</Filter>
     </CustomBuild>
-    <CustomBuild Include="FiltersPlugin.h" />
     <CustomBuild Include="MainDialog.h">
       <Filter>MainDialog</Filter>
     </CustomBuild>
@@ -283,6 +279,10 @@
     </CustomBuild>
     <CustomBuild Include="FilterData.h">
       <Filter>FilterData</Filter>
+    </CustomBuild>
+    <CustomBuild Include="ModelFilterPlugin.h" />
+    <CustomBuild Include="FilterDialogButtonHandler.h">
+      <Filter>PluginButtons</Filter>
     </CustomBuild>
   </ItemGroup>
 </Project>
