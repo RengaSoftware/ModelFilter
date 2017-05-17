@@ -42,7 +42,6 @@ GroupDialog::GroupDialog(QDialog* parent)
     pHeader->setSectionResizeMode(pHeader->logicalIndex(i), QHeaderView::ResizeMode::Interactive);
   }
 
-  // TODO: this is good function devision, make other code like this
   // load comboboxes
   loadTypeBox();
   loadPropertyBox();
@@ -54,9 +53,7 @@ GroupDialog::GroupDialog(QDialog* parent)
   connect(m_pUi->addButton, SIGNAL(clicked()), this, SLOT(onAddButton()));
   connect(m_pUi->deleteButton, SIGNAL(clicked()), this, SLOT(onDeleteButton()));
   
-  // TODO: extract method
-  m_pUi->okButton->setEnabled(false);
-  m_pUi->deleteButton->setEnabled(false);
+  itemCountChanged(false);
 }
 
 GroupDialog::GroupDialog(QDialog* parent, const GroupData& groupData)
@@ -64,118 +61,21 @@ GroupDialog::GroupDialog(QDialog* parent, const GroupData& groupData)
 {
   setWindowTitle(QApplication::translate("GroupDialog", "EditWindowName"));
   
-  // TODO: extract method
   // set data in tree
-  for (auto& rowData : groupData.m_propertyList)
-  {
-    QStandardItem* pPropertyItem = new QStandardItem(rowData.m_property.m_propertyName);
-    pPropertyItem->setData(QVariant(rowData.m_property.m_propertyType));
-    pPropertyItem->setData(QVariant(rowData.m_property.m_valueType), Qt::UserRole + 2);
+  buildProperties(groupData);
 
-    QStandardItem* pOperatorItem = new QStandardItem(m_pBuilder->getOperatorName(rowData.m_operatorType));
-    pOperatorItem->setData(QVariant(rowData.m_operatorType));
-
-    QStandardItem* pValueItem = new QStandardItem(rowData.m_value);
-
-    m_pTreeModel->appendRow({ pPropertyItem, pOperatorItem, pValueItem });
-  }
-
-  // TODO: need this?
-  // select first item
+  // select first item once: intitially tree hasn't selected item
   m_pUi->treeView->setCurrentIndex(m_pTreeModel->index(0, 0));
 
-  // TODO: extract method
   // set buttons
-  m_pUi->okButton->setEnabled(true);
-  m_pUi->deleteButton->setEnabled(true);
-  m_pUi->typeBox->setEnabled(false);
+  itemCountChanged(true);
 
-  // TODO: extract method
   // set current comboBox
-  TypeDataArray typeDataArray;
-  for (size_t i = 0; i < typeDataArray.m_array.size(); i++)
-  {
-    if (typeDataArray.m_array[i].m_type == groupData.m_groupType)
-    {
-      QModelIndex modelIndex = m_pTypeBoxModel->index(i, 0);
-      int realRow = m_pTypeBoxSortModel->mapFromSource(modelIndex).row();
-      m_pUi->typeBox->setCurrentIndex(realRow);
-      break;
-    }
-  }
+  setTypeBox(groupData.m_groupType);
 }
 
 GroupDialog::~GroupDialog()
 {}
-
-void GroupDialog::onAddButton()
-{
-  // list of items to treeView
-  QList<QStandardItem*> list = { new QStandardItem(m_pUi->propertyBox->currentText()),
-                                 new QStandardItem(m_pUi->operatorBox->currentText()),
-                                 new QStandardItem(m_pUi->valueBox->currentText()) };
-  // set property data
-  const QModelIndex realIndex = m_pPropertyBoxSortModel->index(m_pUi->propertyBox->currentIndex(), 0);
-  const QModelIndex orderIndex = m_pPropertyBoxSortModel->mapToSource(realIndex);
-  QStandardItem* pPropertyItem = m_pPropertyBoxModel->itemFromIndex(orderIndex);
-  list.at(0)->setData(pPropertyItem->data());
-  list.at(0)->setData(pPropertyItem->data(Qt::UserRole + 2), Qt::UserRole + 2);
-  // set operator data
-  list.at(1)->setData(m_pOperatorBoxModel->item(m_pUi->operatorBox->currentIndex())->data());
-
-  m_pTreeModel->appendRow(list);
-  m_pUi->treeView->setCurrentIndex(m_pTreeModel->index(m_pTreeModel->rowCount() - 1, 0));
-
-  // TODO: extract method
-  // set comboBox and buttons state
-  m_pUi->typeBox->setEnabled(false);
-  m_pUi->okButton->setEnabled(true);
-  m_pUi->okButton->setFocus();
-  m_pUi->deleteButton->setEnabled(true);
-  m_pUi->valueBox->clearEditText();
-}
-
-void GroupDialog::onDeleteButton()
-{
-  QModelIndex currentIndex = m_pUi->treeView->currentIndex();
-  const int selectedRow = currentIndex.row();
-  m_pTreeModel->removeRow(selectedRow);
-
-  if (m_pTreeModel->rowCount() == 0)
-  {
-    // TODO: extract method
-    m_pUi->deleteButton->setEnabled(false);
-    m_pUi->okButton->setEnabled(false);
-    m_pUi->typeBox->setEnabled(true);
-    m_pUi->cancelButton->setFocus();
-  }
-  else
-  {
-    m_pUi->treeView->setCurrentIndex(m_pTreeModel->index(std::min(m_pTreeModel->rowCount() - 1, selectedRow), 0));
-  }
-}
-
-void GroupDialog::onTypeBoxIndexChanged(const int changedIndex)
-{
-  // change factory
-  const int itemIndex = m_pTypeBoxSortModel->mapToSource(m_pTypeBoxSortModel->index(changedIndex, 0)).row();
-  QVariant currentData = m_pTypeBoxModel->item(itemIndex, 0)->data();
-  assert(currentData.isValid());
-  const rengabase::UUID uuid = rengabase::UUID::fromString(QStringToRengaString(currentData.toString()));
-  rengaapi::ObjectType objectType = rengaapi::ObjectType(uuid);
-  
-  ObjectPropertyBuilderFactory factory;
-  m_pBuilder.reset(factory.createBuilder(objectType));
-
-  // reload property combobox
-  reloadPropertyBox();
-  reloadOperatorBox();
-}
-
-void GroupDialog::onPropertyBoxIndexChanged(const int changedIndex)
-{
-  reloadOperatorBox();
-}
 
 GroupData GroupDialog::getGroupDescription()
 {
@@ -214,6 +114,105 @@ GroupData GroupDialog::getGroupDescription()
   }
 
   return groupData;
+}
+
+void GroupDialog::onAddButton()
+{
+  // list of items to treeView
+  QList<QStandardItem*> list = { new QStandardItem(m_pUi->propertyBox->currentText()),
+                                 new QStandardItem(m_pUi->operatorBox->currentText()),
+                                 new QStandardItem(m_pUi->valueBox->currentText()) };
+  // set property data
+  const QModelIndex realIndex = m_pPropertyBoxSortModel->index(m_pUi->propertyBox->currentIndex(), 0);
+  const QModelIndex orderIndex = m_pPropertyBoxSortModel->mapToSource(realIndex);
+  QStandardItem* pPropertyItem = m_pPropertyBoxModel->itemFromIndex(orderIndex);
+  list.at(0)->setData(pPropertyItem->data());
+  list.at(0)->setData(pPropertyItem->data(Qt::UserRole + 2), Qt::UserRole + 2);
+  // set operator data
+  list.at(1)->setData(m_pOperatorBoxModel->item(m_pUi->operatorBox->currentIndex())->data());
+
+  m_pTreeModel->appendRow(list);
+  m_pUi->treeView->setCurrentIndex(m_pTreeModel->index(m_pTreeModel->rowCount() - 1, 0));
+
+  // set comboBox and buttons state
+  itemCountChanged(true);
+  m_pUi->okButton->setFocus();
+  m_pUi->valueBox->clearEditText();
+}
+
+void GroupDialog::onDeleteButton()
+{
+  QModelIndex currentIndex = m_pUi->treeView->currentIndex();
+  const int selectedRow = currentIndex.row();
+  m_pTreeModel->removeRow(selectedRow);
+
+  if (m_pTreeModel->rowCount() == 0)
+  {
+    itemCountChanged(false);
+    m_pUi->cancelButton->setFocus();
+  }
+  else
+  {
+    m_pUi->treeView->setCurrentIndex(m_pTreeModel->index(std::min(m_pTreeModel->rowCount() - 1, selectedRow), 0));
+  }
+}
+
+void GroupDialog::onTypeBoxIndexChanged(const int changedIndex)
+{
+  // change factory
+  const int itemIndex = m_pTypeBoxSortModel->mapToSource(m_pTypeBoxSortModel->index(changedIndex, 0)).row();
+  QVariant currentData = m_pTypeBoxModel->item(itemIndex, 0)->data();
+  assert(currentData.isValid());
+  const rengabase::UUID uuid = rengabase::UUID::fromString(QStringToRengaString(currentData.toString()));
+  rengaapi::ObjectType objectType = rengaapi::ObjectType(uuid);
+  
+  ObjectPropertyBuilderFactory factory;
+  m_pBuilder.reset(factory.createBuilder(objectType));
+
+  // reload property combobox
+  reloadPropertyBox();
+  reloadOperatorBox();
+}
+
+void GroupDialog::onPropertyBoxIndexChanged(const int changedIndex)
+{
+  reloadOperatorBox();
+}
+
+void GroupDialog::buildProperties(const GroupData& groupData) {
+  for (auto& rowData : groupData.m_propertyList)
+  {
+    QStandardItem* pPropertyItem = new QStandardItem(rowData.m_property.m_propertyName);
+    pPropertyItem->setData(QVariant(rowData.m_property.m_propertyType));
+    pPropertyItem->setData(QVariant(rowData.m_property.m_valueType), Qt::UserRole + 2);
+
+    QStandardItem* pOperatorItem = new QStandardItem(m_pBuilder->getOperatorName(rowData.m_operatorType));
+    pOperatorItem->setData(QVariant(rowData.m_operatorType));
+
+    QStandardItem* pValueItem = new QStandardItem(rowData.m_value);
+
+    m_pTreeModel->appendRow({ pPropertyItem, pOperatorItem, pValueItem });
+  }
+}
+
+void GroupDialog::setTypeBox(const rengaapi::ObjectType& groupType) {
+  TypeDataArray typeDataArray;
+  for (size_t i = 0; i < typeDataArray.m_array.size(); i++)
+  {
+    if (typeDataArray.m_array[i].m_type == groupType)
+    {
+      QModelIndex modelIndex = m_pTypeBoxModel->index(i, 0);
+      int realRow = m_pTypeBoxSortModel->mapFromSource(modelIndex).row();
+      m_pUi->typeBox->setCurrentIndex(realRow);
+      break;
+    }
+  }
+}
+
+void GroupDialog::itemCountChanged(bool isZero) {
+  m_pUi->okButton->setEnabled(isZero);
+  m_pUi->deleteButton->setEnabled(isZero);
+  m_pUi->typeBox->setEnabled(!isZero);
 }
 
 void GroupDialog::loadTypeBox()

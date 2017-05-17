@@ -41,7 +41,7 @@ void FilterData::exportData(QFile* filterFile)
 
 FilterData FilterData::importData(QFile* filterFile)
 {
-  FilterData data("empty name");
+  FilterData data;
   QXmlStreamReader reader;
   reader.setDevice(filterFile);
   while (!reader.atEnd())
