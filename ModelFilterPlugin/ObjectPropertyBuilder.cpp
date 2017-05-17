@@ -15,8 +15,8 @@
 #include <RengaAPI/Project.h>
 #include <RengaAPI/UserAttributeRegister.h>
 #include <RengaAPI/UserAttributeDescription.h>
-#include <RengaBase/AreaMeasure.h>
 #include <RengaBase/LengthMeasure.h>
+#include <RengaBase/AreaMeasure.h>
 #include <RengaBase/VolumeMeasure.h>
 
 ObjectPropertyBuilder::ObjectPropertyBuilder()
