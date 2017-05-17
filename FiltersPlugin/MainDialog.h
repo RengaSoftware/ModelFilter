@@ -10,8 +10,12 @@
 #include <QtWidgets/QDialog>
 #include <QtGui/QStandardItemModel>
 
+#include <RengaAPI/ModelObjectCollection.h>
+
 class FilterDialog;
 class FilterData;
+
+typedef std::pair<rengaapi::ObjectIdCollection, rengaapi::ObjectIdCollection> objectIdCollection;
 
 namespace Ui
 {
@@ -36,8 +40,9 @@ private slots:
   void onImportFilter();
 
 private:
+  objectIdCollection collectObjects(const FilterData& data);
+  void setObjectsVisibility(const objectIdCollection& idCollection);
   void enableButtons(bool isEnable);
-  void showFilterDialog(FilterDialog* pFilterDialog, QStandardItem* pFilterItem = nullptr);
   void setUniqueName(FilterData& data);
 
 private:
