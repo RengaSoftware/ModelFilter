@@ -1,5 +1,5 @@
 //
-// Copyright “Renga Software” LLC, 2016. All rights reserved.
+// Copyright “Renga Software” LLC, 2017. All rights reserved.
 //
 // “Renga Software” LLC PROVIDES THIS PROGRAM "AS IS" AND WITH ALL FAULTS. 
 // “Renga Software” LLC  DOES NOT WARRANT THAT THE OPERATION OF THE PROGRAM WILL BE
@@ -20,7 +20,6 @@
 #include <RengaAPI/Application.h>
 #include <RengaAPI/LevelView.h>
 #include <RengaAPI/Model.h>
-#include <RengaAPI/ModelObjectCollection.h>
 #include <RengaAPI/ModelObjectTypes.h>
 #include <RengaAPI/ObjectVisibility.h>
 #include <RengaAPI/Project.h>
@@ -52,8 +51,23 @@ MainDialog::~MainDialog()
 
 void MainDialog::onAddFilter()
 {
-  std::unique_ptr<FilterDialog> m_pFilterDialog(new FilterDialog(this));
-  showFilterDialog(m_pFilterDialog.get());
+  std::unique_ptr<FilterDialog> pFilterDialog(new FilterDialog(this));
+  int exitValue = pFilterDialog->exec();
+  if (exitValue != QDialog::Accepted)
+    return;
+
+  // store FilterData
+  FilterData filterData = pFilterDialog->getFilterDescription();
+  setUniqueName(filterData);
+  m_filterDataArray.push_back(filterData);
+
+  // add filter to the list
+  QStandardItem* filterItem = new QStandardItem(filterData.m_filterName);
+  m_pListModel->appendRow(filterItem);
+  m_pUi->listView->setCurrentIndex(m_pListModel->indexFromItem(filterItem));
+
+  // set buttons
+  enableButtons(true);
 }
 
 void MainDialog::onEditFilter()
@@ -61,8 +75,24 @@ void MainDialog::onEditFilter()
   // get filter item
   QModelIndex selectedItemIndex = m_pUi->listView->currentIndex();
   QStandardItem* pFilterItem = m_pListModel->itemFromIndex(selectedItemIndex);
+
+  // show FilterDialog
   std::unique_ptr<FilterDialog> pFilterDialog(new FilterDialog(this, m_filterDataArray[selectedItemIndex.row()]));
-  showFilterDialog(pFilterDialog.get(), pFilterItem);
+  int exitValue = pFilterDialog->exec();
+  if (exitValue != QDialog::Accepted)
+    return;
+
+  // update filter name
+  FilterData filterData = pFilterDialog->getFilterDescription();
+  const int filterItemRow = m_pListModel->indexFromItem(pFilterItem).row();
+  if (m_filterDataArray[filterItemRow].m_filterName.compare(filterData.m_filterName) != 0)
+  {
+    setUniqueName(filterData);
+    pFilterItem->setText(filterData.m_filterName);
+  }
+
+  // store FilterData
+  m_filterDataArray[filterItemRow] = filterData;
 }
 
 void MainDialog::onDeleteFilter()
@@ -86,10 +116,9 @@ void MainDialog::onDeleteFilter()
   const int filterRow = filterIndex.row();
   m_pListModel->removeRow(filterRow);
 
-  // TODO: tooooooooo difficult to understand this removing
-  // it is hard and not good to support same order in gui and in m_filterDataArray
-  std::swap(m_filterDataArray[filterRow], m_filterDataArray[m_filterDataArray.size() - 1]);
-  m_filterDataArray.pop_back();
+  // remove FilterData
+  auto it = m_filterDataArray.begin() + filterRow;
+  m_filterDataArray.erase(it);
 
   enableButtons(m_pListModel->rowCount() > 0);
   if (m_pListModel->rowCount() > 0)
@@ -106,94 +135,15 @@ void MainDialog::onCopyFilter()
   m_filterDataArray.push_back(filterCopy);
 }
 
-// TODO: extract methods/responsibilities from here (collecting according filter/applying action(hide/show))
 void MainDialog::onApplyFilter()
 {
+  // divide modelObjects on 2 sets
   const int filterRow = m_pUi->listView->currentIndex().row();
+  assert(filterRow >= 0);
+  auto idCollection = collectObjects(m_filterDataArray[filterRow]);
 
-  // collect rengaapi::ObjectId collection
-  rengaapi::Model rengaProjectModel = rengaapi::Project::model();
-  rengaapi::ModelObjectCollection objectCollection = rengaProjectModel.objects();
-  rengaapi::ObjectIdCollection matchIdCollection;
-  rengaapi::ObjectIdCollection notMatchIdCollection;
-  rengaapi::ObjectIdCollection levelIdCollection; // TODO: realy need this?
-
-  // check all model objects
-  for (auto pObject : objectCollection)
-  {
-    if (pObject->type() == rengaapi::ModelObjectTypes::LevelType)
-    {
-      levelIdCollection.add(pObject->objectId());
-      continue;
-    }
-    // apply all groups on object
-    bool isObjectMatchFilter = false;
-    for (auto& groupData : m_filterDataArray[filterRow].m_groupList)
-    {
-      if (groupData.m_groupType != pObject->type())
-        continue;
-
-      // apply all properties from group
-      bool isObjectMatchGroup = true;
-      for (auto& propertyData : groupData.m_propertyList)
-      {
-        bool isObjectMatchProperty;
-        if (propertyData.m_value.length() == 0)
-        {
-          // empty value from user: means all objects match to this property
-          isObjectMatchProperty = true;
-        }
-        else
-        {
-          // apply filter
-          ObjectPropertyBuilderFactory m_propertyBuilderFactory;
-          std::unique_ptr<ObjectPropertyBuilder> pObjectBuilder(m_propertyBuilderFactory.createBuilder(pObject->type()));
-          isObjectMatchProperty = pObjectBuilder->isObjectMatchFilter(propertyData, pObject);
-        }
-        // if object does not match property -> object does not match group
-        if (!isObjectMatchProperty)
-        {
-          isObjectMatchGroup = false;
-          break;
-        }
-      }
-
-      // if object match group -> object match filter
-      if (isObjectMatchGroup)
-      {
-        isObjectMatchFilter = true;
-        break;
-      }
-    }
-
-    // check filter matching
-    if (isObjectMatchFilter)
-      matchIdCollection.add(pObject->objectId());
-    else
-      notMatchIdCollection.add(pObject->objectId());
-  }
-
-  // show or hide matching objects
-  bool isShow = m_pUi->izolateRadioButton->isChecked();
-
-  rengaapi::View* pView = rengaapi::Application::activeView();
-  switch (pView->type())
-  {
-  case rengaapi::ViewType::View3D:
-    rengaapi::ObjectVisibility::setVisibleIn3DView(levelIdCollection, true); // TODO: realy need this?
-    rengaapi::ObjectVisibility::setVisibleIn3DView(notMatchIdCollection, !isShow);
-    rengaapi::ObjectVisibility::setVisibleIn3DView(matchIdCollection, isShow);
-    break;
-  case rengaapi::ViewType::Level:
-  {
-    rengaapi::ObjectId levelId = dynamic_cast<rengaapi::LevelView*>(pView)->levelId();
-    rengaapi::ObjectVisibility::setVisibleOnLevel(notMatchIdCollection, levelId, !isShow);
-    rengaapi::ObjectVisibility::setVisibleOnLevel(matchIdCollection, levelId, isShow);
-    break;
-  }
-  default:
-    break;
-  }
+  // apply selected action (hide or show)
+  setObjectsVisibility(idCollection);
   return;
 }
 
@@ -261,6 +211,89 @@ void MainDialog::onImportFilter()
   }
 }
 
+objectIdCollection MainDialog::collectObjects(const FilterData& data) {
+  // collect 2 separate sets of objectId: first set is match to filter, but second not
+  rengaapi::Model rengaProjectModel = rengaapi::Project::model();
+  rengaapi::ModelObjectCollection objectCollection = rengaProjectModel.objects();
+  rengaapi::ObjectIdCollection matchIdCollection;
+  rengaapi::ObjectIdCollection notMatchIdCollection;
+
+  // check all model objects
+  for (auto pObject : objectCollection)
+  {
+    // apply all groups on object
+    bool isObjectMatchFilter = false;
+    for (auto& groupData : data.m_groupList)
+    {
+      if (groupData.m_groupType != pObject->type())
+        continue;
+
+      // apply all properties from group
+      bool isObjectMatchGroup = true;
+      for (auto& propertyData : groupData.m_propertyList)
+      {
+        bool isObjectMatchProperty;
+        if (propertyData.m_value.length() == 0)
+        {
+          // empty value from user: means all objects match to this property
+          isObjectMatchProperty = true;
+        }
+        else
+        {
+          // apply filter
+          ObjectPropertyBuilderFactory m_propertyBuilderFactory;
+          std::unique_ptr<ObjectPropertyBuilder> pObjectBuilder(m_propertyBuilderFactory.createBuilder(pObject->type()));
+          isObjectMatchProperty = pObjectBuilder->isObjectMatchFilter(propertyData, pObject);
+        }
+        // if object does not match property -> object does not match group
+        if (!isObjectMatchProperty)
+        {
+          isObjectMatchGroup = false;
+          break;
+        }
+      }
+
+      // if object match group -> object match filter
+      if (isObjectMatchGroup)
+      {
+        isObjectMatchFilter = true;
+        break;
+      }
+    }
+
+    // check filter matching
+    if (isObjectMatchFilter)
+      matchIdCollection.add(pObject->objectId());
+    else
+      notMatchIdCollection.add(pObject->objectId());
+  }
+
+  return std::make_pair(matchIdCollection, notMatchIdCollection);
+}
+
+void MainDialog::setObjectsVisibility(const objectIdCollection& idCollection) {
+  // show or hide matching objects
+  bool isShow = m_pUi->izolateRadioButton->isChecked();
+
+  rengaapi::View* pView = rengaapi::Application::activeView();
+  switch (pView->type())
+  {
+  case rengaapi::ViewType::View3D:
+    rengaapi::ObjectVisibility::setVisibleIn3DView(idCollection.first, isShow);
+    rengaapi::ObjectVisibility::setVisibleIn3DView(idCollection.second, !isShow);
+    break;
+  case rengaapi::ViewType::Level:
+  {
+    rengaapi::ObjectId levelId = dynamic_cast<rengaapi::LevelView*>(pView)->levelId();
+    rengaapi::ObjectVisibility::setVisibleOnLevel(idCollection.first, levelId, isShow);
+    rengaapi::ObjectVisibility::setVisibleOnLevel(idCollection.second, levelId, !isShow);
+    break;
+  }
+  default:
+    break;
+  }
+}
+
 // TODO: this should be a slot (or observer) for "selection changed" or "current index changed" or smth like that?
 void MainDialog::enableButtons(bool isEnable)
 {
@@ -269,44 +302,6 @@ void MainDialog::enableButtons(bool isEnable)
   m_pUi->deleteButton->setEnabled(isEnable);
   m_pUi->exportButton->setEnabled(isEnable);
   m_pUi->okButton->setEnabled(isEnable);
-}
-
-//TODO: remove responsibility add/edit from here 
-//this function should just open dialog and return result from it.
-//Functions above should understand is this an adding or editing and do all stuff with renaming and adding to list
-// can be "bool MainDialog::showFilterDialog(FilterDialog* pFilterDialog, FilterData& outFilterData)"
-void MainDialog::showFilterDialog(FilterDialog* pFilterDialog, QStandardItem* pFilterItem)
-{
-  int exitValue = pFilterDialog->exec();
-  if (exitValue == QDialog::Accepted)
-  {
-    FilterData filterData = pFilterDialog->getFilterDescription();
-    // TODO: save filter data in QStandardItem, do not use unique names as identifier
-    // maybe you can save in the QStandardItem an index in m_filterDataArray as id
-    if (pFilterItem != nullptr)
-    {
-      const int oldFilterRow = m_pListModel->indexFromItem(pFilterItem).row();
-      if (pFilterItem->text().compare(filterData.m_filterName) != 0)
-      {
-        setUniqueName(filterData);
-        pFilterItem->setText(filterData.m_filterName);
-      }
-      m_filterDataArray[oldFilterRow] = filterData;
-    }
-    else
-    {
-      setUniqueName(filterData);
-      QStandardItem* newFilterItem = new QStandardItem(filterData.m_filterName);
-      m_pListModel->appendRow(newFilterItem);
-      m_pUi->listView->setCurrentIndex(m_pListModel->indexFromItem(newFilterItem));
-      m_filterDataArray.push_back(filterData);
-    }
-    enableButtons(true);
-  }
-  else
-  {
-    assert(exitValue == QDialog::Rejected);
-  }
 }
 
 void MainDialog::setUniqueName(FilterData& data)
