@@ -13,7 +13,7 @@
     </message>
     <message>
         <source>Name</source>
-        <translation>Имя</translation>
+        <translation>Имя:</translation>
     </message>
     <message>
         <source>Filter name</source>
@@ -76,7 +76,7 @@
     </message>
     <message>
         <source>All search criteria</source>
-        <translation>Все критерии поиска</translation>
+        <translation>Все критерии поиска:</translation>
     </message>
     <message>
         <source>Delete</source>

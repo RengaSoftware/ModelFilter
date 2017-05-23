@@ -13,7 +13,7 @@
     </message>
     <message>
         <source>Name</source>
-        <translation>Name</translation>
+        <translation>Name:</translation>
     </message>
     <message>
         <source>Filter name</source>
@@ -76,7 +76,7 @@
     </message>
     <message>
         <source>All search criteria</source>
-        <translation>All search criteria</translation>
+        <translation>All search criteria:</translation>
     </message>
     <message>
         <source>Delete</source>
