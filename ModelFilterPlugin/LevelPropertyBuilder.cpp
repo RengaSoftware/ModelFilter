@@ -32,7 +32,7 @@ bool LevelPropertyBuilder::isObjectMatchFilter(const SearchÑriteriaData& data, r
   case PropertyType::Elevation:
     return apply(pLevel->elevation(), data);
   case PropertyType::Name:
-    return apply(pLevel->name(), data);
+    return apply(pLevel->levelName(), data);
   case PropertyType::UserAttribute:
     return isUserAttributeMatchFilter(pObject, data);
   default:
