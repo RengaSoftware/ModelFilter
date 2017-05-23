@@ -5,7 +5,7 @@
     <name>FilterDialog</name>
     <message>
         <source>WindowName</source>
-        <translation>Filter adding</translation>
+        <translation type="vanished">Filter adding</translation>
     </message>
     <message>
         <source>EditWindowName</source>
@@ -13,38 +13,38 @@
     </message>
     <message>
         <source>Name</source>
-        <translation>Name:</translation>
+        <translation type="vanished">Name:</translation>
     </message>
     <message>
         <source>Filter name</source>
-        <translation>New filter</translation>
+        <translation type="vanished">New filter</translation>
     </message>
     <message>
         <source>Add</source>
-        <translation>Add</translation>
+        <translation type="vanished">Add</translation>
     </message>
     <message>
         <source>Edit</source>
-        <translation>Edit</translation>
+        <translation type="vanished">Edit</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation>Delete</translation>
+        <translation type="vanished">Delete</translation>
     </message>
     <message>
         <source>OK</source>
-        <translation>OK</translation>
+        <translation type="vanished">OK</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation>Cancel</translation>
+        <translation type="vanished">Cancel</translation>
     </message>
 </context>
 <context>
     <name>GroupDialog</name>
     <message>
         <source>WindowName</source>
-        <translation>Group adding</translation>
+        <translation type="vanished">Group adding</translation>
     </message>
     <message>
         <source>EditWindowName</source>
@@ -52,54 +52,54 @@
     </message>
     <message>
         <source>Add search criteria in list below:</source>
-        <translation>Add search criteria in list below:</translation>
+        <translation type="vanished">Add search criteria in list below:</translation>
     </message>
     <message>
         <source>Object type:</source>
-        <translation>Object type:</translation>
+        <translation type="vanished">Object type:</translation>
     </message>
     <message>
         <source>Property:</source>
-        <translation>Property:</translation>
+        <translation type="vanished">Property:</translation>
     </message>
     <message>
         <source>Operator:</source>
-        <translation>Operator:</translation>
+        <translation type="vanished">Operator:</translation>
     </message>
     <message>
         <source>Value:</source>
-        <translation>Value:</translation>
+        <translation type="vanished">Value:</translation>
     </message>
     <message>
         <source>Add</source>
-        <translation>Add</translation>
+        <translation type="vanished">Add</translation>
     </message>
     <message>
         <source>All search criteria</source>
-        <translation>All search criteria:</translation>
+        <translation type="vanished">All search criteria:</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation>Delete</translation>
+        <translation type="vanished">Delete</translation>
     </message>
     <message>
         <source>OK</source>
-        <translation>OK</translation>
+        <translation type="vanished">OK</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation>Cancel</translation>
+        <translation type="vanished">Cancel</translation>
     </message>
 </context>
 <context>
     <name>MainDialog</name>
     <message>
         <source>WindowName</source>
-        <translation>Filter choosing</translation>
+        <translation type="vanished">Filter choosing</translation>
     </message>
     <message>
         <source>Export Filter</source>
-        <translation>Export Filter</translation>
+        <translation type="vanished">Export Filter</translation>
     </message>
     <message>
         <source>Import filter</source>
@@ -107,47 +107,51 @@
     </message>
     <message>
         <source>addToolTip</source>
-        <translation>Add filter</translation>
+        <translation type="vanished">Add filter</translation>
     </message>
     <message>
         <source>copyToolTip</source>
-        <translation>Copy filter</translation>
+        <translation type="vanished">Copy filter</translation>
     </message>
     <message>
         <source>editToolTip</source>
-        <translation>Edit filter</translation>
+        <translation type="vanished">Edit filter</translation>
     </message>
     <message>
         <source>deleteToolTip</source>
-        <translation>Delete filter</translation>
+        <translation type="vanished">Delete filter</translation>
     </message>
     <message>
         <source>exportToolTip</source>
-        <translation>Export filter to file</translation>
+        <translation type="vanished">Export filter to file</translation>
     </message>
     <message>
         <source>importToolTip</source>
-        <translation>Import filter from file</translation>
+        <translation type="vanished">Import filter from file</translation>
     </message>
     <message>
         <source>Chosen objects</source>
-        <translation>Chosen objects</translation>
+        <translation type="vanished">Chosen objects</translation>
     </message>
     <message>
         <source>Izolate</source>
-        <translation>Izolate</translation>
+        <translation type="vanished">Izolate</translation>
     </message>
     <message>
         <source>Hide</source>
-        <translation>Hide</translation>
+        <translation type="vanished">Hide</translation>
     </message>
     <message>
         <source>OK</source>
-        <translation>OK</translation>
+        <translation type="vanished">OK</translation>
     </message>
     <message>
         <source>Close</source>
-        <translation>Close</translation>
+        <translation type="vanished">Close</translation>
+    </message>
+    <message>
+        <source>Export filter</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -436,63 +440,63 @@
     <name>modelObjects</name>
     <message>
         <source>Levels</source>
-        <translation>Levels</translation>
+        <translation type="vanished">Levels</translation>
     </message>
     <message>
         <source>Columns</source>
-        <translation>Columns</translation>
+        <translation type="vanished">Columns</translation>
     </message>
     <message>
         <source>Floors</source>
-        <translation>Floors</translation>
+        <translation type="vanished">Floors</translation>
     </message>
     <message>
         <source>Openings</source>
-        <translation>Openings</translation>
+        <translation type="vanished">Openings</translation>
     </message>
     <message>
         <source>Roofs</source>
-        <translation>Roofs</translation>
+        <translation type="vanished">Roofs</translation>
     </message>
     <message>
         <source>Beams</source>
-        <translation>Beams</translation>
+        <translation type="vanished">Beams</translation>
     </message>
     <message>
         <source>Stairs</source>
-        <translation>Stairs</translation>
+        <translation type="vanished">Stairs</translation>
     </message>
     <message>
         <source>Ramps</source>
-        <translation>Ramps</translation>
+        <translation type="vanished">Ramps</translation>
     </message>
     <message>
         <source>Windows</source>
-        <translation>Windows</translation>
+        <translation type="vanished">Windows</translation>
     </message>
     <message>
         <source>Doors</source>
-        <translation>Doors</translation>
+        <translation type="vanished">Doors</translation>
     </message>
     <message>
         <source>Railings</source>
-        <translation>Railings</translation>
+        <translation type="vanished">Railings</translation>
     </message>
     <message>
         <source>Walls</source>
-        <translation>Walls</translation>
+        <translation type="vanished">Walls</translation>
     </message>
     <message>
         <source>Rooms</source>
-        <translation>Rooms</translation>
+        <translation type="vanished">Rooms</translation>
     </message>
     <message>
         <source>Isolated foundations</source>
-        <translation>Isolated foundations</translation>
+        <translation type="vanished">Isolated foundations</translation>
     </message>
     <message>
         <source>Wall foundations</source>
-        <translation>Wall foundations</translation>
+        <translation type="vanished">Wall foundations</translation>
     </message>
 </context>
 <context>
@@ -534,59 +538,59 @@
     <name>operator</name>
     <message>
         <source>eq</source>
-        <translation>Equals</translation>
+        <translation type="vanished">Equals</translation>
     </message>
     <message>
         <source>neq</source>
-        <translation>Not equals</translation>
+        <translation type="vanished">Not equals</translation>
     </message>
     <message>
         <source>geq</source>
-        <translation>Greater or equal</translation>
+        <translation type="vanished">Greater or equal</translation>
     </message>
     <message>
         <source>leq</source>
-        <translation>Less or equal</translation>
+        <translation type="vanished">Less or equal</translation>
     </message>
     <message>
         <source>greater</source>
-        <translation>Greater</translation>
+        <translation type="vanished">Greater</translation>
     </message>
     <message>
         <source>less</source>
-        <translation>Less</translation>
+        <translation type="vanished">Less</translation>
     </message>
     <message>
         <source>equal</source>
-        <translation>Equals</translation>
+        <translation type="vanished">Equals</translation>
     </message>
     <message>
         <source>notEqual</source>
-        <translation>Not equals</translation>
+        <translation type="vanished">Not equals</translation>
     </message>
     <message>
         <source>contain</source>
-        <translation>Contains</translation>
+        <translation type="vanished">Contains</translation>
     </message>
     <message>
         <source>notContain</source>
-        <translation>Not contains</translation>
+        <translation type="vanished">Not contains</translation>
     </message>
     <message>
         <source>prefix</source>
-        <translation>Begins with</translation>
+        <translation type="vanished">Begins with</translation>
     </message>
     <message>
         <source>notPrefix</source>
-        <translation>Not begins with</translation>
+        <translation type="vanished">Not begins with</translation>
     </message>
     <message>
         <source>suffix</source>
-        <translation>Ends with</translation>
+        <translation type="vanished">Ends with</translation>
     </message>
     <message>
         <source>notSuffix</source>
-        <translation>Not ends with</translation>
+        <translation type="vanished">Not ends with</translation>
     </message>
 </context>
 <context>

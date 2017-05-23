@@ -533,6 +533,10 @@ copy /y $(ProjectDir)Resources\PluginIcon.png $(SolutionDir)$(Configuration)\$(P
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">"$(QTDIR)\bin\uic.exe" -o ".\GeneratedFiles\ui_%(Filename).h" "%(FullPath)"</Command>
     </CustomBuild>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="ModelFilterPlugin_en.ts" />
+    <None Include="ModelFilterPlugin_ru.ts" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

@@ -45,6 +45,11 @@
     <Filter Include="FilterData">
       <UniqueIdentifier>{a82d6f78-5092-452e-8174-2d3a79e90a9a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Translation Files">
+      <UniqueIdentifier>{639EADAA-A684-42e4-A9AD-28FC9BCB8F7C}</UniqueIdentifier>
+      <Extensions>ts</Extensions>
+      <ParseFiles>false</ParseFiles>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="RengaStringToQString.cpp">
@@ -284,5 +289,13 @@
     <CustomBuild Include="FilterDialogButtonHandler.h">
       <Filter>PluginButtons</Filter>
     </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ModelFilterPlugin_en.ts">
+      <Filter>Translation Files</Filter>
+    </None>
+    <None Include="ModelFilterPlugin_ru.ts">
+      <Filter>Translation Files</Filter>
+    </None>
   </ItemGroup>
 </Project>
