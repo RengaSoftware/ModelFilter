@@ -14,6 +14,7 @@
 #include "ObjectPropertyBuilderFactory.h"
 
 #include <QtCore/QFile.h>
+#include <QtCore/QStandardPaths.h>
 #include <QtWidgets/QFileDialog.h>
 #include <QtWidgets/QMessageBox.h>
 
@@ -23,6 +24,8 @@
 #include <RengaAPI/ModelObjectTypes.h>
 #include <RengaAPI/ObjectVisibility.h>
 #include <RengaAPI/Project.h>
+
+const QString pluginSubPath = "ModelFilterPlugin";
 
 MainDialog::MainDialog()
   : QDialog(nullptr, Qt::WindowTitleHint | Qt::WindowSystemMenuHint | Qt::WindowCloseButtonHint)
@@ -43,7 +46,10 @@ MainDialog::MainDialog()
   connect(m_pUi->exportButton, SIGNAL(clicked()), this, SLOT(onExportFilter()));
   connect(m_pUi->importButton, SIGNAL(clicked()), this, SLOT(onImportFilter()));
   connect(m_pUi->okButton, SIGNAL(clicked()), this, SLOT(onApplyFilter()));
-  enableButtons(false);
+
+  loadLocalFilters();
+
+  enableButtons(m_filterDataArray.size());
 }
 
 MainDialog::~MainDialog()
@@ -60,6 +66,7 @@ void MainDialog::onAddFilter()
   FilterData filterData = pFilterDialog->getFilterDescription();
   setUniqueName(filterData);
   m_filterDataArray.push_back(filterData);
+  saveFilterFile(filterData);
 
   // add filter to the list
   QStandardItem* filterItem = new QStandardItem(filterData.m_filterName);
@@ -85,6 +92,7 @@ void MainDialog::onEditFilter()
   // update filter name
   FilterData filterData = pFilterDialog->getFilterDescription();
   const int filterItemRow = m_pListModel->indexFromItem(pFilterItem).row();
+  deleteFilterFile(m_filterDataArray[filterItemRow]);
   if (m_filterDataArray[filterItemRow].m_filterName.compare(filterData.m_filterName) != 0)
   {
     setUniqueName(filterData);
@@ -93,6 +101,7 @@ void MainDialog::onEditFilter()
 
   // store FilterData
   m_filterDataArray[filterItemRow] = filterData;
+  saveFilterFile(m_filterDataArray[filterItemRow]);
 }
 
 void MainDialog::onDeleteFilter()
@@ -118,6 +127,7 @@ void MainDialog::onDeleteFilter()
 
   // remove FilterData
   auto it = m_filterDataArray.begin() + filterRow;
+  deleteFilterFile(*it);
   m_filterDataArray.erase(it);
 
   enableButtons(m_pListModel->rowCount() > 0);
@@ -133,6 +143,7 @@ void MainDialog::onCopyFilter()
   QStandardItem* copyItem = new QStandardItem(filterCopy.m_filterName);
   m_pListModel->appendRow(copyItem);
   m_filterDataArray.push_back(filterCopy);
+  saveFilterFile(filterCopy);
 }
 
 void MainDialog::onApplyFilter()
@@ -167,7 +178,8 @@ void MainDialog::onExportFilter()
       exportMessageBox.exec();
       return;
     }
-    m_filterDataArray[m_pUi->listView->currentIndex().row()].exportData(filterFile.get());
+    const int filterDataRow = m_pUi->listView->currentIndex().row();
+    m_filterDataArray[filterDataRow].exportData(filterFile.get());
   }
 }
 
@@ -203,6 +215,7 @@ void MainDialog::onImportFilter()
     }
     setUniqueName(filterData);
     m_filterDataArray.push_back(filterData);
+    saveFilterFile(filterData);
 
     QStandardItem* item = new QStandardItem(filterData.m_filterName);
     m_pListModel->appendRow(item);
@@ -211,7 +224,40 @@ void MainDialog::onImportFilter()
   }
 }
 
-objectIdCollection MainDialog::collectObjects(const FilterData& data) {
+void MainDialog::loadLocalFilters() {
+  QString dataLocationPath = QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation);
+  QDir userDataDir(dataLocationPath);
+  
+  // check if path correct
+  assert(userDataDir != QDir::current());
+  // create plugin folder if necessary
+  if (userDataDir.entryList({ pluginSubPath }, QDir::Dirs).empty())
+    userDataDir.mkdir(pluginSubPath);
+
+  // TODO: move creation of plugin directory to ModelFilterPlugin.cpp
+  pluginDataDir = QDir(QString("%1/%2").arg(dataLocationPath).arg(pluginSubPath));
+  QFileInfoList entryList = pluginDataDir.entryInfoList({ "*.rnf" }, QDir::Files | QDir::Readable);
+  // open each .rnf file
+  for (auto& fileInfo : entryList) {
+    std::unique_ptr<QFile> filterFile(new QFile(fileInfo.canonicalFilePath()));
+    if (!filterFile->open(QIODevice::ReadOnly | QIODevice::Text))
+      continue;
+
+    FilterData filterData = FilterData::importData(filterFile.get());
+    if (filterData.m_groupList.size() == 0)
+      continue;
+
+    setUniqueName(filterData);
+    m_filterDataArray.push_back(filterData);
+
+    QStandardItem* item = new QStandardItem(filterData.m_filterName);
+    m_pListModel->appendRow(item);
+    m_pUi->listView->setCurrentIndex(m_pListModel->indexFromItem(item));
+  }
+}
+
+objectIdCollection MainDialog::collectObjects(const FilterData& data)
+{
   // collect 2 separate sets of objectId: first set is match to filter, but second not
   rengaapi::Model rengaProjectModel = rengaapi::Project::model();
   rengaapi::ModelObjectCollection objectCollection = rengaProjectModel.objects();
@@ -271,7 +317,8 @@ objectIdCollection MainDialog::collectObjects(const FilterData& data) {
   return std::make_pair(matchIdCollection, notMatchIdCollection);
 }
 
-void MainDialog::setObjectsVisibility(const objectIdCollection& idCollection) {
+void MainDialog::setObjectsVisibility(const objectIdCollection& idCollection)
+{
   // show or hide matching objects
   bool isShow = m_pUi->izolateRadioButton->isChecked();
 
@@ -311,4 +358,20 @@ void MainDialog::setUniqueName(FilterData& data)
     filterNames.insert(std::make_pair(i, m_pListModel->item(i)->text()));
   std::wstring uniqueFilterName = CUniqueNameGenerator::generate(filterNames, data.m_filterName.toStdWString(), true);
   data.m_filterName = QString::fromStdWString(uniqueFilterName);
+}
+
+void MainDialog::saveFilterFile(FilterData& data)
+{
+  QFile filterFile(QString("%1/%2.rnf").arg(pluginDataDir.canonicalPath()).arg(data.m_filterName));
+  if (filterFile.open(QIODevice::WriteOnly | QIODevice::Text))
+    data.exportData(&filterFile);
+  else
+    assert(false);
+}
+
+void MainDialog::deleteFilterFile(FilterData& data)
+{
+  QFile filterFile(QString("%1/%2.rnf").arg(pluginDataDir.canonicalPath()).arg(data.m_filterName));
+  if (filterFile.exists())
+    filterFile.remove();
 }

@@ -7,8 +7,9 @@
 //
 
 #pragma once
-#include <QtWidgets/QDialog>
+#include <QtCore/QDir>
 #include <QtGui/QStandardItemModel>
+#include <QtWidgets/QDialog>
 
 #include <RengaAPI/ModelObjectCollection.h>
 
@@ -40,13 +41,17 @@ private slots:
   void onImportFilter();
 
 private:
+  void loadLocalFilters();
   objectIdCollection collectObjects(const FilterData& data);
   void setObjectsVisibility(const objectIdCollection& idCollection);
   void enableButtons(bool isEnable);
   void setUniqueName(FilterData& data);
+  void saveFilterFile(FilterData& data);
+  void deleteFilterFile(FilterData& data);
 
 private:
   std::unique_ptr<Ui::MainDialog> m_pUi;
   std::unique_ptr<QStandardItemModel> m_pListModel;
   std::vector<FilterData> m_filterDataArray;
+  QDir pluginDataDir;
 };
