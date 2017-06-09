@@ -126,6 +126,8 @@ struct GroupData {
     : m_groupType(objectType)
   {}
 
+  bool isValid();
+
   rengaapi::ObjectType m_groupType;
   std::list<SearchÑriteriaData> m_propertyList;
 };
@@ -141,6 +143,7 @@ struct FilterData {
 
   static FilterData importData(QFile* filterFile);
   void exportData(QFile* filterFile);
+  bool isValid();
 
 private:
   static GroupData parseGroup(QXmlStreamReader& reader);

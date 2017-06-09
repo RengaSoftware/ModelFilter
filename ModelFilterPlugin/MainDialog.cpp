@@ -113,8 +113,8 @@ void MainDialog::onDeleteFilter()
     QApplication::translate("deleteMessageBox", "text").append(filterName),
     QMessageBox::Ok | QMessageBox::Cancel,
     this);
-  int result = deleteMessageBox.exec();
-  if (result == QMessageBox::Cancel)
+  int exitValue = deleteMessageBox.exec();
+  if (exitValue == QMessageBox::Cancel)
     return;
 
   // get filter item
@@ -163,7 +163,8 @@ void MainDialog::onExportFilter()
   QFileDialog fileDialog(this, QApplication::translate("MainDialog", "Export filter"), "", "Renga Filter (*.rnf)");
   fileDialog.setAcceptMode(QFileDialog::AcceptSave);
   fileDialog.setFileMode(QFileDialog::ExistingFile);
-  if (fileDialog.exec() == QDialog::Accepted)
+  int exitValue = fileDialog.exec();
+  if (exitValue == QDialog::Accepted)
   {
     QString fileName = fileDialog.selectedFiles().first();
     std::unique_ptr<QFile> filterFile(new QFile(fileName));
@@ -187,7 +188,8 @@ void MainDialog::onImportFilter()
 {
   QFileDialog fileDialog(this, QApplication::translate("MainDialog", "Import filter"), "", "Renga Filter (*.rnf)");
   fileDialog.setFileMode(QFileDialog::ExistingFile);
-  if (fileDialog.exec() == QDialog::Accepted)
+  int exitValue = fileDialog.exec();
+  if (exitValue == QDialog::Accepted)
   {
     QString fileName = fileDialog.selectedFiles().first();
     std::unique_ptr<QFile> filterFile(new QFile(fileName));
@@ -203,7 +205,7 @@ void MainDialog::onImportFilter()
       return;
     }
     FilterData filterData = FilterData::importData(filterFile.get());
-    if (filterData.m_groupList.size() == 0) {
+    if (!filterData.isValid()) {
       QMessageBox importMessageBox(
         QMessageBox::Icon::Critical,
         QApplication::translate("importMessageBox", "title"),
@@ -244,7 +246,7 @@ void MainDialog::loadLocalFilters() {
       continue;
 
     FilterData filterData = FilterData::importData(filterFile.get());
-    if (filterData.m_groupList.size() == 0)
+    if (!filterData.isValid())
       continue;
 
     setUniqueName(filterData);
