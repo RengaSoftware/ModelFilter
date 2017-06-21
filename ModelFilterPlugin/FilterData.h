@@ -69,6 +69,7 @@ enum OperatorType {
   LEQ,
   GR, // greater
   LS, //less
+  All,
 };
 
 struct DoubleOperatorData

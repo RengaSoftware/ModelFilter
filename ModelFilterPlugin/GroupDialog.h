@@ -36,6 +36,8 @@ public:
   void onDeleteButton();
   void onTypeBoxIndexChanged(const int changedIndex);
   void onPropertyBoxIndexChanged(const int changedIndex);
+  void onOperatorBoxIndexChanged(const int changedIndex);
+  void onValueChanged(const QString& value);
 
 private:
   void buildProperties(const GroupData& groupData);
@@ -49,6 +51,8 @@ private:
 
   void loadOperatorBox();
   void reloadOperatorBox();
+
+  void reloadValueBox(int changedIndex);
 
 private:
   std::unique_ptr<Ui::GroupDialog> m_pUi;

@@ -280,19 +280,10 @@ objectIdCollection MainDialog::collectObjects(const FilterData& data)
       bool isObjectMatchGroup = true;
       for (auto& propertyData : groupData.m_propertyList)
       {
-        bool isObjectMatchProperty;
-        if (propertyData.m_value.length() == 0)
-        {
-          // empty value from user: means all objects match to this property
-          isObjectMatchProperty = true;
-        }
-        else
-        {
-          // apply filter
-          ObjectPropertyBuilderFactory m_propertyBuilderFactory;
-          std::unique_ptr<ObjectPropertyBuilder> pObjectBuilder(m_propertyBuilderFactory.createBuilder(pObject->type()));
-          isObjectMatchProperty = pObjectBuilder->isObjectMatchFilter(propertyData, pObject);
-        }
+        // apply filter
+        ObjectPropertyBuilderFactory m_propertyBuilderFactory;
+        std::unique_ptr<ObjectPropertyBuilder> pObjectBuilder(m_propertyBuilderFactory.createBuilder(pObject->type()));
+        bool isObjectMatchProperty = pObjectBuilder->isObjectMatchFilter(propertyData, pObject);
         // if object does not match property -> object does not match group
         if (!isObjectMatchProperty)
         {

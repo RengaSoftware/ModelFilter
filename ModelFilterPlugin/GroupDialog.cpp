@@ -52,7 +52,7 @@ GroupDialog::GroupDialog(QDialog* parent)
   // set buttons
   connect(m_pUi->addButton, SIGNAL(clicked()), this, SLOT(onAddButton()));
   connect(m_pUi->deleteButton, SIGNAL(clicked()), this, SLOT(onDeleteButton()));
-  
+
   itemCountChanged(false);
 }
 
@@ -60,7 +60,7 @@ GroupDialog::GroupDialog(QDialog* parent, const GroupData& groupData)
   : GroupDialog(parent)
 {
   setWindowTitle(QApplication::translate("GroupDialog", "EditWindowName"));
-  
+
   // set data in tree
   buildProperties(groupData);
 
@@ -165,7 +165,7 @@ void GroupDialog::onTypeBoxIndexChanged(const int changedIndex)
   assert(currentData.isValid());
   const rengabase::UUID uuid = rengabase::UUID::fromString(QStringToRengaString(currentData.toString()));
   rengaapi::ObjectType objectType = rengaapi::ObjectType(uuid);
-  
+
   ObjectPropertyBuilderFactory factory;
   m_pBuilder.reset(factory.createBuilder(objectType));
 
@@ -177,6 +177,16 @@ void GroupDialog::onTypeBoxIndexChanged(const int changedIndex)
 void GroupDialog::onPropertyBoxIndexChanged(const int changedIndex)
 {
   reloadOperatorBox();
+}
+
+void GroupDialog::onOperatorBoxIndexChanged(const int changedIndex)
+{
+  reloadValueBox(changedIndex);
+}
+
+void GroupDialog::onValueChanged(const QString& value)
+{
+  m_pUi->addButton->setEnabled(value.length() > 0);
 }
 
 void GroupDialog::buildProperties(const GroupData& groupData) {
@@ -297,6 +307,7 @@ void GroupDialog::loadOperatorBox()
 
 void GroupDialog::reloadOperatorBox()
 {
+  disconnect(m_pUi->operatorBox, SIGNAL(currentIndexChanged(int)), this, SLOT(onOperatorBoxIndexChanged(int)));
   m_pOperatorBoxModel->clear();
 
   // get type of selected property
@@ -308,10 +319,6 @@ void GroupDialog::reloadOperatorBox()
   bool ok = false;
   ValueType valueType = ValueType(data.toInt(&ok));
 
-  // reset value box
-  m_pUi->valueBox->setValidator(valueType == ValueType::Double ? new QDoubleValidator() : nullptr);
-  m_pUi->valueBox->clearEditText();
-
   // load operators
   for (auto& it : m_pBuilder->getOperators(valueType))
   {
@@ -319,4 +326,34 @@ void GroupDialog::reloadOperatorBox()
     operatorItem->setData(QVariant(it.first));
     m_pOperatorBoxModel->appendRow(operatorItem);
   }
+
+  connect(m_pUi->operatorBox, SIGNAL(currentIndexChanged(int)), this, SLOT(onOperatorBoxIndexChanged(int)));
+
+  m_pUi->valueBox->setValidator(valueType == ValueType::Double ? new QDoubleValidator() : nullptr);
+  reloadValueBox(m_pUi->operatorBox->currentIndex());
+}
+
+void GroupDialog::reloadValueBox(int changedIndex)
+{
+  disconnect(m_pUi->valueBox, SIGNAL(currentTextChanged(const QString&)), this, SLOT(onValueChanged(const QString&)));
+
+  m_pUi->valueBox->clearEditText();
+
+  QStandardItem* pItem = m_pOperatorBoxModel->item(changedIndex, 0);
+  bool ok = true;
+  OperatorType type = OperatorType(pItem->data().toInt(&ok));
+  assert(ok);
+
+  if (type == OperatorType::All)
+  {
+    m_pUi->valueBox->setEnabled(false);
+    m_pUi->addButton->setEnabled(true);
+  }
+  else
+  {
+    m_pUi->valueBox->setEnabled(true);
+    onValueChanged("");
+  }
+
+  connect(m_pUi->valueBox, SIGNAL(currentTextChanged(const QString&)), this, SLOT(onValueChanged(const QString&)));
 }
