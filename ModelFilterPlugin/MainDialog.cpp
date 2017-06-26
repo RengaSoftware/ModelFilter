@@ -25,10 +25,9 @@
 #include <RengaAPI/ObjectVisibility.h>
 #include <RengaAPI/Project.h>
 
-const QString pluginSubPath = "ModelFilterPlugin";
-
-MainDialog::MainDialog()
+MainDialog::MainDialog(const QDir& dir)
   : QDialog(nullptr, Qt::WindowTitleHint | Qt::WindowSystemMenuHint | Qt::WindowCloseButtonHint)
+  , pluginDataDir(dir)
 {
   m_pUi.reset(new Ui::MainDialog());
   m_pUi->setupUi(this);
@@ -218,17 +217,7 @@ void MainDialog::onImportFilter()
 }
 
 void MainDialog::loadLocalFilters() {
-  QString dataLocationPath = QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation);
-  QDir userDataDir(dataLocationPath);
-
-  // check if path correct
-  assert(userDataDir != QDir::current());
-  // create plugin folder if necessary
-  if (userDataDir.entryList({ pluginSubPath }, QDir::Dirs).empty())
-    userDataDir.mkdir(pluginSubPath);
-
-  // TODO: move creation of plugin directory to ModelFilterPlugin.cpp
-  pluginDataDir = QDir(QString("%1/%2").arg(dataLocationPath).arg(pluginSubPath));
+  
   QFileInfoList entryList = pluginDataDir.entryInfoList({ "*.rnf" }, QDir::Files | QDir::Readable);
   // open each .rnf file
   for (auto& fileInfo : entryList) {

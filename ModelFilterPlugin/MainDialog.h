@@ -29,7 +29,7 @@ class MainDialog : public QDialog
   Q_OBJECT
 
 public:
-  MainDialog();
+  MainDialog(const QDir& pluginDataDir);
   ~MainDialog();
 
 private slots:
@@ -54,5 +54,5 @@ private:
   std::unique_ptr<Ui::MainDialog> m_pUi;
   std::unique_ptr<QStandardItemModel> m_pListModel;
   std::vector<FilterData> m_filterDataArray;
-  QDir pluginDataDir;
+  const QDir pluginDataDir;
 };

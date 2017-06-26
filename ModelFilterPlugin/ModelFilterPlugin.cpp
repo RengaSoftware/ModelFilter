@@ -12,6 +12,9 @@
 #include "PluginToolButtons.h"
 #include "RengaEventsHandler.h"
 
+
+#include <QtCore/QFile.h>
+#include <QtCore/QStandardPaths.h>
 #include <QtWidgets/QApplication.h>
 
 #include <RengaAPI/Localization.h>
@@ -19,6 +22,7 @@
 
 static const QString russianLocaleFileName = "ModelFilterPlugin_ru.qm";
 static const QString englishLocaleFileName = "ModelFilterPlugin_en.qm";
+static const QString pluginSubPath = "ModelFilterPlugin";
 static const QString defaultLocaleFileName = englishLocaleFileName;
 
 static const QString c_russianLocale = "ru_RU";
@@ -50,10 +54,26 @@ ModelFilterPlugin::~ModelFilterPlugin()
 
 bool ModelFilterPlugin::initialize(const wchar_t* pluginPath)
 {
+  QString dataLocationPath = QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation);
+  QDir userDataDir(dataLocationPath);
+
+  // check if path correct
+  if (userDataDir == QDir::current())
+    return false;
+
+  // create plugin folder if necessary
+  if (userDataDir.entryList({ pluginSubPath }, QDir::Dirs).empty())
+  {
+    bool pathCreated = userDataDir.mkdir(pluginSubPath);
+    if (!pathCreated)
+      return false;
+  }
+  QDir pluginDataDir = QDir(QString("%1/%2").arg(dataLocationPath).arg(pluginSubPath));
+
   if (!loadTranslator(pluginPath))
     return false;
 
-  m_pMainDialog.reset(new MainDialog());
+  m_pMainDialog.reset(new MainDialog(pluginDataDir));
 
   subscribeOnRengaEvents();
   addPluginButtons(pluginPath);
