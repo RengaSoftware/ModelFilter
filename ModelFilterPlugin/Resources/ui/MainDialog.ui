@@ -726,6 +726,9 @@ QListView::item:hover {
      </item>
      <item>
       <widget class="QPushButton" name="okButton">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
        <property name="minimumSize">
         <size>
          <width>80</width>

@@ -37,6 +37,7 @@ MainDialog::MainDialog()
   m_pListModel.reset(new QStandardItemModel);
   m_pUi->listView->setModel(m_pListModel.get());
   connect(m_pUi->listView, SIGNAL(doubleClicked(const QModelIndex&)), this, SLOT(onEditFilter()));
+  connect(m_pUi->listView->selectionModel(), SIGNAL(selectionChanged(const QItemSelection&, const QItemSelection&)), this, SLOT(enableButtons(const QItemSelection&)));
 
   // connect buttons
   connect(m_pUi->addButton, SIGNAL(clicked()), this, SLOT(onAddFilter()));
@@ -48,8 +49,6 @@ MainDialog::MainDialog()
   connect(m_pUi->okButton, SIGNAL(clicked()), this, SLOT(onApplyFilter()));
 
   loadLocalFilters();
-
-  enableButtons(m_filterDataArray.size());
 }
 
 MainDialog::~MainDialog()
@@ -72,9 +71,6 @@ void MainDialog::onAddFilter()
   QStandardItem* filterItem = new QStandardItem(filterData.m_filterName);
   m_pListModel->appendRow(filterItem);
   m_pUi->listView->setCurrentIndex(m_pListModel->indexFromItem(filterItem));
-
-  // set buttons
-  enableButtons(true);
 }
 
 void MainDialog::onEditFilter()
@@ -129,10 +125,6 @@ void MainDialog::onDeleteFilter()
   auto it = m_filterDataArray.begin() + filterRow;
   deleteFilterFile(*it);
   m_filterDataArray.erase(it);
-
-  enableButtons(m_pListModel->rowCount() > 0);
-  if (m_pListModel->rowCount() > 0)
-    m_pUi->listView->setCurrentIndex(m_pListModel->index(std::min(filterRow, m_pListModel->rowCount() - 1), 0));
 }
 
 void MainDialog::onCopyFilter()
@@ -222,14 +214,13 @@ void MainDialog::onImportFilter()
     QStandardItem* item = new QStandardItem(filterData.m_filterName);
     m_pListModel->appendRow(item);
     m_pUi->listView->setCurrentIndex(m_pListModel->indexFromItem(item));
-    enableButtons(true);
   }
 }
 
 void MainDialog::loadLocalFilters() {
   QString dataLocationPath = QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation);
   QDir userDataDir(dataLocationPath);
-  
+
   // check if path correct
   assert(userDataDir != QDir::current());
   // create plugin folder if necessary
@@ -254,7 +245,12 @@ void MainDialog::loadLocalFilters() {
 
     QStandardItem* item = new QStandardItem(filterData.m_filterName);
     m_pListModel->appendRow(item);
-    m_pUi->listView->setCurrentIndex(m_pListModel->indexFromItem(item));
+  }
+
+  if (m_pListModel->rowCount() > 0)
+  {
+    m_pUi->listView->setCurrentIndex(m_pListModel->index(0, 0));
+    enableButtons(m_pUi->listView->selectionModel()->selection());
   }
 }
 
@@ -291,7 +287,6 @@ objectIdCollection MainDialog::collectObjects(const FilterData& data)
           break;
         }
       }
-
       // if object match group -> object match filter
       if (isObjectMatchGroup)
       {
@@ -306,7 +301,6 @@ objectIdCollection MainDialog::collectObjects(const FilterData& data)
     else
       notMatchIdCollection.add(pObject->objectId());
   }
-
   return std::make_pair(matchIdCollection, notMatchIdCollection);
 }
 
@@ -334,9 +328,9 @@ void MainDialog::setObjectsVisibility(const objectIdCollection& idCollection)
   }
 }
 
-// TODO: this should be a slot (or observer) for "selection changed" or "current index changed" or smth like that?
-void MainDialog::enableButtons(bool isEnable)
+void MainDialog::enableButtons(const QItemSelection& selectedItems)
 {
+  bool isEnable = selectedItems.size() > 0;
   m_pUi->copyButton->setEnabled(isEnable);
   m_pUi->editButton->setEnabled(isEnable);
   m_pUi->deleteButton->setEnabled(isEnable);

@@ -8,6 +8,7 @@
 
 #pragma once
 #include <QtCore/QDir>
+#include <QtCore/QItemSelectionModel.h>
 #include <QtGui/QStandardItemModel>
 #include <QtWidgets/QDialog>
 
@@ -39,12 +40,12 @@ private slots:
   void onApplyFilter();
   void onExportFilter();
   void onImportFilter();
+  void enableButtons(const QItemSelection& selected);
 
 private:
   void loadLocalFilters();
   objectIdCollection collectObjects(const FilterData& data);
   void setObjectsVisibility(const objectIdCollection& idCollection);
-  void enableButtons(bool isEnable);
   void setUniqueName(FilterData& data);
   void saveFilterFile(FilterData& data);
   void deleteFilterFile(FilterData& data);
