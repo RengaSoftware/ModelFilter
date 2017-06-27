@@ -36,7 +36,7 @@ PropertyList StairPropertyBuilder::getObjectProperties()
   return properties;
 }
 
-bool StairPropertyBuilder::isObjectMatchFilter(const Search—riteriaData& data, rengaapi::ModelObject* pObject)
+bool StairPropertyBuilder::isObjectMatchFilter(const SearchCriteriaData& data, rengaapi::ModelObject* pObject)
 {
   rengaapi::Stair* pStair = dynamic_cast<rengaapi::Stair*>(pObject);
   assert(pStair != nullptr);

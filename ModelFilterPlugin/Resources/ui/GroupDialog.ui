@@ -52,10 +52,10 @@
         <bool>false</bool>
        </property>
        <property name="maxVisibleItems">
-        <number>8</number>
+        <number>9</number>
        </property>
        <property name="maxCount">
-        <number>8</number>
+        <number>9</number>
        </property>
       </widget>
      </item>

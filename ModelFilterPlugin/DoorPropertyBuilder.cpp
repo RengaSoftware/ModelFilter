@@ -29,7 +29,7 @@ PropertyList DoorPropertyBuilder::getObjectProperties()
   return properties;
 }
 
-bool DoorPropertyBuilder::isObjectMatchFilter(const Search—riteriaData& data, rengaapi::ModelObject* pObject)
+bool DoorPropertyBuilder::isObjectMatchFilter(const SearchCriteriaData& data, rengaapi::ModelObject* pObject)
 {
   rengaapi::Door* pDoor = dynamic_cast<rengaapi::Door*>(pObject);
   assert(pDoor != nullptr);

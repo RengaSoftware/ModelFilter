@@ -28,14 +28,16 @@ ObjectPropertyBuilder::ObjectPropertyBuilder()
       std::make_pair(OperatorType::Prefix, StringOperatorData("prefix", [](const QString one, const QString two) {return one.startsWith(two); })),
       std::make_pair(OperatorType::NotPrefix, StringOperatorData("notPrefix", [](const QString one, const QString two) {return !one.startsWith(two); })),
       std::make_pair(OperatorType::Suffix, StringOperatorData("suffix", [](const QString one, const QString two) {return one.endsWith(two); })),
-      std::make_pair(OperatorType::NotSuffix, StringOperatorData("notSuffix", [](const QString one, const QString two) {return !one.endsWith(two); })) })
+      std::make_pair(OperatorType::NotSuffix, StringOperatorData("notSuffix", [](const QString one, const QString two) {return !one.endsWith(two); })),
+      std::make_pair(OperatorType::All, StringOperatorData("all", [](const QString, const QString) {return true; })) })
       , m_doubleOperatorData({
           std::make_pair(OperatorType::EQ, DoubleOperatorData("eq", [](const double one, const double two) {return one == two; })),
           std::make_pair(OperatorType::NEQ, DoubleOperatorData("neq", [](const double one, const double two) {return one != two; })),
           std::make_pair(OperatorType::GEQ, DoubleOperatorData("geq", [](const double one, const double two) {return one >= two; })),
           std::make_pair(OperatorType::LEQ, DoubleOperatorData("leq", [](const double one, const double two) {return one <= two; })),
           std::make_pair(OperatorType::GR, DoubleOperatorData("greater", [](const double one, const double two) {return one > two; })),
-          std::make_pair(OperatorType::LS, DoubleOperatorData("less", [](const double one, const double two) {return one < two; })) })
+          std::make_pair(OperatorType::LS, DoubleOperatorData("less", [](const double one, const double two) {return one < two; })),
+          std::make_pair(OperatorType::All, DoubleOperatorData("all", [](const double, const double) {return true; })) })
 {}
 
 ObjectPropertyBuilder::~ObjectPropertyBuilder()
@@ -136,7 +138,7 @@ std::list<std::pair<OperatorType, QString>> ObjectPropertyBuilder::getOperators(
   return operatorList;
 }
 
-bool ObjectPropertyBuilder::apply(const rengabase::LengthMeasureOptional& measure, const Search—riteriaData& data, MeasureUnit unit)
+bool ObjectPropertyBuilder::apply(const rengabase::LengthMeasureOptional& measure, const SearchCriteriaData& data, MeasureUnit unit)
 {
   if (!measure.hasValue())
     return false;
@@ -162,7 +164,7 @@ bool ObjectPropertyBuilder::apply(const rengabase::LengthMeasureOptional& measur
   return apply(value, data);
 }
 
-bool ObjectPropertyBuilder::apply(const rengabase::AreaMeasureOptional& measure, const Search—riteriaData& data, MeasureUnit unit)
+bool ObjectPropertyBuilder::apply(const rengabase::AreaMeasureOptional& measure, const SearchCriteriaData& data, MeasureUnit unit)
 {
   if (!measure.hasValue())
     return false;
@@ -185,7 +187,7 @@ bool ObjectPropertyBuilder::apply(const rengabase::AreaMeasureOptional& measure,
   return apply(value, data);
 }
 
-bool ObjectPropertyBuilder::apply(const rengabase::VolumeMeasureOptional& measure, const Search—riteriaData& data, MeasureUnit unit)
+bool ObjectPropertyBuilder::apply(const rengabase::VolumeMeasureOptional& measure, const SearchCriteriaData& data, MeasureUnit unit)
 {
   if (!measure.hasValue())
     return false;
@@ -208,22 +210,22 @@ bool ObjectPropertyBuilder::apply(const rengabase::VolumeMeasureOptional& measur
   return apply(value, data);
 }
 
-bool ObjectPropertyBuilder::apply(const rengabase::LengthMeasure& lengthMeasure, const Search—riteriaData& data)
+bool ObjectPropertyBuilder::apply(const rengabase::LengthMeasure& lengthMeasure, const SearchCriteriaData& data)
 {
   return apply(lengthMeasure.inMillimeters(), data);
 }
 
-bool ObjectPropertyBuilder::apply(const rengabase::AreaMeasure& areaMeasure, const Search—riteriaData& data)
+bool ObjectPropertyBuilder::apply(const rengabase::AreaMeasure& areaMeasure, const SearchCriteriaData& data)
 {
   return apply(areaMeasure.inMeters2(), data);
 }
 
-bool ObjectPropertyBuilder::apply(const rengabase::VolumeMeasure& volumeMeasure, const Search—riteriaData& data)
+bool ObjectPropertyBuilder::apply(const rengabase::VolumeMeasure& volumeMeasure, const SearchCriteriaData& data)
 {
   return apply(volumeMeasure.inMeters3(), data);
 }
 
-bool ObjectPropertyBuilder::apply(const rengaapi::MaterialId& materialId, const rengabase::VolumeMeasureOptional& volumeMeasure, const Search—riteriaData& data)
+bool ObjectPropertyBuilder::apply(const rengaapi::MaterialId& materialId, const rengabase::VolumeMeasureOptional& volumeMeasure, const SearchCriteriaData& data)
 {
   const double mass = countOneLayeredMass(materialId, volumeMeasure);
 
@@ -233,7 +235,7 @@ bool ObjectPropertyBuilder::apply(const rengaapi::MaterialId& materialId, const 
   return apply(mass, data);
 }
 
-bool ObjectPropertyBuilder::apply(const rengaapi::MaterialId& materialId, const std::vector<rengabase::VolumeMeasureOptional>& volumeMeasureCollection, const Search—riteriaData& data)
+bool ObjectPropertyBuilder::apply(const rengaapi::MaterialId& materialId, const std::vector<rengabase::VolumeMeasureOptional>& volumeMeasureCollection, const SearchCriteriaData& data)
 {
   const double mass = countMultiLayeredMass(materialId, volumeMeasureCollection);
 
@@ -243,7 +245,7 @@ bool ObjectPropertyBuilder::apply(const rengaapi::MaterialId& materialId, const 
   return apply(mass, data);
 }
 
-bool ObjectPropertyBuilder::apply(const rengaapi::ObjectId& levelId, const Search—riteriaData& data)
+bool ObjectPropertyBuilder::apply(const rengaapi::ObjectId& levelId, const SearchCriteriaData& data)
 {
   rengaapi::Model rengaProjectModel = rengaapi::Project::model();
   rengaapi::ObjectFilter levelsFilter = rengaapi::ObjectFilter::createObjectFilterByType(rengaapi::ModelObjectTypes::LevelType);
@@ -263,12 +265,12 @@ bool ObjectPropertyBuilder::apply(const rengaapi::ObjectId& levelId, const Searc
   return false;
 }
 
-bool ObjectPropertyBuilder::apply(const uint number, const Search—riteriaData& data)
+bool ObjectPropertyBuilder::apply(const uint number, const SearchCriteriaData& data)
 {
   return apply(static_cast<double>(number), data);
 }
 
-bool ObjectPropertyBuilder::apply(const double value, const Search—riteriaData& data)
+bool ObjectPropertyBuilder::apply(const double value, const SearchCriteriaData& data)
 {
   if (data.m_value.length() == 0)
     return true;
@@ -278,17 +280,17 @@ bool ObjectPropertyBuilder::apply(const double value, const Search—riteriaData& 
   return it->second.m_function(value, data.m_value.toDouble());
 }
 
-bool ObjectPropertyBuilder::apply(const rengabase::String& rengaString, const Search—riteriaData& data)
+bool ObjectPropertyBuilder::apply(const rengabase::String& rengaString, const SearchCriteriaData& data)
 {
   return apply(rengaStringToQString(rengaString), data);
 }
 
-bool ObjectPropertyBuilder::apply(const rengaapi::MaterialId& materialId, const Search—riteriaData& data)
+bool ObjectPropertyBuilder::apply(const rengaapi::MaterialId& materialId, const SearchCriteriaData& data)
 {
   return apply(getMaterialName(materialId), data);
 }
 
-bool ObjectPropertyBuilder::apply(const QString & value, const Search—riteriaData& data)
+bool ObjectPropertyBuilder::apply(const QString & value, const SearchCriteriaData& data)
 {
   if (data.m_value.length() == 0)
     return true;
@@ -298,7 +300,7 @@ bool ObjectPropertyBuilder::apply(const QString & value, const Search—riteriaDat
   return it->second.m_function(value, data.m_value);
 }
 
-bool ObjectPropertyBuilder::isUserAttributeMatchFilter(const rengaapi::ModelObject* pObject, const Search—riteriaData& data)
+bool ObjectPropertyBuilder::isUserAttributeMatchFilter(const rengaapi::ModelObject* pObject, const SearchCriteriaData& data)
 {
   rengaapi::UserAttributeRegister userAttributeRegister = rengaapi::Project::userAttributeRegister();
   rengaapi::UserAttributeIdCollection attributeCollection = userAttributeRegister.attributes();

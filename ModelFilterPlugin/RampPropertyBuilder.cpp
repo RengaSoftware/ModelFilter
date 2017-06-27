@@ -34,7 +34,7 @@ PropertyList RampPropertyBuilder::getObjectProperties()
 }
 
 
-bool RampPropertyBuilder::isObjectMatchFilter(const Search—riteriaData& data, rengaapi::ModelObject* pObject)
+bool RampPropertyBuilder::isObjectMatchFilter(const SearchCriteriaData& data, rengaapi::ModelObject* pObject)
 {
   rengaapi::Ramp* pRamp = dynamic_cast<rengaapi::Ramp*>(pObject);
   assert(pRamp != nullptr);

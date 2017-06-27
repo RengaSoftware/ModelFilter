@@ -32,7 +32,7 @@ PropertyList IsolatedFoundationPropertyBuilder::getObjectProperties()
   return properties;
 }
 
-bool IsolatedFoundationPropertyBuilder::isObjectMatchFilter(const Search—riteriaData& data, rengaapi::ModelObject* pObject)
+bool IsolatedFoundationPropertyBuilder::isObjectMatchFilter(const SearchCriteriaData& data, rengaapi::ModelObject* pObject)
 {
   rengaapi::IsolatedFoundation* pIsolatedFoundation = dynamic_cast<rengaapi::IsolatedFoundation*>(pObject);
   assert(pIsolatedFoundation != nullptr);

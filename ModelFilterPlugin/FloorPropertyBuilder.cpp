@@ -30,7 +30,7 @@ PropertyList FloorPropertyBuilder::getObjectProperties()
 {
   return properties;
 }
-bool FloorPropertyBuilder::isObjectMatchFilter(const Search—riteriaData& data, rengaapi::ModelObject* pObject)
+bool FloorPropertyBuilder::isObjectMatchFilter(const SearchCriteriaData& data, rengaapi::ModelObject* pObject)
 {
   rengaapi::Floor* pFloor = dynamic_cast<rengaapi::Floor*>(pObject);
   assert(pFloor != nullptr);

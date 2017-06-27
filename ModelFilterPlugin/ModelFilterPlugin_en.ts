@@ -151,7 +151,7 @@
     </message>
     <message>
         <source>Export filter</source>
-        <translation type="unfinished"></translation>
+        <translation>Export filter</translation>
     </message>
 </context>
 <context>
@@ -591,6 +591,10 @@
     <message>
         <source>notSuffix</source>
         <translation type="vanished">Not ends with</translation>
+    </message>
+    <message>
+        <source>all</source>
+        <translation type="vanished">All values</translation>
     </message>
 </context>
 <context>

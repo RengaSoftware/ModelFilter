@@ -29,7 +29,7 @@ public:
   ObjectPropertyBuilder();
   virtual ~ObjectPropertyBuilder();
   virtual PropertyList getObjectProperties() = 0;
-  virtual bool isObjectMatchFilter(const Search—riteriaData& data, rengaapi::ModelObject* pObject) = 0;
+  virtual bool isObjectMatchFilter(const SearchCriteriaData& data, rengaapi::ModelObject* pObject) = 0;
 
   static PropertyList getUserAttributes(const rengaapi::ObjectType& objectType);
 
@@ -42,23 +42,23 @@ private:
   const std::map<OperatorType, DoubleOperatorData> m_doubleOperatorData;
 
 protected:
-  bool apply(const rengabase::LengthMeasureOptional& measure, const Search—riteriaData& data, MeasureUnit unit = MeasureUnit::Millimeter);
-  bool apply(const rengabase::AreaMeasureOptional& measure, const Search—riteriaData& data, MeasureUnit unit = MeasureUnit::Meter);
-  bool apply(const rengabase::VolumeMeasureOptional& measure, const Search—riteriaData& data, MeasureUnit unit = MeasureUnit::Meter);
-  bool apply(const rengabase::LengthMeasure& lengthMeasure, const Search—riteriaData& data);
-  bool apply(const rengabase::AreaMeasure& areaMeasure, const Search—riteriaData& data);
-  bool apply(const rengabase::VolumeMeasure& volumeMeasure, const Search—riteriaData& data);
-  bool apply(const rengaapi::MaterialId& materialId, const rengabase::VolumeMeasureOptional& volumeMeasure, const Search—riteriaData& data);
-  bool apply(const rengaapi::MaterialId& materialId, const std::vector<rengabase::VolumeMeasureOptional>& volumeMeasureCollection, const Search—riteriaData& data);
-  bool apply(const rengaapi::ObjectId& levelId, const Search—riteriaData& data);
-  bool apply(const uint number, const Search—riteriaData& data);
-  bool apply(const double value, const Search—riteriaData& data);
+  bool apply(const rengabase::LengthMeasureOptional& measure, const SearchCriteriaData& data, MeasureUnit unit = MeasureUnit::Millimeter);
+  bool apply(const rengabase::AreaMeasureOptional& measure, const SearchCriteriaData& data, MeasureUnit unit = MeasureUnit::Meter);
+  bool apply(const rengabase::VolumeMeasureOptional& measure, const SearchCriteriaData& data, MeasureUnit unit = MeasureUnit::Meter);
+  bool apply(const rengabase::LengthMeasure& lengthMeasure, const SearchCriteriaData& data);
+  bool apply(const rengabase::AreaMeasure& areaMeasure, const SearchCriteriaData& data);
+  bool apply(const rengabase::VolumeMeasure& volumeMeasure, const SearchCriteriaData& data);
+  bool apply(const rengaapi::MaterialId& materialId, const rengabase::VolumeMeasureOptional& volumeMeasure, const SearchCriteriaData& data);
+  bool apply(const rengaapi::MaterialId& materialId, const std::vector<rengabase::VolumeMeasureOptional>& volumeMeasureCollection, const SearchCriteriaData& data);
+  bool apply(const rengaapi::ObjectId& levelId, const SearchCriteriaData& data);
+  bool apply(const uint number, const SearchCriteriaData& data);
+  bool apply(const double value, const SearchCriteriaData& data);
 
-  bool apply(const rengabase::String& rengaString, const Search—riteriaData& data);
-  bool apply(const rengaapi::MaterialId& materialId, const Search—riteriaData& data);
-  bool apply(const QString& value, const Search—riteriaData& data);
+  bool apply(const rengabase::String& rengaString, const SearchCriteriaData& data);
+  bool apply(const rengaapi::MaterialId& materialId, const SearchCriteriaData& data);
+  bool apply(const QString& value, const SearchCriteriaData& data);
 
-  bool isUserAttributeMatchFilter(const rengaapi::ModelObject* pObject, const Search—riteriaData& data);
+  bool isUserAttributeMatchFilter(const rengaapi::ModelObject* pObject, const SearchCriteriaData& data);
 
 private:
   double countOneLayeredMass(const rengaapi::MaterialId& materialId, const rengabase::VolumeMeasureOptional& volumeMeasure);

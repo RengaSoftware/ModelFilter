@@ -69,6 +69,7 @@ enum OperatorType {
   LEQ,
   GR, // greater
   LS, //less
+  All,
 };
 
 struct DoubleOperatorData
@@ -109,8 +110,8 @@ struct Property {
 
 typedef std::list<Property> PropertyList;
 
-struct Search—riteriaData {
-  Search—riteriaData::Search—riteriaData(const Property& property, const OperatorType& operatorType, const QString& value)
+struct SearchCriteriaData {
+  SearchCriteriaData::SearchCriteriaData(const Property& property, const OperatorType& operatorType, const QString& value)
     : m_property(property)
     , m_operatorType(operatorType)
     , m_value(value)
@@ -126,8 +127,10 @@ struct GroupData {
     : m_groupType(objectType)
   {}
 
+  bool isValid();
+
   rengaapi::ObjectType m_groupType;
-  std::list<Search—riteriaData> m_propertyList;
+  std::list<SearchCriteriaData> m_propertyList;
 };
 
 struct FilterData {
@@ -141,10 +144,11 @@ struct FilterData {
 
   static FilterData importData(QFile* filterFile);
   void exportData(QFile* filterFile);
+  bool isValid();
 
 private:
   static GroupData parseGroup(QXmlStreamReader& reader);
-  static Search—riteriaData parseProperty(QXmlStreamReader& reader, rengaapi::ObjectType type);
+  static SearchCriteriaData parseProperty(QXmlStreamReader& reader, rengaapi::ObjectType type);
   static QString parseTagText(QXmlStreamReader& reader);
 
 public:

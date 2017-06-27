@@ -151,7 +151,7 @@
     </message>
     <message>
         <source>Export filter</source>
-        <translation type="unfinished"></translation>
+        <translation>Экспорт фильтра</translation>
     </message>
 </context>
 <context>
@@ -591,6 +591,10 @@
     <message>
         <source>notSuffix</source>
         <translation type="vanished">Не заканчивается на</translation>
+    </message>
+    <message>
+        <source>all</source>
+        <translation type="vanished">Все значения</translation>
     </message>
 </context>
 <context>

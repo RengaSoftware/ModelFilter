@@ -10,20 +10,27 @@
 #include "FilterData.h"
 #include "ObjectPropertyBuilderFactory.h"
 
+#include <map>
+
+bool GroupData::isValid()
+{
+  return m_propertyList.size() > 0;
+}
+
 void FilterData::exportData(QFile* filterFile)
 {
   QXmlStreamWriter writer(filterFile);
   writer.setAutoFormatting(true);
   writer.setAutoFormattingIndent(2);
   writer.writeStartDocument();
-  
+
   writer.writeStartElement("filter");
   writer.writeTextElement("name", m_filterName);
   for (auto& group : m_groupList)
   {
     writer.writeStartElement("group");
     writer.writeTextElement("type", rengaStringToQString(group.m_groupType.id().toString()));
-    for (auto& property: group.m_propertyList)
+    for (auto& property : group.m_propertyList)
     {
       writer.writeStartElement("property");
       writer.writeTextElement("propertyType", QString::number(property.m_property.m_propertyType));
@@ -62,7 +69,7 @@ FilterData FilterData::importData(QFile* filterFile)
       else if (reader.name() == "group")
       {
         GroupData group = parseGroup(reader);
-        if (group.m_propertyList.size() > 0)
+        if (group.isValid())
           data.m_groupList.push_back(group);
       }
     }
@@ -87,7 +94,7 @@ GroupData FilterData::parseGroup(QXmlStreamReader& reader)
       }
       else
       {
-        Search—riteriaData propertyData = parseProperty(reader, groupData.m_groupType);
+        SearchCriteriaData propertyData = parseProperty(reader, groupData.m_groupType);
         if (propertyData.m_property.m_propertyType != PropertyType::Invalid)
           groupData.m_propertyList.push_back(propertyData);
       }
@@ -97,59 +104,61 @@ GroupData FilterData::parseGroup(QXmlStreamReader& reader)
   return groupData;
 }
 
-Search—riteriaData FilterData::parseProperty(QXmlStreamReader& reader, rengaapi::ObjectType type)
+bool FilterData::isValid()
 {
+  return m_filterName.length() > 0 && m_groupList.size() > 0;
+}
+
+SearchCriteriaData FilterData::parseProperty(QXmlStreamReader& reader, rengaapi::ObjectType type)
+{
+  // parse property 
   reader.readNext();
-
-  // get propertyList of ObjectType
-  ObjectPropertyBuilderFactory factory;
-  std::unique_ptr<ObjectPropertyBuilder> builder(factory.createBuilder(type));
-  const PropertyList propertyList = builder->getObjectProperties();
-
-  // parse property
-  PropertyType propertyType;
-  OperatorType operatorType;
-  ValueType valueType;
-  QString value;
-  QString propertyName;
-  int counter = 0;
+  std::map<QString, QString> data;
+  QStringList keyList = { "propertyType", "operatorType", "valueType", "value" };
   while (!(reader.tokenType() == QXmlStreamReader::EndElement && reader.name() == "property"))
   {
     if (reader.tokenType() == QXmlStreamReader::StartElement)
     {
-      if (reader.name() == "propertyType")
+      const QString tagName = reader.name().toString();
+      if (keyList.contains(tagName))
       {
-        propertyType = PropertyType(parseTagText(reader).toInt());
-        counter++;
-        for (auto it = propertyList.begin(); it != propertyList.end(); ++it) {
-          if (it->m_propertyType == propertyType) {
-            propertyName = it->m_propertyName;
-            counter++;
-            break;
-          }
-        }
-      }
-      if (reader.name() == "operatorType") {
-        operatorType = OperatorType(parseTagText(reader).toInt());
-        counter++;
-      }
-      if (reader.name() == "valueType") {
-        valueType = ValueType(parseTagText(reader).toInt());
-        counter++;
-      }
-      if (reader.name() == "value") {
-        value = parseTagText(reader);
-        counter++;
+        data[tagName] = parseTagText(reader);
+        keyList.removeOne(tagName);
       }
     }
     reader.readNext();
   }
 
-  if (counter == 5)
-    return Search—riteriaData(Property(propertyType, valueType, propertyName), operatorType, value);
-  else
-    // object don't have this PropertyType, return empty PropertyData
-    return Search—riteriaData(Property(PropertyType::Invalid, valueType, propertyName), operatorType, value);
+  // check if all data fields present exactly once
+  bool ok, flag = keyList.empty();
+  PropertyType propertyType = PropertyType(data["propertyType"].toInt(&ok));
+  flag &= ok;
+  OperatorType operatorType = OperatorType(data["operatorType"].toInt(&ok));
+  flag &= ok;
+  ValueType valueType = ValueType(data["valueType"].toInt(&ok));
+  flag &= ok;
+  QString value = data["value"];
+
+  // check if object has property
+  // also get property name
+  ObjectPropertyBuilderFactory factory;
+  std::unique_ptr<ObjectPropertyBuilder> builder(factory.createBuilder(type));
+  const PropertyList propertyList = builder->getObjectProperties();
+  QString propertyName;
+  for (auto it = propertyList.begin(); it != propertyList.end(); ++it) {
+    if (it->m_propertyType == propertyType) {
+      propertyName = it->m_propertyName;
+      break;
+    }
+  }
+
+  if (!flag || propertyName.length() > 0)
+  {
+    // property not valid
+    propertyType = PropertyType::Invalid;
+  }
+    
+  return SearchCriteriaData(Property(propertyType, valueType, propertyName), operatorType, value);
 }
 
 QString FilterData::parseTagText(QXmlStreamReader& reader)

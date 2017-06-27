@@ -23,7 +23,7 @@ PropertyList LevelPropertyBuilder::getObjectProperties()
   return properties;
 }
 
-bool LevelPropertyBuilder::isObjectMatchFilter(const Search—riteriaData& data, rengaapi::ModelObject* pObject)
+bool LevelPropertyBuilder::isObjectMatchFilter(const SearchCriteriaData& data, rengaapi::ModelObject* pObject)
 {
   rengaapi::Level* pLevel = dynamic_cast<rengaapi::Level*>(pObject);
   assert(pLevel != nullptr);

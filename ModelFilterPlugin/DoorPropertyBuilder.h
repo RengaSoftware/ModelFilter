@@ -16,7 +16,7 @@ public:
   DoorPropertyBuilder();
 
   PropertyList getObjectProperties();
-  bool isObjectMatchFilter(const Search—riteriaData& data, rengaapi::ModelObject* pObject);
+  bool isObjectMatchFilter(const SearchCriteriaData& data, rengaapi::ModelObject* pObject);
 
 private:
   PropertyList properties;

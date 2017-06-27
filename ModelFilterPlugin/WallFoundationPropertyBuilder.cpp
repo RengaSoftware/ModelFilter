@@ -33,7 +33,7 @@ PropertyList WallFoundationPropertyBuilder::getObjectProperties()
   return properties;
 }
 
-bool WallFoundationPropertyBuilder::isObjectMatchFilter(const Search—riteriaData& data, rengaapi::ModelObject* pObject)
+bool WallFoundationPropertyBuilder::isObjectMatchFilter(const SearchCriteriaData& data, rengaapi::ModelObject* pObject)
 {
   rengaapi::WallFoundation* pWallFoundation = dynamic_cast<rengaapi::WallFoundation*>(pObject);
   assert(pWallFoundation != nullptr);
