@@ -43,9 +43,7 @@ ModelFilterPlugin::ModelFilterPlugin()
   //paths.append("your plugin folder path");
   //QCoreApplication::setLibraryPaths(paths);
 
-  //int argc = 0;
-  //char** argv = 0;
-  //m_pApp.reset(new QApplication(argc, argv));
+  //m_pApp.reset(new QApplication(m_argc, m_argv));
 #endif
 }
 

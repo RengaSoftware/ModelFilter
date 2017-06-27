@@ -48,6 +48,8 @@ private:
 #ifdef _DEBUG
   // NOTE: To debug plugin you should create debug QApplication in plugin.
   std::unique_ptr<QApplication> m_pApp;
+  int m_argc = 0;
+  char** m_argv = 0;
 #endif
 
   std::unique_ptr<PluginToolButtons> m_pPluginToolButtons;
