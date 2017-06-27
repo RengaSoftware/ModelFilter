@@ -27,7 +27,7 @@
 
 MainDialog::MainDialog(const QDir& dir)
   : QDialog(nullptr, Qt::WindowTitleHint | Qt::WindowSystemMenuHint | Qt::WindowCloseButtonHint)
-  , pluginDataDir(dir)
+  , m_pluginDataDir(dir)
 {
   m_pUi.reset(new Ui::MainDialog());
   m_pUi->setupUi(this);
@@ -36,7 +36,7 @@ MainDialog::MainDialog(const QDir& dir)
   m_pListModel.reset(new QStandardItemModel);
   m_pUi->listView->setModel(m_pListModel.get());
   connect(m_pUi->listView, SIGNAL(doubleClicked(const QModelIndex&)), this, SLOT(onEditFilter()));
-  connect(m_pUi->listView->selectionModel(), SIGNAL(selectionChanged(const QItemSelection&, const QItemSelection&)), this, SLOT(enableButtons(const QItemSelection&)));
+  connect(m_pUi->listView->selectionModel(), SIGNAL(selectionChanged(const QItemSelection&, const QItemSelection&)), this, SLOT(updateButtons(const QItemSelection&)));
 
   // connect buttons
   connect(m_pUi->addButton, SIGNAL(clicked()), this, SLOT(onAddFilter()));
@@ -84,10 +84,12 @@ void MainDialog::onEditFilter()
   if (exitValue != QDialog::Accepted)
     return;
 
-  // update filter name
-  FilterData filterData = pFilterDialog->getFilterDescription();
+  // delete old FilterData
   const int filterItemRow = m_pListModel->indexFromItem(pFilterItem).row();
   deleteFilterFile(m_filterDataArray[filterItemRow]);
+
+  // set unique filter name
+  FilterData filterData = pFilterDialog->getFilterDescription();
   if (m_filterDataArray[filterItemRow].m_filterName.compare(filterData.m_filterName) != 0)
   {
     setUniqueName(filterData);
@@ -128,11 +130,16 @@ void MainDialog::onDeleteFilter()
 
 void MainDialog::onCopyFilter()
 {
+  // copy original filterData
   const int filterRow = m_pUi->listView->currentIndex().row();
   FilterData filterCopy = m_filterDataArray[filterRow];
+
+  // set unique filter name
   setUniqueName(filterCopy);
   QStandardItem* copyItem = new QStandardItem(filterCopy.m_filterName);
   m_pListModel->appendRow(copyItem);
+
+  // store FilterData
   m_filterDataArray.push_back(filterCopy);
   saveFilterFile(filterCopy);
 }
@@ -218,7 +225,7 @@ void MainDialog::onImportFilter()
 
 void MainDialog::loadLocalFilters() {
   
-  QFileInfoList entryList = pluginDataDir.entryInfoList({ "*.rnf" }, QDir::Files | QDir::Readable);
+  QFileInfoList entryList = m_pluginDataDir.entryInfoList({ "*.rnf" }, QDir::Files | QDir::Readable);
   // open each .rnf file
   for (auto& fileInfo : entryList) {
     std::unique_ptr<QFile> filterFile(new QFile(fileInfo.canonicalFilePath()));
@@ -239,7 +246,7 @@ void MainDialog::loadLocalFilters() {
   if (m_pListModel->rowCount() > 0)
   {
     m_pUi->listView->setCurrentIndex(m_pListModel->index(0, 0));
-    enableButtons(m_pUi->listView->selectionModel()->selection());
+    updateButtons(m_pUi->listView->selectionModel()->selection());
   }
 }
 
@@ -317,7 +324,7 @@ void MainDialog::setObjectsVisibility(const objectIdCollection& idCollection)
   }
 }
 
-void MainDialog::enableButtons(const QItemSelection& selectedItems)
+void MainDialog::updateButtons(const QItemSelection& selectedItems)
 {
   bool isEnable = selectedItems.size() > 0;
   m_pUi->copyButton->setEnabled(isEnable);
@@ -338,7 +345,7 @@ void MainDialog::setUniqueName(FilterData& data)
 
 void MainDialog::saveFilterFile(FilterData& data)
 {
-  QFile filterFile(QString("%1/%2.rnf").arg(pluginDataDir.canonicalPath()).arg(data.m_filterName));
+  QFile filterFile(QString("%1/%2.rnf").arg(m_pluginDataDir.canonicalPath()).arg(data.m_filterName));
   if (filterFile.open(QIODevice::WriteOnly | QIODevice::Text))
     data.exportData(&filterFile);
   else
@@ -347,7 +354,7 @@ void MainDialog::saveFilterFile(FilterData& data)
 
 void MainDialog::deleteFilterFile(FilterData& data)
 {
-  QFile filterFile(QString("%1/%2.rnf").arg(pluginDataDir.canonicalPath()).arg(data.m_filterName));
+  QFile filterFile(QString("%1/%2.rnf").arg(m_pluginDataDir.canonicalPath()).arg(data.m_filterName));
   if (filterFile.exists())
     filterFile.remove();
 }

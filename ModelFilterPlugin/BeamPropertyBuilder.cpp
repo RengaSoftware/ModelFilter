@@ -34,7 +34,7 @@ PropertyList BeamPropertyBuilder::getObjectProperties()
   return properties;
 }
 
-bool BeamPropertyBuilder::isObjectMatchFilter(const Search—riteriaData& data, rengaapi::ModelObject* pObject)
+bool BeamPropertyBuilder::isObjectMatchFilter(const SearchCriteriaData& data, rengaapi::ModelObject* pObject)
 {
   rengaapi::Beam* pBeam = dynamic_cast<rengaapi::Beam*>(pObject);
   assert(pBeam != nullptr);

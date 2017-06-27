@@ -110,8 +110,8 @@ struct Property {
 
 typedef std::list<Property> PropertyList;
 
-struct Search—riteriaData {
-  Search—riteriaData::Search—riteriaData(const Property& property, const OperatorType& operatorType, const QString& value)
+struct SearchCriteriaData {
+  SearchCriteriaData::SearchCriteriaData(const Property& property, const OperatorType& operatorType, const QString& value)
     : m_property(property)
     , m_operatorType(operatorType)
     , m_value(value)
@@ -130,7 +130,7 @@ struct GroupData {
   bool isValid();
 
   rengaapi::ObjectType m_groupType;
-  std::list<Search—riteriaData> m_propertyList;
+  std::list<SearchCriteriaData> m_propertyList;
 };
 
 struct FilterData {
@@ -148,7 +148,7 @@ struct FilterData {
 
 private:
   static GroupData parseGroup(QXmlStreamReader& reader);
-  static Search—riteriaData parseProperty(QXmlStreamReader& reader, rengaapi::ObjectType type);
+  static SearchCriteriaData parseProperty(QXmlStreamReader& reader, rengaapi::ObjectType type);
   static QString parseTagText(QXmlStreamReader& reader);
 
 public:

@@ -109,7 +109,7 @@ GroupData GroupDialog::getGroupDescription()
     ok = false;
     OperatorType operatorType = OperatorType(pOperatorItem->data().toInt(&ok));
     assert(ok);
-    SearchÑriteriaData propertyData(property, operatorType, pValueItem->text());
+    SearchCriteriaData propertyData(property, operatorType, pValueItem->text());
     groupData.m_propertyList.push_back(propertyData);
   }
 

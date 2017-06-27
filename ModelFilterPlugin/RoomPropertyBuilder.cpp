@@ -29,7 +29,7 @@ PropertyList RoomPropertyBuilder::getObjectProperties()
   return properties;
 }
 
-bool RoomPropertyBuilder::isObjectMatchFilter(const Search—riteriaData& data, rengaapi::ModelObject* pObject)
+bool RoomPropertyBuilder::isObjectMatchFilter(const SearchCriteriaData& data, rengaapi::ModelObject* pObject)
 {
   rengaapi::Room* pRoom = dynamic_cast<rengaapi::Room*>(pObject);
   assert(pRoom != nullptr);

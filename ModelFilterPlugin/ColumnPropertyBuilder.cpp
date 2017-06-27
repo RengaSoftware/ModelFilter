@@ -32,7 +32,7 @@ PropertyList ColumnPropertyBuilder::getObjectProperties()
   return properties;
 }
 
-bool ColumnPropertyBuilder::isObjectMatchFilter(const Search—riteriaData& data, rengaapi::ModelObject* pObject)
+bool ColumnPropertyBuilder::isObjectMatchFilter(const SearchCriteriaData& data, rengaapi::ModelObject* pObject)
 {
   rengaapi::Column* pColumn = dynamic_cast<rengaapi::Column*>(pObject);
   assert(pColumn != nullptr);

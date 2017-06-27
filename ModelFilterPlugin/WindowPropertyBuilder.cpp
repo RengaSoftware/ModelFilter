@@ -29,7 +29,7 @@ PropertyList WindowPropertyBuilder::getObjectProperties()
   return properties;
 }
 
-bool WindowPropertyBuilder::isObjectMatchFilter(const Search—riteriaData& data, rengaapi::ModelObject* pObject)
+bool WindowPropertyBuilder::isObjectMatchFilter(const SearchCriteriaData& data, rengaapi::ModelObject* pObject)
 {
   rengaapi::Window* pWindow = dynamic_cast<rengaapi::Window*>(pObject);
   assert(pWindow != nullptr);

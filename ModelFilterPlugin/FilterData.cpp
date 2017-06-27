@@ -94,7 +94,7 @@ GroupData FilterData::parseGroup(QXmlStreamReader& reader)
       }
       else
       {
-        Search—riteriaData propertyData = parseProperty(reader, groupData.m_groupType);
+        SearchCriteriaData propertyData = parseProperty(reader, groupData.m_groupType);
         if (propertyData.m_property.m_propertyType != PropertyType::Invalid)
           groupData.m_propertyList.push_back(propertyData);
       }
@@ -109,7 +109,7 @@ bool FilterData::isValid()
   return m_filterName.length() > 0 && m_groupList.size() > 0;
 }
 
-Search—riteriaData FilterData::parseProperty(QXmlStreamReader& reader, rengaapi::ObjectType type)
+SearchCriteriaData FilterData::parseProperty(QXmlStreamReader& reader, rengaapi::ObjectType type)
 {
   // parse property 
   reader.readNext();
@@ -130,10 +130,13 @@ Search—riteriaData FilterData::parseProperty(QXmlStreamReader& reader, rengaapi:
   }
 
   // check if all data fields present exactly once
-  bool ok = keyList.empty();
+  bool ok, flag = keyList.empty();
   PropertyType propertyType = PropertyType(data["propertyType"].toInt(&ok));
+  flag &= ok;
   OperatorType operatorType = OperatorType(data["operatorType"].toInt(&ok));
+  flag &= ok;
   ValueType valueType = ValueType(data["valueType"].toInt(&ok));
+  flag &= ok;
   QString value = data["value"];
 
   // check if object has property
@@ -149,11 +152,13 @@ Search—riteriaData FilterData::parseProperty(QXmlStreamReader& reader, rengaapi:
     }
   }
 
-  if (ok && propertyName.length() > 0)
-    return Search—riteriaData(Property(propertyType, valueType, propertyName), operatorType, value);
-  else
+  if (!flag || propertyName.length() > 0)
+  {
     // property not valid
-    return Search—riteriaData(Property(PropertyType::Invalid, valueType, propertyName), operatorType, value);
+    propertyType = PropertyType::Invalid;
+  }
+    
+  return SearchCriteriaData(Property(propertyType, valueType, propertyName), operatorType, value);
 }
 
 QString FilterData::parseTagText(QXmlStreamReader& reader)

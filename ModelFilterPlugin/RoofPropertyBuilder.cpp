@@ -30,7 +30,7 @@ PropertyList RoofPropertyBuilder::getObjectProperties()
   return properties;
 }
 
-bool RoofPropertyBuilder::isObjectMatchFilter(const Search—riteriaData& data, rengaapi::ModelObject* pObject)
+bool RoofPropertyBuilder::isObjectMatchFilter(const SearchCriteriaData& data, rengaapi::ModelObject* pObject)
 {
   rengaapi::Roof* pRoof = dynamic_cast<rengaapi::Roof*>(pObject);
   assert(pRoof != nullptr);

@@ -28,7 +28,7 @@ PropertyList RailingPropertyBuilder::getObjectProperties()
   return properties;
 }
 
-bool RailingPropertyBuilder::isObjectMatchFilter(const Search—riteriaData& data, rengaapi::ModelObject* pObject)
+bool RailingPropertyBuilder::isObjectMatchFilter(const SearchCriteriaData& data, rengaapi::ModelObject* pObject)
 {
   rengaapi::Railing* pRailing = dynamic_cast<rengaapi::Railing*>(pObject);
   assert(pRailing != nullptr);

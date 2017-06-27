@@ -29,7 +29,7 @@ PropertyList OpeningPropertyBuilder::getObjectProperties()
   return properties;
 }
 
-bool OpeningPropertyBuilder::isObjectMatchFilter(const Search—riteriaData& data, rengaapi::ModelObject* pObject)
+bool OpeningPropertyBuilder::isObjectMatchFilter(const SearchCriteriaData& data, rengaapi::ModelObject* pObject)
 {
   rengaapi::Opening* pOpening = dynamic_cast<rengaapi::Opening*>(pObject);
   assert(pOpening != nullptr);

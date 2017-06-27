@@ -29,7 +29,7 @@ class MainDialog : public QDialog
   Q_OBJECT
 
 public:
-  MainDialog(const QDir& pluginDataDir);
+  MainDialog(const QDir& dir);
   ~MainDialog();
 
 private slots:
@@ -40,7 +40,7 @@ private slots:
   void onApplyFilter();
   void onExportFilter();
   void onImportFilter();
-  void enableButtons(const QItemSelection& selected);
+  void updateButtons(const QItemSelection& selected);
 
 private:
   void loadLocalFilters();
@@ -54,5 +54,5 @@ private:
   std::unique_ptr<Ui::MainDialog> m_pUi;
   std::unique_ptr<QStandardItemModel> m_pListModel;
   std::vector<FilterData> m_filterDataArray;
-  const QDir pluginDataDir;
+  const QDir m_pluginDataDir;
 };
