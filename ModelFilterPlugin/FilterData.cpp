@@ -152,7 +152,7 @@ SearchCriteriaData FilterData::parseProperty(QXmlStreamReader& reader, rengaapi:
     }
   }
 
-  if (!flag || propertyName.length() > 0)
+  if (!flag || propertyName.isEmpty())
   {
     // property not valid
     propertyType = PropertyType::Invalid;
