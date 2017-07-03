@@ -52,7 +52,7 @@ private:
   void loadOperatorBox();
   void reloadOperatorBox();
 
-  void reloadValueBox(int changedIndex);
+  void reloadValueLine(int changedIndex);
 
 private:
   std::unique_ptr<Ui::GroupDialog> m_pUi;

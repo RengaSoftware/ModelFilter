@@ -53,6 +53,8 @@ GroupDialog::GroupDialog(QDialog* parent)
   connect(m_pUi->addButton, SIGNAL(clicked()), this, SLOT(onAddButton()));
   connect(m_pUi->deleteButton, SIGNAL(clicked()), this, SLOT(onDeleteButton()));
 
+  connect(m_pUi->valueLine, SIGNAL(textEdited(const QString&)), this, SLOT(onValueChanged(const QString&)));
+
   itemCountChanged(false);
 }
 
@@ -121,7 +123,7 @@ void GroupDialog::onAddButton()
   // list of items to treeView
   QList<QStandardItem*> list = { new QStandardItem(m_pUi->propertyBox->currentText()),
                                  new QStandardItem(m_pUi->operatorBox->currentText()),
-                                 new QStandardItem(m_pUi->valueBox->currentText()) };
+                                 new QStandardItem(m_pUi->valueLine->text()) };
   // set property data
   const QModelIndex realIndex = m_pPropertyBoxSortModel->index(m_pUi->propertyBox->currentIndex(), 0);
   const QModelIndex orderIndex = m_pPropertyBoxSortModel->mapToSource(realIndex);
@@ -137,7 +139,7 @@ void GroupDialog::onAddButton()
   // set comboBox and buttons state
   itemCountChanged(true);
   m_pUi->okButton->setFocus();
-  m_pUi->valueBox->clearEditText();
+  m_pUi->valueLine->clear();
 }
 
 void GroupDialog::onDeleteButton()
@@ -181,7 +183,7 @@ void GroupDialog::onPropertyBoxIndexChanged(const int changedIndex)
 
 void GroupDialog::onOperatorBoxIndexChanged(const int changedIndex)
 {
-  reloadValueBox(changedIndex);
+  reloadValueLine(changedIndex);
 }
 
 void GroupDialog::onValueChanged(const QString& value)
@@ -329,15 +331,13 @@ void GroupDialog::reloadOperatorBox()
 
   connect(m_pUi->operatorBox, SIGNAL(currentIndexChanged(int)), this, SLOT(onOperatorBoxIndexChanged(int)));
 
-  m_pUi->valueBox->setValidator(valueType == ValueType::Double ? new QDoubleValidator() : nullptr);
-  reloadValueBox(m_pUi->operatorBox->currentIndex());
+  m_pUi->valueLine->setValidator(valueType == ValueType::Double ? new QDoubleValidator() : nullptr);
+  reloadValueLine(m_pUi->operatorBox->currentIndex());
 }
 
-void GroupDialog::reloadValueBox(int changedIndex)
+void GroupDialog::reloadValueLine(int changedIndex)
 {
-  disconnect(m_pUi->valueBox, SIGNAL(currentTextChanged(const QString&)), this, SLOT(onValueChanged(const QString&)));
-
-  m_pUi->valueBox->clearEditText();
+  m_pUi->valueLine->clear();
 
   QStandardItem* pItem = m_pOperatorBoxModel->item(changedIndex, 0);
   bool ok = true;
@@ -346,14 +346,12 @@ void GroupDialog::reloadValueBox(int changedIndex)
 
   if (type == OperatorType::All)
   {
-    m_pUi->valueBox->setEnabled(false);
+    m_pUi->valueLine->setEnabled(false);
     m_pUi->addButton->setEnabled(true);
   }
   else
   {
-    m_pUi->valueBox->setEnabled(true);
+    m_pUi->valueLine->setEnabled(true);
     onValueChanged("");
   }
-
-  connect(m_pUi->valueBox, SIGNAL(currentTextChanged(const QString&)), this, SLOT(onValueChanged(const QString&)));
 }
