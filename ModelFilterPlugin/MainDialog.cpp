@@ -158,7 +158,11 @@ void MainDialog::onApplyFilter()
 
 void MainDialog::onExportFilter()
 {
-  QFileDialog fileDialog(this, QApplication::translate("MainDialog", "Export filter"), "", "Renga Filter (*.rnf)");
+  QFileDialog fileDialog(
+    this,
+    QApplication::translate("MainDialog", "Export filter"),
+    "",
+    QApplication::translate("MainDialog", "Filter"));
   fileDialog.setAcceptMode(QFileDialog::AcceptSave);
   fileDialog.setFileMode(QFileDialog::ExistingFile);
   int exitValue = fileDialog.exec();
@@ -184,7 +188,11 @@ void MainDialog::onExportFilter()
 
 void MainDialog::onImportFilter()
 {
-  QFileDialog fileDialog(this, QApplication::translate("MainDialog", "Import filter"), "", "Renga Filter (*.rnf)");
+  QFileDialog fileDialog(
+    this,
+    QApplication::translate("MainDialog", "Import filter"),
+    "",
+    QApplication::translate("MainDialog", "Filter"));
   fileDialog.setFileMode(QFileDialog::ExistingFile);
   int exitValue = fileDialog.exec();
   if (exitValue == QDialog::Accepted)
@@ -224,7 +232,7 @@ void MainDialog::onImportFilter()
 }
 
 void MainDialog::loadLocalFilters() {
-  
+
   QFileInfoList entryList = m_pluginDataDir.entryInfoList({ "*.rnf" }, QDir::Files | QDir::Readable);
   // open each .rnf file
   for (auto& fileInfo : entryList) {

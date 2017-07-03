@@ -98,10 +98,6 @@
         <translation type="vanished">Filter choosing</translation>
     </message>
     <message>
-        <source>Export Filter</source>
-        <translation type="vanished">Export Filter</translation>
-    </message>
-    <message>
         <source>Import filter</source>
         <translation>Import filter</translation>
     </message>
@@ -152,6 +148,10 @@
     <message>
         <source>Export filter</source>
         <translation>Export filter</translation>
+    </message>
+    <message>
+        <source>Filter</source>
+        <translation>Filter (*.rnf)</translation>
     </message>
 </context>
 <context>

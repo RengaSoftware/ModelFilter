@@ -98,10 +98,6 @@
         <translation type="vanished">Выбор фильтра</translation>
     </message>
     <message>
-        <source>Export Filter</source>
-        <translation type="vanished">Экспорт фильтра</translation>
-    </message>
-    <message>
         <source>Import filter</source>
         <translation>Импорт фильтра</translation>
     </message>
@@ -152,6 +148,10 @@
     <message>
         <source>Export filter</source>
         <translation>Экспорт фильтра</translation>
+    </message>
+    <message>
+        <source>Filter</source>
+        <translation>Фильтр (*.rnf)</translation>
     </message>
 </context>
 <context>
