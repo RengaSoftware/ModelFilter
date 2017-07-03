@@ -17,7 +17,7 @@ WallFoundationPropertyBuilder::WallFoundationPropertyBuilder()
   properties = { Property(PropertyType::Name, ValueType::String, QApplication::translate("wallFoundation", "name")),
     Property(PropertyType::Material, ValueType::String, QApplication::translate("wallFoundation", "material")),
     Property(PropertyType::Mark, ValueType::String, QApplication::translate("wallFoundation", "mark")),
-    Property(PropertyType::LevelHeight, ValueType::Double, QApplication::translate("wallFoundation", "level")),
+    Property(PropertyType::LevelHeight, ValueType::String, QApplication::translate("wallFoundation", "level")),
     Property(PropertyType::Offset, ValueType::Double, QApplication::translate("wallFoundation", "offset")),
     Property(PropertyType::Width, ValueType::Double, QApplication::translate("wallFoundation", "overallWidth")),
     Property(PropertyType::Height, ValueType::Double, QApplication::translate("wallFoundation", "overallHeight")),

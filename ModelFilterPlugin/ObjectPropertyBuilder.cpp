@@ -257,7 +257,7 @@ bool ObjectPropertyBuilder::apply(const rengaapi::ObjectId& levelId, const Searc
     {
       rengaapi::Level* pLevel = dynamic_cast<rengaapi::Level*>(pObject);
       assert(pLevel != nullptr);
-      return apply(pLevel->elevation().inMillimeters(), data);
+      return apply(pLevel->levelName(), data);
     }
   }
 

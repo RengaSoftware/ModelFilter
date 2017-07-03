@@ -17,7 +17,7 @@ FloorPropertyBuilder::FloorPropertyBuilder()
   properties = { Property(PropertyType::Name, ValueType::String, QApplication::translate("floor", "name")),
     Property(PropertyType::Material, ValueType::String, QApplication::translate("floor", "material")),
     Property(PropertyType::Mark, ValueType::String, QApplication::translate("floor", "mark")),
-    Property(PropertyType::LevelHeight, ValueType::Double, QApplication::translate("floor", "level")),
+    Property(PropertyType::LevelHeight, ValueType::String, QApplication::translate("floor", "level")),
     Property(PropertyType::Offset, ValueType::Double, QApplication::translate("floor", "offset")),
     Property(PropertyType::Thickness, ValueType::Double, QApplication::translate("floor", "thickness")),
     Property(PropertyType::Volume, ValueType::Double, QApplication::translate("floor", "netVolume")),

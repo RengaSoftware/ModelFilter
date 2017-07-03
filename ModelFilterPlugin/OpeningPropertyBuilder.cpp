@@ -16,7 +16,7 @@ OpeningPropertyBuilder::OpeningPropertyBuilder()
 {
   properties = { Property(PropertyType::Name, ValueType::String, QApplication::translate("opening", "name")),
     Property(PropertyType::Mark, ValueType::String, QApplication::translate("opening", "mark")),
-    Property(PropertyType::LevelHeight, ValueType::Double, QApplication::translate("opening", "level")),
+    Property(PropertyType::LevelHeight, ValueType::String, QApplication::translate("opening", "level")),
     Property(PropertyType::Offset, ValueType::Double, QApplication::translate("opening", "offset")),
     Property(PropertyType::Thickness, ValueType::Double, QApplication::translate("opening", "thickness")),
     Property(PropertyType::Volume, ValueType::Double, QApplication::translate("opening", "volume")),

@@ -17,7 +17,7 @@ StairPropertyBuilder::StairPropertyBuilder()
   properties = { Property(PropertyType::Name, ValueType::String, QApplication::translate("stair", "name")),
     Property(PropertyType::Material, ValueType::String, QApplication::translate("stair", "material")),
     Property(PropertyType::Mark, ValueType::String, QApplication::translate("stair", "mark")),
-    Property(PropertyType::LevelHeight, ValueType::Double, QApplication::translate("stair", "level")),
+    Property(PropertyType::LevelHeight, ValueType::String, QApplication::translate("stair", "level")),
     Property(PropertyType::Offset, ValueType::Double, QApplication::translate("stair", "offset")),
     Property(PropertyType::Height, ValueType::Double, QApplication::translate("stair", "height")),
     Property(PropertyType::Width, ValueType::Double, QApplication::translate("stair", "width")),

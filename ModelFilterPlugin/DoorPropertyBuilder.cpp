@@ -16,7 +16,7 @@ DoorPropertyBuilder::DoorPropertyBuilder()
 {
   properties = { Property(PropertyType::Name, ValueType::String, QApplication::translate("door", "name")),
     Property(PropertyType::Mark, ValueType::String, QApplication::translate("door", "mark")),
-    Property(PropertyType::LevelHeight, ValueType::Double, QApplication::translate("door", "level")),
+    Property(PropertyType::LevelHeight, ValueType::String, QApplication::translate("door", "level")),
     Property(PropertyType::Offset, ValueType::Double, QApplication::translate("door", "offset")),
     Property(PropertyType::Height, ValueType::Double, QApplication::translate("door", "overallHeight")),
     Property(PropertyType::Width, ValueType::Double, QApplication::translate("door", "overallWidth")),

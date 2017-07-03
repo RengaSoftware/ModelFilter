@@ -17,7 +17,7 @@ RampPropertyBuilder::RampPropertyBuilder()
   properties = { Property(PropertyType::Name, ValueType::String, QApplication::translate("ramp", "name")),
     Property(PropertyType::Material, ValueType::String, QApplication::translate("ramp", "material")),
     Property(PropertyType::Mark, ValueType::String, QApplication::translate("ramp", "mark")),
-    Property(PropertyType::LevelHeight, ValueType::Double, QApplication::translate("ramp", "level")),
+    Property(PropertyType::LevelHeight, ValueType::String, QApplication::translate("ramp", "level")),
     Property(PropertyType::Offset, ValueType::Double, QApplication::translate("ramp", "offset")),
     Property(PropertyType::Height, ValueType::Double, QApplication::translate("ramp", "height")),
     Property(PropertyType::Width, ValueType::Double, QApplication::translate("ramp", "width")),

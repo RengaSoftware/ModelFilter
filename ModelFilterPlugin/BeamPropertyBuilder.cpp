@@ -18,7 +18,7 @@ BeamPropertyBuilder::BeamPropertyBuilder()
   properties = { Property(PropertyType::Name, ValueType::String, QApplication::translate("beam", "name")),
     Property(PropertyType::Material, ValueType::String, QApplication::translate("beam", "material")),
     Property(PropertyType::Mark, ValueType::String, QApplication::translate("beam", "mark")),
-    Property(PropertyType::LevelHeight, ValueType::Double, QApplication::translate("beam", "level")),
+    Property(PropertyType::LevelHeight, ValueType::String, QApplication::translate("beam", "level")),
     Property(PropertyType::Offset, ValueType::Double, QApplication::translate("beam", "offset")),
     Property(PropertyType::Length, ValueType::Double, QApplication::translate("beam", "length")),
     Property(PropertyType::Volume, ValueType::Double, QApplication::translate("beam", "netVolume")),

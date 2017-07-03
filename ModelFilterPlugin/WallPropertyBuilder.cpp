@@ -17,7 +17,7 @@ WallPropertyBuilder::WallPropertyBuilder()
   properties = { Property(PropertyType::Name, ValueType::String, QApplication::translate("wall", "name")),
     Property(PropertyType::Material, ValueType::String, QApplication::translate("wall", "material")),
     Property(PropertyType::Mark, ValueType::String, QApplication::translate("wall", "mark")),
-    Property(PropertyType::LevelHeight, ValueType::Double, QApplication::translate("wall", "level")),
+    Property(PropertyType::LevelHeight, ValueType::String, QApplication::translate("wall", "level")),
     Property(PropertyType::Offset, ValueType::Double, QApplication::translate("wall", "offset")),
     Property(PropertyType::Length, ValueType::Double, QApplication::translate("wall", "length")),
     Property(PropertyType::Thickness, ValueType::Double, QApplication::translate("wall", "thickness")),

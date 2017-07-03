@@ -16,7 +16,7 @@ WindowPropertyBuilder::WindowPropertyBuilder()
 {
   properties = { Property(PropertyType::Name, ValueType::String, QApplication::translate("window", "name")),
                  Property(PropertyType::Mark, ValueType::String, QApplication::translate("window", "mark")),
-                 Property(PropertyType::LevelHeight, ValueType::Double, QApplication::translate("window", "level")),
+                 Property(PropertyType::LevelHeight, ValueType::String, QApplication::translate("window", "level")),
                  Property(PropertyType::Offset, ValueType::Double, QApplication::translate("window", "offset")),
                  Property(PropertyType::Height, ValueType::Double, QApplication::translate("window", "overallHeight")),
                  Property(PropertyType::Width, ValueType::Double, QApplication::translate("window", "overallWidth")),

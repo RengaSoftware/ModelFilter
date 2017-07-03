@@ -16,7 +16,7 @@ RoomPropertyBuilder::RoomPropertyBuilder()
 {
   properties = { Property(PropertyType::Name, ValueType::String, QApplication::translate("room", "name")),
     Property(PropertyType::RoomNumber, ValueType::String, QApplication::translate("room", "roomNumber")),
-    Property(PropertyType::LevelHeight, ValueType::Double, QApplication::translate("room", "level")),
+    Property(PropertyType::LevelHeight, ValueType::String, QApplication::translate("room", "level")),
     Property(PropertyType::Offset, ValueType::Double, QApplication::translate("room", "offset")),
     Property(PropertyType::Height, ValueType::Double, QApplication::translate("room", "nominalHeight")),
     Property(PropertyType::Volume, ValueType::Double, QApplication::translate("room", "grossVolume")),

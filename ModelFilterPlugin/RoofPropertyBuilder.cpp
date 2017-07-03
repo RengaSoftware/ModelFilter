@@ -17,7 +17,7 @@ RoofPropertyBuilder::RoofPropertyBuilder()
   properties = { Property(PropertyType::Name, ValueType::String, QApplication::translate("roof", "name")),
     Property(PropertyType::Material, ValueType::String, QApplication::translate("roof", "material")),
     Property(PropertyType::Mark, ValueType::String, QApplication::translate("roof", "mark")),
-    Property(PropertyType::LevelHeight, ValueType::Double, QApplication::translate("roof", "level")),
+    Property(PropertyType::LevelHeight, ValueType::String, QApplication::translate("roof", "level")),
     Property(PropertyType::Offset, ValueType::Double, QApplication::translate("roof", "offset")),
     Property(PropertyType::Thickness, ValueType::Double, QApplication::translate("roof", "thickness")),
     Property(PropertyType::Volume, ValueType::Double, QApplication::translate("roof", "netVolume")),

@@ -17,7 +17,7 @@ IsolatedFoundationPropertyBuilder::IsolatedFoundationPropertyBuilder()
   properties = { Property(PropertyType::Name, ValueType::String, QApplication::translate("isolatedFoundation", "name")),
     Property(PropertyType::Material, ValueType::String, QApplication::translate("isolatedFoundation", "material")),
     Property(PropertyType::Mark, ValueType::String, QApplication::translate("isolatedFoundation", "mark")),
-    Property(PropertyType::LevelHeight, ValueType::Double, QApplication::translate("isolatedFoundation", "level")),
+    Property(PropertyType::LevelHeight, ValueType::String, QApplication::translate("isolatedFoundation", "level")),
     Property(PropertyType::Offset, ValueType::Double, QApplication::translate("isolatedFoundation", "offset")),
     Property(PropertyType::Width, ValueType::Double, QApplication::translate("isolatedFoundation", "overallWidth")),
     Property(PropertyType::Depth, ValueType::Double, QApplication::translate("isolatedFoundation", "overallDepth")),
