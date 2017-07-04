@@ -20,24 +20,7 @@
 #include <RengaBase/VolumeMeasure.h>
 
 ObjectPropertyBuilder::ObjectPropertyBuilder()
-  : m_stringOperatorData({
-      std::make_pair(OperatorType::Equal, StringOperatorData("equal", [](const QString one, const QString two) {return one.compare(two) == 0; })),
-      std::make_pair(OperatorType::NotEqual, StringOperatorData("notEqual", [](const QString one, const QString two) {return one.compare(two) != 0; })),
-      std::make_pair(OperatorType::Contain, StringOperatorData("contain", [](const QString one, const QString two) {return one.contains(two); })),
-      std::make_pair(OperatorType::NotContain, StringOperatorData("notContain", [](const QString one, const QString two) {return !one.contains(two); })),
-      std::make_pair(OperatorType::Prefix, StringOperatorData("prefix", [](const QString one, const QString two) {return one.startsWith(two); })),
-      std::make_pair(OperatorType::NotPrefix, StringOperatorData("notPrefix", [](const QString one, const QString two) {return !one.startsWith(two); })),
-      std::make_pair(OperatorType::Suffix, StringOperatorData("suffix", [](const QString one, const QString two) {return one.endsWith(two); })),
-      std::make_pair(OperatorType::NotSuffix, StringOperatorData("notSuffix", [](const QString one, const QString two) {return !one.endsWith(two); })),
-      std::make_pair(OperatorType::All, StringOperatorData("all", [](const QString, const QString) {return true; })) })
-      , m_doubleOperatorData({
-          std::make_pair(OperatorType::EQ, DoubleOperatorData("eq", [](const double one, const double two) {return one == two; })),
-          std::make_pair(OperatorType::NEQ, DoubleOperatorData("neq", [](const double one, const double two) {return one != two; })),
-          std::make_pair(OperatorType::GEQ, DoubleOperatorData("geq", [](const double one, const double two) {return one >= two; })),
-          std::make_pair(OperatorType::LEQ, DoubleOperatorData("leq", [](const double one, const double two) {return one <= two; })),
-          std::make_pair(OperatorType::GR, DoubleOperatorData("greater", [](const double one, const double two) {return one > two; })),
-          std::make_pair(OperatorType::LS, DoubleOperatorData("less", [](const double one, const double two) {return one < two; })),
-          std::make_pair(OperatorType::All, DoubleOperatorData("all", [](const double, const double) {return true; })) })
+  : m_operatorData(OperatorData::Instance())
 {}
 
 ObjectPropertyBuilder::~ObjectPropertyBuilder()
@@ -70,19 +53,6 @@ PropertyList ObjectPropertyBuilder::getUserAttributes(const rengaapi::ObjectType
   return attributeList;
 }
 
-QString ObjectPropertyBuilder::getOperatorName(const OperatorType& type)
-{
-  auto it = m_doubleOperatorData.find(type);
-  if (it != m_doubleOperatorData.end())
-    return it->second.m_name;
-  auto it2 = m_stringOperatorData.find(type);
-  if (it2 != m_stringOperatorData.end())
-    return it2->second.m_name;
-
-  assert(false);
-  return QString("");
-}
-
 QString ObjectPropertyBuilder::getMaterialName(const rengaapi::MaterialId materialId)
 {
   rengaapi::Materials::MaterialType materialType = rengaapi::Materials::materialType(materialId);
@@ -113,29 +83,6 @@ QString ObjectPropertyBuilder::getMaterialName(const rengaapi::MaterialId materi
   break;
   }
   return materialName;
-}
-
-std::list<std::pair<OperatorType, QString>> ObjectPropertyBuilder::getOperators(const ValueType valueType)
-{
-  std::list<std::pair<OperatorType, QString>> operatorList;
-  switch (valueType)
-  {
-  case ValueType::Double:
-  {
-    for (auto& it : m_doubleOperatorData)
-      operatorList.push_back(std::make_pair(it.first, it.second.m_name));
-    break;
-  }
-  case ValueType::String:
-  {
-    for (auto& it : m_stringOperatorData)
-      operatorList.push_back(std::make_pair(it.first, it.second.m_name));
-    break;
-  }
-  default:
-    break;
-  }
-  return operatorList;
 }
 
 bool ObjectPropertyBuilder::apply(const rengabase::LengthMeasureOptional& measure, const SearchCriteriaData& data, MeasureUnit unit)
@@ -275,7 +222,7 @@ bool ObjectPropertyBuilder::apply(const double value, const SearchCriteriaData& 
   if (data.m_value.length() == 0)
     return true;
 
-  auto it = m_doubleOperatorData.find(data.m_operatorType);
+  auto it = m_operatorData->m_double.find(data.m_operatorType);
   assert(it != m_doubleOperatorData.end());
   return it->second.m_function(value, data.m_value.toDouble());
 }
@@ -295,7 +242,7 @@ bool ObjectPropertyBuilder::apply(const QString & value, const SearchCriteriaDat
   if (data.m_value.length() == 0)
     return true;
 
-  auto it = m_stringOperatorData.find(data.m_operatorType);
+  auto it = m_operatorData->m_string.find(data.m_operatorType);
   assert(it != m_stringOperatorData.end());
   return it->second.m_function(value, data.m_value);
 }

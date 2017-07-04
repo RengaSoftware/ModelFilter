@@ -8,6 +8,7 @@
 
 #pragma once
 #include "FilterData.h"
+#include "OperatorData.h"
 
 #include <QtCore/QSortFilterProxyModel>
 #include <QtGui/QStandardItemModel>
@@ -58,6 +59,7 @@ private:
   std::unique_ptr<Ui::GroupDialog> m_pUi;
 
   std::unique_ptr<ObjectPropertyBuilder> m_pBuilder;
+  std::shared_ptr<OperatorData> m_operatorData;
 
   std::unique_ptr<QStandardItemModel> m_pTreeModel;
   std::unique_ptr<QStandardItemModel> m_pTypeBoxModel;

@@ -153,7 +153,6 @@ void MainDialog::onApplyFilter()
 
   // apply selected action (hide or show)
   setObjectsVisibility(idCollection);
-  return;
 }
 
 void MainDialog::onExportFilter()

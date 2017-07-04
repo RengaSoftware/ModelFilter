@@ -8,6 +8,7 @@
 
 #pragma once
 #include "FilterData.h"
+#include "OperatorData.h"
 
 #include <RengaAPI/MaterialId.h>
 #include <RengaAPI/ModelObject.h>
@@ -32,14 +33,7 @@ public:
   virtual bool isObjectMatchFilter(const SearchCriteriaData& data, rengaapi::ModelObject* pObject) = 0;
 
   static PropertyList getUserAttributes(const rengaapi::ObjectType& objectType);
-
-  QString getOperatorName(const OperatorType& type);
   QString getMaterialName(const rengaapi::MaterialId id);
-  std::list<std::pair<OperatorType, QString>> getOperators(const ValueType valueType);
-
-private:
-  const std::map<OperatorType, StringOperatorData> m_stringOperatorData;
-  const std::map<OperatorType, DoubleOperatorData> m_doubleOperatorData;
 
 protected:
   bool apply(const rengabase::LengthMeasureOptional& measure, const SearchCriteriaData& data, MeasureUnit unit = MeasureUnit::Millimeter);
@@ -63,4 +57,5 @@ protected:
 private:
   double countOneLayeredMass(const rengaapi::MaterialId& materialId, const rengabase::VolumeMeasureOptional& volumeMeasure);
   double countMultiLayeredMass(const rengaapi::MaterialId& materialId, const std::vector<rengabase::VolumeMeasureOptional>& volumeMeasureCollection);
+  std::shared_ptr<OperatorData> m_operatorData;
 };

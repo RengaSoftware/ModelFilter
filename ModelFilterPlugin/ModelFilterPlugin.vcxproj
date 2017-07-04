@@ -266,6 +266,7 @@ copy /y $(ProjectDir)Resources\PluginIcon.png $(SolutionDir)$(Configuration)\$(P
     <ClCompile Include="ObjectPropertyBuilder.cpp" />
     <ClCompile Include="ObjectPropertyBuilderFactory.cpp" />
     <ClCompile Include="OpeningPropertyBuilder.cpp" />
+    <ClCompile Include="OperatorData.cpp" />
     <ClCompile Include="PluginToolButtons.cpp" />
     <ClCompile Include="RailingPropertyBuilder.cpp" />
     <ClCompile Include="RampPropertyBuilder.cpp" />
@@ -383,6 +384,7 @@ copy /y $(ProjectDir)Resources\PluginIcon.png $(SolutionDir)$(Configuration)\$(P
     <ClInclude Include="ObjectPropertyBuilder.h" />
     <ClInclude Include="ObjectPropertyBuilderFactory.h" />
     <ClInclude Include="NameGenerator.h" />
+    <ClInclude Include="OperatorData.h" />
     <ClInclude Include="TypeData.h" />
     <ClInclude Include="WallFoundationPropertyBuilder.h" />
     <ClInclude Include="WallPropertyBuilder.h" />

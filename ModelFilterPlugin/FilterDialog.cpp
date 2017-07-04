@@ -9,7 +9,6 @@
 #include "stdafx.h"
 #include "FilterDialog.h"
 #include "GroupDialog.h"
-#include "ObjectPropertyBuilderFactory.h"
 #include "TypeData.h"
 
 #include "ui_FilterDialog.h"
@@ -18,6 +17,7 @@ static const unsigned int c_treeViewColumnsCount = 3;
 
 FilterDialog::FilterDialog(QDialog* parent)
   : QDialog(parent, Qt::WindowTitleHint | Qt::WindowSystemMenuHint | Qt::WindowCloseButtonHint)
+  , m_operatorData(OperatorData::Instance())
 {
   m_pUi.reset(new Ui::FilterDialog());
   m_pUi->setupUi(this);
@@ -61,15 +61,13 @@ FilterDialog::FilterDialog(QDialog * parent, const FilterData& filterData)
   // set data in tree
   for (auto& groupData : filterData.m_groupList)
   {
-    ObjectPropertyBuilderFactory factory;
-    std::shared_ptr<ObjectPropertyBuilder> objectBuilder(factory.createBuilder(groupData.m_groupType));
     TypeDataArray typeDataArray;
     QStandardItem* groupItem = new QStandardItem(typeDataArray.getObjectTypeName(groupData.m_groupType));
     for (auto& propertyData : groupData.m_propertyList)
     {
       groupItem->appendRow({
         new QStandardItem(propertyData.m_property.m_propertyName),
-        new QStandardItem(objectBuilder->getOperatorName(propertyData.m_operatorType)) ,
+        new QStandardItem(m_operatorData->getOperatorName(propertyData.m_operatorType)),
         new QStandardItem(propertyData.m_value)
       });
     }
@@ -193,13 +191,11 @@ QStandardItem* FilterDialog::buildGroupItem(const GroupData& data) {
   TypeDataArray typeDataArray;
   groupItem->setText(typeDataArray.getObjectTypeName(data.m_groupType));
 
-  ObjectPropertyBuilderFactory factory;
-  std::unique_ptr<ObjectPropertyBuilder> pBuilder(factory.createBuilder(data.m_groupType));
   for (auto property : data.m_propertyList)
   {
     groupItem->appendRow({
       new QStandardItem(property.m_property.m_propertyName),
-      new QStandardItem(pBuilder->getOperatorName(property.m_operatorType)),
+      new QStandardItem(m_operatorData->getOperatorName(property.m_operatorType)),
       new QStandardItem(property.m_value)
     });
   }

@@ -8,6 +8,7 @@
 
 #pragma once
 #include "FilterData.h"
+#include "OperatorData.h"
 
 #include <QtWidgets/QDialog>
 #include <QtGui/QStandardItemModel>
@@ -46,5 +47,6 @@ private:
 private:
   std::unique_ptr<Ui::FilterDialog> m_pUi;
   std::unique_ptr<QStandardItemModel> m_pTreeModel;
+  std::shared_ptr<OperatorData> m_operatorData;
   FilterData mData;
 };

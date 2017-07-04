@@ -181,6 +181,9 @@
     <ClCompile Include="FilterDialogButtonHandler.cpp">
       <Filter>PluginButtons</Filter>
     </ClCompile>
+    <ClCompile Include="OperatorData.cpp">
+      <Filter>FilterData</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="RengaStringToQString.h">
@@ -251,6 +254,9 @@
       <Filter>FilterData</Filter>
     </ClInclude>
     <ClInclude Include="TypeData.h">
+      <Filter>FilterData</Filter>
+    </ClInclude>
+    <ClInclude Include="OperatorData.h">
       <Filter>FilterData</Filter>
     </ClInclude>
   </ItemGroup>

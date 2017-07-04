@@ -72,30 +72,6 @@ enum OperatorType {
   All,
 };
 
-struct DoubleOperatorData
-{
-  DoubleOperatorData::DoubleOperatorData(const QString& operatorName, std::function<bool(double, double)> function)
-    : m_function(function)
-  {
-    m_name = QApplication::translate("operator", operatorName.toStdString().data());
-  }
-
-  QString m_name;
-  const std::function<bool(double, double)> m_function;
-};
-
-struct StringOperatorData
-{
-  StringOperatorData::StringOperatorData(const QString& operatorName, std::function<bool(QString, QString)> function)
-    : m_function(function)
-  {
-    m_name = QApplication::translate("operator", operatorName.toStdString().data());
-  }
-
-  QString m_name;
-  const std::function<bool(QString, QString)> m_function;
-};
-
 struct Property {
   Property::Property(const PropertyType& propertyType, const ValueType valueType, const QString& name)
     : m_propertyType(propertyType)

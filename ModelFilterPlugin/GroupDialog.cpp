@@ -17,6 +17,7 @@ static const unsigned int c_treeViewColumnsCount = 3;
 
 GroupDialog::GroupDialog(QDialog* parent)
   : QDialog(parent, Qt::WindowTitleHint | Qt::WindowSystemMenuHint | Qt::WindowCloseButtonHint)
+  , m_operatorData(OperatorData::Instance())
 {
   m_pUi.reset(new Ui::GroupDialog());
   m_pUi->setupUi(this);
@@ -197,8 +198,8 @@ void GroupDialog::buildProperties(const GroupData& groupData) {
     QStandardItem* pPropertyItem = new QStandardItem(rowData.m_property.m_propertyName);
     pPropertyItem->setData(QVariant(rowData.m_property.m_propertyType));
     pPropertyItem->setData(QVariant(rowData.m_property.m_valueType), Qt::UserRole + 2);
-
-    QStandardItem* pOperatorItem = new QStandardItem(m_pBuilder->getOperatorName(rowData.m_operatorType));
+    
+    QStandardItem* pOperatorItem = new QStandardItem(m_operatorData->getOperatorName(rowData.m_operatorType));
     pOperatorItem->setData(QVariant(rowData.m_operatorType));
 
     QStandardItem* pValueItem = new QStandardItem(rowData.m_value);
@@ -322,7 +323,7 @@ void GroupDialog::reloadOperatorBox()
   ValueType valueType = ValueType(data.toInt(&ok));
 
   // load operators
-  for (auto& it : m_pBuilder->getOperators(valueType))
+  for (auto& it : m_operatorData->getOperators(valueType))
   {
     QStandardItem* operatorItem = new QStandardItem(it.second);
     operatorItem->setData(QVariant(it.first));
