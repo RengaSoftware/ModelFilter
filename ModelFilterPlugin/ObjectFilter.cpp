@@ -164,7 +164,6 @@ bool ObjectFilter::apply(const double value, const SearchCriteriaData& data)
     return true;
 
   auto it = m_operatorData->m_double.find(data.m_operatorType);
-  assert(it != m_doubleOperatorData.end());
   return it->second.m_function(value, data.m_value.toDouble());
 }
 
@@ -184,7 +183,6 @@ bool ObjectFilter::apply(const QString & value, const SearchCriteriaData& data)
     return true;
 
   auto it = m_operatorData->m_string.find(data.m_operatorType);
-  assert(it != m_stringOperatorData.end());
   return it->second.m_function(value, data.m_value);
 }
 
