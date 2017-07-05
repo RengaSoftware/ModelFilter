@@ -543,7 +543,12 @@ QTreeView::item:hover {
   <tabstop>typeBox</tabstop>
   <tabstop>propertyBox</tabstop>
   <tabstop>operatorBox</tabstop>
+  <tabstop>valueLine</tabstop>
+  <tabstop>addButton</tabstop>
   <tabstop>treeView</tabstop>
+  <tabstop>deleteButton</tabstop>
+  <tabstop>okButton</tabstop>
+  <tabstop>cancelButton</tabstop>
  </tabstops>
  <resources>
   <include location="../resource.qrc"/>

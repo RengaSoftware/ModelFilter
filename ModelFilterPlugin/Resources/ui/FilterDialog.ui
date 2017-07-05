@@ -398,6 +398,9 @@ QTreeView::branch:!has-children:!has-siblings:adjoins-item {
  <tabstops>
   <tabstop>lineEdit</tabstop>
   <tabstop>treeView</tabstop>
+  <tabstop>addButton</tabstop>
+  <tabstop>editButton</tabstop>
+  <tabstop>deleteButton</tabstop>
   <tabstop>okButton</tabstop>
   <tabstop>cancelButton</tabstop>
  </tabstops>
