@@ -87,57 +87,6 @@
       <Filter>Generated Files\Release</Filter>
     </ClCompile>
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="ObjectPropertyBuilder.cpp">
-      <Filter>ModelObjects</Filter>
-    </ClCompile>
-    <ClCompile Include="ObjectPropertyBuilderFactory.cpp">
-      <Filter>ModelObjects</Filter>
-    </ClCompile>
-    <ClCompile Include="BeamPropertyBuilder.cpp">
-      <Filter>ModelObjects</Filter>
-    </ClCompile>
-    <ClCompile Include="ColumnPropertyBuilder.cpp">
-      <Filter>ModelObjects</Filter>
-    </ClCompile>
-    <ClCompile Include="DoorPropertyBuilder.cpp">
-      <Filter>ModelObjects</Filter>
-    </ClCompile>
-    <ClCompile Include="FloorPropertyBuilder.cpp">
-      <Filter>ModelObjects</Filter>
-    </ClCompile>
-    <ClCompile Include="IsolatedFoundationPropertyBuilder.cpp">
-      <Filter>ModelObjects</Filter>
-    </ClCompile>
-    <ClCompile Include="LevelPropertyBuilder.cpp">
-      <Filter>ModelObjects</Filter>
-    </ClCompile>
-    <ClCompile Include="OpeningPropertyBuilder.cpp">
-      <Filter>ModelObjects</Filter>
-    </ClCompile>
-    <ClCompile Include="RailingPropertyBuilder.cpp">
-      <Filter>ModelObjects</Filter>
-    </ClCompile>
-    <ClCompile Include="RampPropertyBuilder.cpp">
-      <Filter>ModelObjects</Filter>
-    </ClCompile>
-    <ClCompile Include="RoofPropertyBuilder.cpp">
-      <Filter>ModelObjects</Filter>
-    </ClCompile>
-    <ClCompile Include="RoomPropertyBuilder.cpp">
-      <Filter>ModelObjects</Filter>
-    </ClCompile>
-    <ClCompile Include="StairPropertyBuilder.cpp">
-      <Filter>ModelObjects</Filter>
-    </ClCompile>
-    <ClCompile Include="WallFoundationPropertyBuilder.cpp">
-      <Filter>ModelObjects</Filter>
-    </ClCompile>
-    <ClCompile Include="WallPropertyBuilder.cpp">
-      <Filter>ModelObjects</Filter>
-    </ClCompile>
-    <ClCompile Include="WindowPropertyBuilder.cpp">
-      <Filter>ModelObjects</Filter>
-    </ClCompile>
     <ClCompile Include="MainDialog.cpp">
       <Filter>MainDialog</Filter>
     </ClCompile>
@@ -184,6 +133,60 @@
     <ClCompile Include="OperatorData.cpp">
       <Filter>FilterData</Filter>
     </ClCompile>
+    <ClCompile Include="ObjectFactory.cpp">
+      <Filter>ModelObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjectProperty.cpp">
+      <Filter>ModelObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjectFilter.cpp">
+      <Filter>ModelObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="BeamFilterData.cpp">
+      <Filter>ModelObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="ColumnFilterData.cpp">
+      <Filter>ModelObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="DoorFilterData.cpp">
+      <Filter>ModelObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="FloorFilterData.cpp">
+      <Filter>ModelObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="IsolatedFoundationFilterData.cpp">
+      <Filter>ModelObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="LevelFilterData.cpp">
+      <Filter>ModelObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="OpeningFilterData.cpp">
+      <Filter>ModelObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="RailingFilterData.cpp">
+      <Filter>ModelObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="RampFilterData.cpp">
+      <Filter>ModelObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="RoofFilterData.cpp">
+      <Filter>ModelObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="RoomFilterData.cpp">
+      <Filter>ModelObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="StairFilterData.cpp">
+      <Filter>ModelObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="WallFoundationFilterData.cpp">
+      <Filter>ModelObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="WallFilterData.cpp">
+      <Filter>ModelObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="WindowFilterData.cpp">
+      <Filter>ModelObjects</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="RengaStringToQString.h">
@@ -199,57 +202,6 @@
     <ClInclude Include="GeneratedFiles\ui_GroupDialog.h">
       <Filter>Generated Files</Filter>
     </ClInclude>
-    <ClInclude Include="ObjectPropertyBuilder.h">
-      <Filter>ModelObjects</Filter>
-    </ClInclude>
-    <ClInclude Include="ObjectPropertyBuilderFactory.h">
-      <Filter>ModelObjects</Filter>
-    </ClInclude>
-    <ClInclude Include="BeamPropertyBuilder.h">
-      <Filter>ModelObjects</Filter>
-    </ClInclude>
-    <ClInclude Include="ColumnPropertyBuilder.h">
-      <Filter>ModelObjects</Filter>
-    </ClInclude>
-    <ClInclude Include="DoorPropertyBuilder.h">
-      <Filter>ModelObjects</Filter>
-    </ClInclude>
-    <ClInclude Include="FloorPropertyBuilder.h">
-      <Filter>ModelObjects</Filter>
-    </ClInclude>
-    <ClInclude Include="IsolatedFoundationPropertyBuilder.h">
-      <Filter>ModelObjects</Filter>
-    </ClInclude>
-    <ClInclude Include="LevelPropertyBuilder.h">
-      <Filter>ModelObjects</Filter>
-    </ClInclude>
-    <ClInclude Include="OpeningPropertyBuilder.h">
-      <Filter>ModelObjects</Filter>
-    </ClInclude>
-    <ClInclude Include="RailingPropertyBuilder.h">
-      <Filter>ModelObjects</Filter>
-    </ClInclude>
-    <ClInclude Include="RampPropertyBuilder.h">
-      <Filter>ModelObjects</Filter>
-    </ClInclude>
-    <ClInclude Include="RoofPropertyBuilder.h">
-      <Filter>ModelObjects</Filter>
-    </ClInclude>
-    <ClInclude Include="RoomPropertyBuilder.h">
-      <Filter>ModelObjects</Filter>
-    </ClInclude>
-    <ClInclude Include="StairPropertyBuilder.h">
-      <Filter>ModelObjects</Filter>
-    </ClInclude>
-    <ClInclude Include="WallFoundationPropertyBuilder.h">
-      <Filter>ModelObjects</Filter>
-    </ClInclude>
-    <ClInclude Include="WallPropertyBuilder.h">
-      <Filter>ModelObjects</Filter>
-    </ClInclude>
-    <ClInclude Include="WindowPropertyBuilder.h">
-      <Filter>ModelObjects</Filter>
-    </ClInclude>
     <ClInclude Include="NameGenerator.h">
       <Filter>FilterData</Filter>
     </ClInclude>
@@ -258,6 +210,60 @@
     </ClInclude>
     <ClInclude Include="OperatorData.h">
       <Filter>FilterData</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjectFactory.h">
+      <Filter>ModelObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjectProperty.h">
+      <Filter>ModelObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjectFilter.h">
+      <Filter>ModelObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="BeamFilterData.h">
+      <Filter>ModelObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="ColumnFilterData.h">
+      <Filter>ModelObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="DoorFilterData.h">
+      <Filter>ModelObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="FloorFilterData.h">
+      <Filter>ModelObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="IsolatedFoundationFilterData.h">
+      <Filter>ModelObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="LevelFilterData.h">
+      <Filter>ModelObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="OpeningFilterData.h">
+      <Filter>ModelObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="RailingFilterData.h">
+      <Filter>ModelObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="RampFilterData.h">
+      <Filter>ModelObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="RoofFilterData.h">
+      <Filter>ModelObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="RoomFilterData.h">
+      <Filter>ModelObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="StairFilterData.h">
+      <Filter>ModelObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="WallFoundationFilterData.h">
+      <Filter>ModelObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="WallFilterData.h">
+      <Filter>ModelObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="WindowFilterData.h">
+      <Filter>ModelObjects</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

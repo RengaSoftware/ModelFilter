@@ -11,7 +11,7 @@
 #include "FilterDialog.h"
 #include "ui_MainDialog.h"
 #include "NameGenerator.h"
-#include "ObjectPropertyBuilderFactory.h"
+#include "ObjectFactory.h"
 
 #include <QtCore/QFile.h>
 #include <QtCore/QStandardPaths.h>
@@ -280,8 +280,8 @@ objectIdCollection MainDialog::collectObjects(const FilterData& data)
       for (auto& propertyData : groupData.m_propertyList)
       {
         // apply filter
-        ObjectPropertyBuilderFactory m_propertyBuilderFactory;
-        std::unique_ptr<ObjectPropertyBuilder> pObjectBuilder(m_propertyBuilderFactory.createBuilder(pObject->type()));
+        ObjectFilterFactory m_Factory;
+        std::unique_ptr<ObjectFilter> pObjectBuilder(m_Factory.createObjectFilter(pObject->type()));
         bool isObjectMatchProperty = pObjectBuilder->isObjectMatchFilter(propertyData, pObject);
         // if object does not match property -> object does not match group
         if (!isObjectMatchProperty)

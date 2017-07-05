@@ -184,13 +184,13 @@ copy /y $(ProjectDir)Resources\PluginIcon.png $(SolutionDir)$(Configuration)\$(P
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="BeamPropertyBuilder.cpp" />
-    <ClCompile Include="ColumnPropertyBuilder.cpp" />
-    <ClCompile Include="DoorPropertyBuilder.cpp" />
+    <ClCompile Include="BeamFilterData.cpp" />
+    <ClCompile Include="ColumnFilterData.cpp" />
+    <ClCompile Include="DoorFilterData.cpp" />
     <ClCompile Include="FilterData.cpp" />
     <ClCompile Include="FilterDialog.cpp" />
     <ClCompile Include="FilterDialogButtonHandler.cpp" />
-    <ClCompile Include="FloorPropertyBuilder.cpp" />
+    <ClCompile Include="FloorFilterData.cpp" />
     <ClCompile Include="GeneratedFiles\Debug\moc_FilterDialog.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
@@ -232,8 +232,8 @@ copy /y $(ProjectDir)Resources\PluginIcon.png $(SolutionDir)$(Configuration)\$(P
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="GroupDialog.cpp" />
-    <ClCompile Include="IsolatedFoundationPropertyBuilder.cpp" />
-    <ClCompile Include="LevelPropertyBuilder.cpp" />
+    <ClCompile Include="IsolatedFoundationFilterData.cpp" />
+    <ClCompile Include="LevelFilterData.cpp" />
     <ClCompile Include="GeneratedFiles\Debug\moc_RengaEventsHandler.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
@@ -263,24 +263,25 @@ copy /y $(ProjectDir)Resources\PluginIcon.png $(SolutionDir)$(Configuration)\$(P
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MainDialog.cpp" />
     <ClCompile Include="ModelFilterPlugin.cpp" />
-    <ClCompile Include="ObjectPropertyBuilder.cpp" />
-    <ClCompile Include="ObjectPropertyBuilderFactory.cpp" />
-    <ClCompile Include="OpeningPropertyBuilder.cpp" />
+    <ClCompile Include="ObjectFilter.cpp" />
+    <ClCompile Include="ObjectProperty.cpp" />
+    <ClCompile Include="ObjectFactory.cpp" />
+    <ClCompile Include="OpeningFilterData.cpp" />
     <ClCompile Include="OperatorData.cpp" />
     <ClCompile Include="PluginToolButtons.cpp" />
-    <ClCompile Include="RailingPropertyBuilder.cpp" />
-    <ClCompile Include="RampPropertyBuilder.cpp" />
+    <ClCompile Include="RailingFilterData.cpp" />
+    <ClCompile Include="RampFilterData.cpp" />
     <ClCompile Include="RengaEventsHandler.cpp" />
     <ClCompile Include="RengaStringToQString.cpp" />
-    <ClCompile Include="RoofPropertyBuilder.cpp" />
-    <ClCompile Include="RoomPropertyBuilder.cpp" />
-    <ClCompile Include="StairPropertyBuilder.cpp" />
+    <ClCompile Include="RoofFilterData.cpp" />
+    <ClCompile Include="RoomFilterData.cpp" />
+    <ClCompile Include="StairFilterData.cpp" />
     <ClCompile Include="stdafx.cpp" />
     <ClCompile Include="NameGenerator.cpp" />
     <ClCompile Include="TypeData.cpp" />
-    <ClCompile Include="WallFoundationPropertyBuilder.cpp" />
-    <ClCompile Include="WallPropertyBuilder.cpp" />
-    <ClCompile Include="WindowPropertyBuilder.cpp" />
+    <ClCompile Include="WallFoundationFilterData.cpp" />
+    <ClCompile Include="WallFilterData.cpp" />
+    <ClCompile Include="WindowFilterData.cpp" />
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="FilterDialog.h">
@@ -381,14 +382,15 @@ copy /y $(ProjectDir)Resources\PluginIcon.png $(SolutionDir)$(Configuration)\$(P
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp</Outputs>
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o ".\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp" "-fstdafx.h" "-f../../FilterDialogButtonHandler.h"  -DUNICODE -DWIN32 -DWIN64 -DQT_DLL -DMODELFILTERPLUGIN_LIB -DQT_NO_DEBUG -DNDEBUG -D_WINDLL "-I.\GeneratedFiles" "-I." "-I$(QTDIR)\include" "-I.\GeneratedFiles\$(ConfigurationName)\." "-I$(renga_sdk)\Include"</Command>
     </CustomBuild>
-    <ClInclude Include="ObjectPropertyBuilder.h" />
-    <ClInclude Include="ObjectPropertyBuilderFactory.h" />
+    <ClInclude Include="ObjectFilter.h" />
+    <ClInclude Include="ObjectProperty.h" />
+    <ClInclude Include="ObjectFactory.h" />
     <ClInclude Include="NameGenerator.h" />
     <ClInclude Include="OperatorData.h" />
     <ClInclude Include="TypeData.h" />
-    <ClInclude Include="WallFoundationPropertyBuilder.h" />
-    <ClInclude Include="WallPropertyBuilder.h" />
-    <ClInclude Include="WindowPropertyBuilder.h" />
+    <ClInclude Include="WallFoundationFilterData.h" />
+    <ClInclude Include="WallFilterData.h" />
+    <ClInclude Include="WindowFilterData.h" />
     <CustomBuild Include="PluginToolButtons.h">
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
       <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Moc%27ing PluginToolButtons.h...</Message>
@@ -425,10 +427,10 @@ copy /y $(ProjectDir)Resources\PluginIcon.png $(SolutionDir)$(Configuration)\$(P
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp</Outputs>
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o ".\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp"  -DUNICODE -DWIN32 -DWIN64 -DQT_DLL -DMODELFILTERPLUGIN_LIB -DQT_NO_DEBUG -DNDEBUG -D_WINDLL  "-I.\GeneratedFiles" "-I." "-I$(QTDIR)\include" "-I.\GeneratedFiles\$(ConfigurationName)\." "-I$(renga_sdk)\Include" "-IC:\Program Files (x86)\Visual Leak Detector\include" "-fstdafx.h" "-f../../RengaEventsHandler.h"</Command>
     </CustomBuild>
-    <ClInclude Include="BeamPropertyBuilder.h" />
-    <ClInclude Include="ColumnPropertyBuilder.h" />
-    <ClInclude Include="DoorPropertyBuilder.h" />
-    <ClInclude Include="FloorPropertyBuilder.h" />
+    <ClInclude Include="BeamFilterData.h" />
+    <ClInclude Include="ColumnFilterData.h" />
+    <ClInclude Include="DoorFilterData.h" />
+    <ClInclude Include="FloorFilterData.h" />
     <ClInclude Include="GeneratedFiles\ui_FilterDialog.h" />
     <ClInclude Include="GeneratedFiles\ui_GroupDialog.h" />
     <ClInclude Include="GeneratedFiles\ui_MainDialog.h" />
@@ -450,15 +452,15 @@ copy /y $(ProjectDir)Resources\PluginIcon.png $(SolutionDir)$(Configuration)\$(P
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp</Outputs>
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o ".\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp"  -DUNICODE -DWIN32 -DWIN64 -DQT_DLL -DMODELFILTERPLUGIN_LIB -DQT_NO_DEBUG -DNDEBUG -D_WINDLL  "-I.\GeneratedFiles" "-I." "-I$(QTDIR)\include" "-I.\GeneratedFiles\$(ConfigurationName)\." "-I$(renga_sdk)\Include" "-IC:\Program Files (x86)\Visual Leak Detector\include" "-fstdafx.h" "-f../../GroupDialog.h"</Command>
     </CustomBuild>
-    <ClInclude Include="IsolatedFoundationPropertyBuilder.h" />
-    <ClInclude Include="LevelPropertyBuilder.h" />
-    <ClInclude Include="OpeningPropertyBuilder.h" />
-    <ClInclude Include="RailingPropertyBuilder.h" />
-    <ClInclude Include="RampPropertyBuilder.h" />
+    <ClInclude Include="IsolatedFoundationFilterData.h" />
+    <ClInclude Include="LevelFilterData.h" />
+    <ClInclude Include="OpeningFilterData.h" />
+    <ClInclude Include="RailingFilterData.h" />
+    <ClInclude Include="RampFilterData.h" />
     <ClInclude Include="RengaStringToQString.h" />
-    <ClInclude Include="RoofPropertyBuilder.h" />
-    <ClInclude Include="RoomPropertyBuilder.h" />
-    <ClInclude Include="StairPropertyBuilder.h" />
+    <ClInclude Include="RoofFilterData.h" />
+    <ClInclude Include="RoomFilterData.h" />
+    <ClInclude Include="StairFilterData.h" />
     <ClInclude Include="stdafx.h" />
   </ItemGroup>
   <ItemGroup>

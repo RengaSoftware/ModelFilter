@@ -9,8 +9,6 @@
 #include "stdafx.h"
 #include "GroupDialog.h"
 #include "ui_GroupDialog.h"
-#include "ObjectPropertyBuilder.h"
-#include "ObjectPropertyBuilderFactory.h"
 #include "TypeData.h"
 
 static const unsigned int c_treeViewColumnsCount = 3;
@@ -169,8 +167,8 @@ void GroupDialog::onTypeBoxIndexChanged(const int changedIndex)
   const rengabase::UUID uuid = rengabase::UUID::fromString(QStringToRengaString(currentData.toString()));
   rengaapi::ObjectType objectType = rengaapi::ObjectType(uuid);
 
-  ObjectPropertyBuilderFactory factory;
-  m_pBuilder.reset(factory.createBuilder(objectType));
+  ObjectPropertyFactory factory;
+  m_pBuilder.reset(factory.createObjectProperty(objectType));
 
   // reload property combobox
   reloadPropertyBox();
@@ -248,8 +246,8 @@ void GroupDialog::loadTypeBox()
   m_pTypeBoxSortModel->sort(0);
 
   // set default builder
-  ObjectPropertyBuilderFactory factory;
-  m_pBuilder.reset(factory.createBuilder(rengaapi::ModelObjectTypes::LevelType));
+  ObjectPropertyFactory factory;
+  m_pBuilder.reset(factory.createObjectProperty(rengaapi::ModelObjectTypes::LevelType));
   m_pUi->typeBox->setCurrentIndex(0);
 
   // connect type combobox

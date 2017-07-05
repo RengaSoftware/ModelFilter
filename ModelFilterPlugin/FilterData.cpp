@@ -8,7 +8,7 @@
 
 #include "stdafx.h"
 #include "FilterData.h"
-#include "ObjectPropertyBuilderFactory.h"
+#include "ObjectFactory.h"
 
 #include <map>
 
@@ -141,8 +141,8 @@ SearchCriteriaData FilterData::parseProperty(QXmlStreamReader& reader, rengaapi:
 
   // check if object has property
   // also get property name
-  ObjectPropertyBuilderFactory factory;
-  std::unique_ptr<ObjectPropertyBuilder> builder(factory.createBuilder(type));
+  ObjectPropertyFactory factory;
+  std::unique_ptr<ObjectProperty> builder(factory.createObjectProperty(type));
   const PropertyList propertyList = builder->getObjectProperties();
   QString propertyName;
   for (auto it = propertyList.begin(); it != propertyList.end(); ++it) {

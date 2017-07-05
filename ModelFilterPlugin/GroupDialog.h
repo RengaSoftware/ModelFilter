@@ -14,7 +14,7 @@
 #include <QtGui/QStandardItemModel>
 #include <QtWidgets/QDialog>
 
-class ObjectPropertyBuilder;
+#include "ObjectFactory.h"
 
 namespace Ui
 {
@@ -58,7 +58,7 @@ private:
 private:
   std::unique_ptr<Ui::GroupDialog> m_pUi;
 
-  std::unique_ptr<ObjectPropertyBuilder> m_pBuilder;
+  std::unique_ptr<ObjectProperty> m_pBuilder;
   std::shared_ptr<OperatorData> m_operatorData;
 
   std::unique_ptr<QStandardItemModel> m_pTreeModel;
