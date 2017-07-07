@@ -7,6 +7,7 @@
 //
 
 #include "stdafx.h"
+#include "DoublePrecise.h"
 #include "OperatorData.h"
 
 std::shared_ptr<OperatorData> OperatorData::data = nullptr;
@@ -23,12 +24,12 @@ OperatorData::OperatorData()
   std::make_pair(OperatorType::NotSuffix, StringOperatorData("notSuffix", [](const QString one, const QString two) {return !one.endsWith(two); })),
   std::make_pair(OperatorType::All, StringOperatorData("all", [](const QString, const QString) {return true; })) })
   , m_double({
-  std::make_pair(OperatorType::EQ, DoubleOperatorData("eq", [](const double one, const double two) {return one == two; })),
-  std::make_pair(OperatorType::NEQ, DoubleOperatorData("neq", [](const double one, const double two) {return one != two; })),
-  std::make_pair(OperatorType::GEQ, DoubleOperatorData("geq", [](const double one, const double two) {return one >= two; })),
-  std::make_pair(OperatorType::LEQ, DoubleOperatorData("leq", [](const double one, const double two) {return one <= two; })),
-  std::make_pair(OperatorType::GR, DoubleOperatorData("greater", [](const double one, const double two) {return one > two; })),
-  std::make_pair(OperatorType::LS, DoubleOperatorData("less", [](const double one, const double two) {return one < two; })),
+  std::make_pair(OperatorType::EQ, DoubleOperatorData("eq", DoublePrecise::eq)),
+  std::make_pair(OperatorType::NEQ, DoubleOperatorData("neq", DoublePrecise::neq)),
+  std::make_pair(OperatorType::GEQ, DoubleOperatorData("geq", DoublePrecise::geq)),
+  std::make_pair(OperatorType::LEQ, DoubleOperatorData("leq", DoublePrecise::leq)),
+  std::make_pair(OperatorType::GR, DoubleOperatorData("greater", DoublePrecise::greater)),
+  std::make_pair(OperatorType::LS, DoubleOperatorData("less", DoublePrecise::less)),
   std::make_pair(OperatorType::All, DoubleOperatorData("all", [](const double, const double) {return true; })) })
 {}
 

@@ -187,6 +187,9 @@
     <ClCompile Include="WindowFilterData.cpp">
       <Filter>ModelObjects</Filter>
     </ClCompile>
+    <ClCompile Include="DoublePrecise.cpp">
+      <Filter>FilterData</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="RengaStringToQString.h">
@@ -264,6 +267,9 @@
     </ClInclude>
     <ClInclude Include="WindowFilterData.h">
       <Filter>ModelObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="DoublePrecise.h">
+      <Filter>FilterData</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
