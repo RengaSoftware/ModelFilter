@@ -310,7 +310,7 @@ objectIdCollection MainDialog::collectObjects(const FilterData& data)
 void MainDialog::setObjectsVisibility(const objectIdCollection& idCollection)
 {
   // show or hide matching objects
-  bool isShow = m_pUi->izolateRadioButton->isChecked();
+  bool isShow = m_pUi->isolateRadioButton->isChecked();
 
   rengaapi::View* pView = rengaapi::Application::activeView();
   switch (pView->type())

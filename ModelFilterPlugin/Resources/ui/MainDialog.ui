@@ -669,9 +669,9 @@ QListView::item:hover {
        <number>9</number>
       </property>
       <item>
-       <widget class="QRadioButton" name="izolateRadioButton">
+       <widget class="QRadioButton" name="isolateRadioButton">
         <property name="text">
-         <string>Izolate</string>
+         <string>Isolate</string>
         </property>
         <property name="checked">
          <bool>true</bool>
@@ -829,7 +829,7 @@ QListView::item:hover {
   <tabstop>deleteButton</tabstop>
   <tabstop>importButton</tabstop>
   <tabstop>exportButton</tabstop>
-  <tabstop>izolateRadioButton</tabstop>
+  <tabstop>isolateRadioButton</tabstop>
   <tabstop>hideRadioButton</tabstop>
   <tabstop>okButton</tabstop>
   <tabstop>closeButton</tabstop>

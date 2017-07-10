@@ -130,7 +130,7 @@
         <translation type="vanished">Отобранные объекты</translation>
     </message>
     <message>
-        <source>Izolate</source>
+        <source>Isolate</source>
         <translation type="vanished">Изолировать</translation>
     </message>
     <message>

@@ -130,8 +130,8 @@
         <translation type="vanished">Chosen objects</translation>
     </message>
     <message>
-        <source>Izolate</source>
-        <translation type="vanished">Izolate</translation>
+        <source>Isolate</source>
+        <translation type="vanished">Isolate</translation>
     </message>
     <message>
         <source>Hide</source>
