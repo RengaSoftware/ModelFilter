@@ -109,62 +109,85 @@ bool FilterData::isValid()
   return m_filterName.length() > 0 && m_groupList.size() > 0;
 }
 
-SearchCriteriaData FilterData::parseProperty(QXmlStreamReader& reader, rengaapi::ObjectType type)
+SearchCriteriaData FilterData::parseProperty(QXmlStreamReader& reader, const rengaapi::ObjectType& type)
 {
-  // parse property 
   reader.readNext();
-  std::map<QString, QString> data;
-  QStringList keyList = { "propertyType", "operatorType", "valueType", "value" };
+  std::map<QString, int> typeData;
+  QStringList typeNameList = { "propertyType", "operatorType", "valueType" };
+  QString propertyValue;
+
   while (!(reader.tokenType() == QXmlStreamReader::EndElement && reader.name() == "property"))
   {
     if (reader.tokenType() == QXmlStreamReader::StartElement)
     {
       const QString tagName = reader.name().toString();
-      if (keyList.contains(tagName))
+      if (typeNameList.contains(tagName))
       {
-        data[tagName] = parseTagText(reader);
-        keyList.removeOne(tagName);
+        int number;
+        if (getTypeNumber(parseTagText(reader), number))
+        {
+          typeData[tagName] = number;
+          typeNameList.removeOne(tagName);
+        }
+      }
+      else if (tagName.compare("value") == 0)
+      {
+        propertyValue = parseTagText(reader);
       }
     }
     reader.readNext();
   }
 
-  // check if all data fields present exactly once
-  bool ok, flag = keyList.empty();
-  PropertyType propertyType = PropertyType(data["propertyType"].toInt(&ok));
-  flag &= ok;
-  OperatorType operatorType = OperatorType(data["operatorType"].toInt(&ok));
-  flag &= ok;
-  ValueType valueType = ValueType(data["valueType"].toInt(&ok));
-  flag &= ok;
-  QString value = data["value"];
+  PropertyType propertyType = PropertyType(typeData["propertyType"]);
+  OperatorType operatorType = OperatorType(typeData["operatorType"]);
+  ValueType valueType = ValueType(typeData["valueType"]);
 
-  // check if object has property
-  // also get property name
+  // get property name
+  QString propertyName;
+  bool hasName = getPropertyName(propertyType, type, propertyName);
+
+  // check if property valid
+  bool emptyValue = operatorType != OperatorType::All && propertyValue.isEmpty();
+  if (!typeNameList.empty() || !hasName || emptyValue)
+  {
+    propertyType = PropertyType::Invalid;
+  }
+
+  return SearchCriteriaData(Property(propertyType, valueType, propertyName), operatorType, propertyValue);
+}
+
+bool FilterData::getTypeNumber(const QString& value, int& res)
+{
+  bool ok;
+  res = value.toInt(&ok);
+  return ok;
+}
+
+bool FilterData::getPropertyName(const PropertyType propertyType, const rengaapi::ObjectType& type, QString& propertyName)
+{
   ObjectPropertyFactory factory;
   std::unique_ptr<ObjectProperty> builder(factory.createObjectProperty(type));
   const PropertyList propertyList = builder->getObjectProperties();
-  QString propertyName;
-  for (auto it = propertyList.begin(); it != propertyList.end(); ++it) {
-    if (it->m_propertyType == propertyType) {
+
+  for (auto it = propertyList.begin(); it != propertyList.end(); ++it)
+  {
+    if (it->m_propertyType == propertyType)
+    {
       propertyName = it->m_propertyName;
-      break;
+      return true;
     }
   }
 
-  if (!flag || propertyName.isEmpty())
-  {
-    // property not valid
-    propertyType = PropertyType::Invalid;
-  }
-    
-  return SearchCriteriaData(Property(propertyType, valueType, propertyName), operatorType, value);
+  return false;
 }
 
 QString FilterData::parseTagText(QXmlStreamReader& reader)
 {
   if (reader.tokenType() != QXmlStreamReader::StartElement)
+  {
     return QString();
+  }
+
   QString elementName = reader.name().toString();
   reader.readNext();
   QString value = reader.text().toString();
