@@ -8,6 +8,7 @@
 
 #include "stdafx.h"
 #include "ObjectFilter.h"
+#include "OperatorData.h"
 
 #include <RengaAPI/Level.h>
 #include <RengaAPI/Materials.h>
@@ -20,7 +21,6 @@
 #include <RengaBase/VolumeMeasure.h>
 
 ObjectFilter::ObjectFilter()
-  : m_operatorData(OperatorData::Instance())
 {}
 
 ObjectFilter::~ObjectFilter()
@@ -163,8 +163,8 @@ bool ObjectFilter::apply(const double value, const SearchCriteriaData& data)
   if (data.m_value.length() == 0)
     return true;
 
-  auto it = m_operatorData->m_double.find(data.m_operatorType);
-  return it->second.m_function(value, data.m_value.toDouble());
+  auto& dblOperator = OperatorData::doubleOperator(data.m_operatorType);
+  return dblOperator.m_function(value, data.m_value.toDouble());
 }
 
 bool ObjectFilter::apply(const rengabase::String& rengaString, const SearchCriteriaData& data)
@@ -182,8 +182,8 @@ bool ObjectFilter::apply(const QString & value, const SearchCriteriaData& data)
   if (data.m_value.length() == 0)
     return true;
 
-  auto it = m_operatorData->m_string.find(data.m_operatorType);
-  return it->second.m_function(value, data.m_value);
+  auto& strOperator = OperatorData::stringOperator(data.m_operatorType);
+  return strOperator.m_function(value, data.m_value);
 }
 
 bool ObjectFilter::isUserAttributeMatchFilter(const rengaapi::ModelObject* pObject, const SearchCriteriaData& data)

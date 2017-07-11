@@ -35,17 +35,20 @@ struct StringOperatorData
 
 class OperatorData
 {
+public:
+  static QString getOperatorName(const OperatorType& type);
+  static const std::list<std::pair<OperatorType, QString>>& getOperators(const ValueType valueType);
+  static const DoubleOperatorData& doubleOperator(OperatorType dblOperatorType);
+  static const StringOperatorData& stringOperator(OperatorType strOperatorType);
+
 private:
   OperatorData();
   OperatorData(OperatorData const&) = delete;
   OperatorData& operator= (OperatorData const&) = delete;
-
-  static std::shared_ptr<OperatorData> data;
-
-public:
   static std::shared_ptr<OperatorData> Instance();
-  QString getOperatorName(const OperatorType& type);
-  std::list<std::pair<OperatorType, QString>> getOperators(const ValueType valueType);
+
+private:
+  static std::shared_ptr<OperatorData> data;
 
   const std::map<OperatorType, StringOperatorData> m_string;
   const std::map<OperatorType, DoubleOperatorData> m_double;

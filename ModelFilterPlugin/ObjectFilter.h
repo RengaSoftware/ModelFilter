@@ -7,7 +7,7 @@
 //
 
 #pragma once
-#include "OperatorData.h"
+#include "FilterData.h"
 
 #include <RengaAPI/MaterialId.h>
 #include <RengaAPI/ModelObject.h>
@@ -53,6 +53,4 @@ private:
   QString getMaterialName(const rengaapi::MaterialId id);
   double countOneLayeredMass(const rengaapi::MaterialId& materialId, const rengabase::VolumeMeasureOptional& volumeMeasure);
   double countMultiLayeredMass(const rengaapi::MaterialId& materialId, const std::vector<rengabase::VolumeMeasureOptional>& volumeMeasureCollection);
-
-  std::shared_ptr<OperatorData> m_operatorData;
 };

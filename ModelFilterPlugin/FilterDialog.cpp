@@ -10,6 +10,7 @@
 #include "FilterDialog.h"
 #include "GroupDialog.h"
 #include "TypeData.h"
+#include "OperatorData.h"
 
 #include "ui_FilterDialog.h"
 
@@ -17,7 +18,6 @@ static const unsigned int c_treeViewColumnsCount = 3;
 
 FilterDialog::FilterDialog(QDialog* parent)
   : QDialog(parent, Qt::WindowTitleHint | Qt::WindowSystemMenuHint | Qt::WindowCloseButtonHint)
-  , m_operatorData(OperatorData::Instance())
 {
   m_pUi.reset(new Ui::FilterDialog());
   m_pUi->setupUi(this);
@@ -67,7 +67,7 @@ FilterDialog::FilterDialog(QDialog * parent, const FilterData& filterData)
     {
       groupItem->appendRow({
         new QStandardItem(propertyData.m_property.m_propertyName),
-        new QStandardItem(m_operatorData->getOperatorName(propertyData.m_operatorType)),
+        new QStandardItem(OperatorData::getOperatorName(propertyData.m_operatorType)),
         new QStandardItem(propertyData.m_value)
       });
     }
@@ -195,7 +195,7 @@ QStandardItem* FilterDialog::buildGroupItem(const GroupData& data) {
   {
     groupItem->appendRow({
       new QStandardItem(property.m_property.m_propertyName),
-      new QStandardItem(m_operatorData->getOperatorName(property.m_operatorType)),
+      new QStandardItem(OperatorData::getOperatorName(property.m_operatorType)),
       new QStandardItem(property.m_value)
     });
   }

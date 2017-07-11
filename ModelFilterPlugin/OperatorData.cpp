@@ -44,31 +44,31 @@ std::shared_ptr<OperatorData> OperatorData::Instance()
 
 QString OperatorData::getOperatorName(const OperatorType& type)
 {
-  auto it = m_double.find(type);
-  if (it != m_double.end())
+  auto it = Instance()->m_double.find(type);
+  if (it != Instance()->m_double.end())
     return it->second.m_name;
-  auto it2 = m_string.find(type);
-  if (it2 != m_string.end())
+  auto it2 = Instance()->m_string.find(type);
+  if (it2 != Instance()->m_string.end())
     return it2->second.m_name;
 
   assert(false);
   return QString("");
 }
 
-std::list<std::pair<OperatorType, QString>> OperatorData::getOperators(const ValueType valueType)
+const std::list<std::pair<OperatorType, QString>>& OperatorData::getOperators(const ValueType valueType)
 {
   std::list<std::pair<OperatorType, QString>> operatorList;
   switch (valueType)
   {
   case ValueType::Double:
   {
-    for (auto& it : m_double)
+    for (auto& it : Instance()->m_double)
       operatorList.push_back(std::make_pair(it.first, it.second.m_name));
     break;
   }
   case ValueType::String:
   {
-    for (auto& it : m_string)
+    for (auto& it : Instance()->m_string)
       operatorList.push_back(std::make_pair(it.first, it.second.m_name));
     break;
   }
@@ -76,4 +76,14 @@ std::list<std::pair<OperatorType, QString>> OperatorData::getOperators(const Val
     break;
   }
   return operatorList;
+}
+
+const StringOperatorData & OperatorData::stringOperator(OperatorType strOperatorType)
+{
+  return OperatorData::Instance()->m_string.at(strOperatorType);
+}
+
+const DoubleOperatorData & OperatorData::doubleOperator(OperatorType dblOperatorType)
+{
+  return OperatorData::Instance()->m_double.at(dblOperatorType);
 }
