@@ -55,7 +55,7 @@ QString OperatorData::getOperatorName(const OperatorType& type)
   return QString("");
 }
 
-const std::list<std::pair<OperatorType, QString>>& OperatorData::getOperators(const ValueType valueType)
+std::list<std::pair<OperatorType, QString>> OperatorData::getOperators(const ValueType valueType)
 {
   std::list<std::pair<OperatorType, QString>> operatorList;
   switch (valueType)

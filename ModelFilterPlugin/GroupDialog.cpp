@@ -321,7 +321,8 @@ void GroupDialog::reloadOperatorBox()
   ValueType valueType = ValueType(data.toInt(&ok));
 
   // load operators
-  for (auto& it : OperatorData::getOperators(valueType))
+  auto operators = OperatorData::getOperators(valueType);
+  for (auto& it : operators)
   {
     QStandardItem* operatorItem = new QStandardItem(it.second);
     operatorItem->setData(QVariant(it.first));
