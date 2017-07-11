@@ -124,7 +124,7 @@ struct FilterData {
 
 private:
   static GroupData parseGroup(QXmlStreamReader& reader);
-  static SearchCriteriaData parseProperty(QXmlStreamReader& reader, const rengaapi::ObjectType& type);
+  static SearchCriteriaData parseSearchCriteria(QXmlStreamReader& reader, const rengaapi::ObjectType& type);
   static bool getTypeNumber(const QString& value, int& res);
   static bool getPropertyName(const PropertyType propertyType, const rengaapi::ObjectType& type, QString& propertyName);
   static QString parseTagText(QXmlStreamReader& reader);

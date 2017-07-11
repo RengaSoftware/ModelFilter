@@ -94,7 +94,7 @@ GroupData FilterData::parseGroup(QXmlStreamReader& reader)
       }
       else
       {
-        SearchCriteriaData propertyData = parseProperty(reader, groupData.m_groupType);
+        SearchCriteriaData propertyData = parseSearchCriteria(reader, groupData.m_groupType);
         if (propertyData.m_property.m_propertyType != PropertyType::Invalid)
           groupData.m_propertyList.push_back(propertyData);
       }
@@ -109,7 +109,7 @@ bool FilterData::isValid()
   return m_filterName.length() > 0 && m_groupList.size() > 0;
 }
 
-SearchCriteriaData FilterData::parseProperty(QXmlStreamReader& reader, const rengaapi::ObjectType& type)
+SearchCriteriaData FilterData::parseSearchCriteria(QXmlStreamReader& reader, const rengaapi::ObjectType& type)
 {
   reader.readNext();
   std::map<QString, int> typeData;

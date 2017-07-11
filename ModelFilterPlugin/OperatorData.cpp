@@ -10,10 +10,10 @@
 #include "DoublePrecise.h"
 #include "OperatorData.h"
 
-std::shared_ptr<OperatorData> OperatorData::data = nullptr;
+std::shared_ptr<OperatorData> OperatorData::m_instance = nullptr;
 
 OperatorData::OperatorData()
-  : m_string({
+  : m_stringOperators({
   std::make_pair(OperatorType::Equal, StringOperatorData("equal", [](const QString one, const QString two) {return one.compare(two) == 0; })),
   std::make_pair(OperatorType::NotEqual, StringOperatorData("notEqual", [](const QString one, const QString two) {return one.compare(two) != 0; })),
   std::make_pair(OperatorType::Contain, StringOperatorData("contain", [](const QString one, const QString two) {return one.contains(two); })),
@@ -23,7 +23,7 @@ OperatorData::OperatorData()
   std::make_pair(OperatorType::Suffix, StringOperatorData("suffix", [](const QString one, const QString two) {return one.endsWith(two); })),
   std::make_pair(OperatorType::NotSuffix, StringOperatorData("notSuffix", [](const QString one, const QString two) {return !one.endsWith(two); })),
   std::make_pair(OperatorType::All, StringOperatorData("all", [](const QString, const QString) {return true; })) })
-  , m_double({
+  , m_doubleOperators({
   std::make_pair(OperatorType::EQ, DoubleOperatorData("eq", DoublePrecise::eq)),
   std::make_pair(OperatorType::NEQ, DoubleOperatorData("neq", DoublePrecise::neq)),
   std::make_pair(OperatorType::GEQ, DoubleOperatorData("geq", DoublePrecise::geq)),
@@ -35,20 +35,20 @@ OperatorData::OperatorData()
 
 std::shared_ptr<OperatorData> OperatorData::Instance()
 {
-  if (data.get() == nullptr)
+  if (m_instance.get() == nullptr)
   {
-    data = std::shared_ptr<OperatorData>(new OperatorData());
+    m_instance = std::shared_ptr<OperatorData>(new OperatorData());
   }
-  return data;
+  return m_instance;
 }
 
 QString OperatorData::getOperatorName(const OperatorType& type)
 {
-  auto it = Instance()->m_double.find(type);
-  if (it != Instance()->m_double.end())
+  auto it = Instance()->m_doubleOperators.find(type);
+  if (it != Instance()->m_doubleOperators.end())
     return it->second.m_name;
-  auto it2 = Instance()->m_string.find(type);
-  if (it2 != Instance()->m_string.end())
+  auto it2 = Instance()->m_stringOperators.find(type);
+  if (it2 != Instance()->m_stringOperators.end())
     return it2->second.m_name;
 
   assert(false);
@@ -62,13 +62,13 @@ const std::list<std::pair<OperatorType, QString>>& OperatorData::getOperators(co
   {
   case ValueType::Double:
   {
-    for (auto& it : Instance()->m_double)
+    for (auto& it : Instance()->m_doubleOperators)
       operatorList.push_back(std::make_pair(it.first, it.second.m_name));
     break;
   }
   case ValueType::String:
   {
-    for (auto& it : Instance()->m_string)
+    for (auto& it : Instance()->m_stringOperators)
       operatorList.push_back(std::make_pair(it.first, it.second.m_name));
     break;
   }
@@ -80,10 +80,10 @@ const std::list<std::pair<OperatorType, QString>>& OperatorData::getOperators(co
 
 const StringOperatorData & OperatorData::stringOperator(OperatorType strOperatorType)
 {
-  return OperatorData::Instance()->m_string.at(strOperatorType);
+  return OperatorData::Instance()->m_stringOperators.at(strOperatorType);
 }
 
 const DoubleOperatorData & OperatorData::doubleOperator(OperatorType dblOperatorType)
 {
-  return OperatorData::Instance()->m_double.at(dblOperatorType);
+  return OperatorData::Instance()->m_doubleOperators.at(dblOperatorType);
 }

@@ -48,8 +48,8 @@ private:
   static std::shared_ptr<OperatorData> Instance();
 
 private:
-  static std::shared_ptr<OperatorData> data;
+  static std::shared_ptr<OperatorData> m_instance;
 
-  const std::map<OperatorType, StringOperatorData> m_string;
-  const std::map<OperatorType, DoubleOperatorData> m_double;
+  const std::map<OperatorType, StringOperatorData> m_stringOperators;
+  const std::map<OperatorType, DoubleOperatorData> m_doubleOperators;
 };
