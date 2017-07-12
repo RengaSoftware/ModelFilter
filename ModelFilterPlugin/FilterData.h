@@ -51,7 +51,9 @@ enum PropertyType {
   TreadLength,
   RoomNumber,
   Elevation,
-  Invalid,
+  RoomName,
+  LevelName,
+  Invalid, // TODO: remove this, serialization should return false on error
 };
 
 enum OperatorType {

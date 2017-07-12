@@ -21,7 +21,8 @@ RoomProperty::RoomProperty()
     Property(PropertyType::Height, ValueType::Double, QApplication::translate("room", "nominalHeight")),
     Property(PropertyType::Volume, ValueType::Double, QApplication::translate("room", "grossVolume")),
     Property(PropertyType::FloorArea, ValueType::Double, QApplication::translate("room", "grossFloorArea")),
-    Property(PropertyType::Perimeter, ValueType::Double, QApplication::translate("room", "grossPerimeter")) };
+    Property(PropertyType::Perimeter, ValueType::Double, QApplication::translate("room", "grossPerimeter")),
+    Property(PropertyType::RoomName, ValueType::String, QApplication::translate("room", "roomName")) };
 }
 
 PropertyList RoomProperty::getObjectProperties()
@@ -51,6 +52,8 @@ bool RoomFilter::isObjectMatchFilter(const SearchCriteriaData& data, rengaapi::M
     return apply(pRoom->name(), data);
   case PropertyType::RoomNumber:
     return apply(pRoom->roomNumber(), data);
+  case PropertyType::RoomName:
+    return apply(pRoom->roomName(), data);
   case PropertyType::UserAttribute:
     return isUserAttributeMatchFilter(pObject, data);
   default:

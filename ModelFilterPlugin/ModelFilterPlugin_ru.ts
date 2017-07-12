@@ -435,6 +435,10 @@
         <source>elevation</source>
         <translation>Высотная отметка, м</translation>
     </message>
+    <message>
+        <source>levelName</source>
+        <translation>Имя уровня</translation>
+    </message>
 </context>
 <context>
     <name>modelObjects</name>
@@ -751,6 +755,10 @@
     <message>
         <source>level</source>
         <translation>Уровень</translation>
+    </message>
+    <message>
+        <source>roomName</source>
+        <translation>Имя помещения</translation>
     </message>
 </context>
 <context>

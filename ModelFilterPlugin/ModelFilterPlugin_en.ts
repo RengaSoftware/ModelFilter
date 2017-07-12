@@ -435,6 +435,10 @@
         <source>elevation</source>
         <translation>Elevation, m</translation>
     </message>
+    <message>
+        <source>levelName</source>
+        <translation>Level name</translation>
+    </message>
 </context>
 <context>
     <name>modelObjects</name>
@@ -751,6 +755,10 @@
     <message>
         <source>level</source>
         <translation>Level</translation>
+    </message>
+    <message>
+        <source>roomName</source>
+        <translation>Room name</translation>
     </message>
 </context>
 <context>

@@ -15,7 +15,8 @@ LevelProperty::LevelProperty()
   : ObjectProperty()
 {
   properties = { Property(PropertyType::Name, ValueType::String, QApplication::translate("level", "name")),
-    Property(PropertyType::Elevation, ValueType::Double, QApplication::translate("level", "elevation")) };
+    Property(PropertyType::Elevation, ValueType::Double, QApplication::translate("level", "elevation")),
+    Property(PropertyType::LevelName, ValueType::String, QApplication::translate("level", "levelName")) };
 }
 
 PropertyList LevelProperty::getObjectProperties()
@@ -33,6 +34,8 @@ bool LevelFilter::isObjectMatchFilter(const SearchCriteriaData& data, rengaapi::
     return apply(pLevel->elevation(), data, MeasureUnit::Meter);
   case PropertyType::Name:
     return apply(pLevel->name(), data);
+  case PropertyType::LevelName:
+    return apply(pLevel->levelName(), data);
   case PropertyType::UserAttribute:
     return isUserAttributeMatchFilter(pObject, data);
   default:
