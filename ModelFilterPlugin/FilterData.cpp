@@ -12,6 +12,8 @@
 
 #include <map>
 
+const QString currentVersion = "1";
+
 bool GroupData::isValid()
 {
   return m_propertyList.size() > 0;
@@ -25,6 +27,7 @@ void FilterData::exportData(QFile* filterFile)
   writer.writeStartDocument();
 
   writer.writeStartElement("filter");
+  writer.writeTextElement("version", currentVersion);
   writer.writeTextElement("name", m_filterName);
   for (auto& group : m_groupList)
   {
@@ -32,8 +35,12 @@ void FilterData::exportData(QFile* filterFile)
     writer.writeTextElement("type", rengaStringToQString(group.m_groupType.id().toString()));
     for (auto& property : group.m_propertyList)
     {
-      writer.writeStartElement("property");
+      writer.writeStartElement("searchCriteria");
       writer.writeTextElement("propertyType", QString::number(property.m_property.m_propertyType));
+      if (property.m_property.m_propertyType == PropertyType::UserAttribute)
+      {
+        writer.writeTextElement("attributeName", property.m_property.m_propertyName);
+      }
       writer.writeTextElement("operatorType", QString::number(property.m_operatorType));
       writer.writeTextElement("valueType", QString::number(property.m_property.m_valueType));
       writer.writeTextElement("value", property.m_value);
@@ -115,8 +122,9 @@ SearchCriteriaData FilterData::parseSearchCriteria(QXmlStreamReader& reader, con
   std::map<QString, int> typeData;
   QStringList typeNameList = { "propertyType", "operatorType", "valueType" };
   QString propertyValue;
+  QString propertyName;
 
-  while (!(reader.tokenType() == QXmlStreamReader::EndElement && reader.name() == "property"))
+  while (!(reader.tokenType() == QXmlStreamReader::EndElement && reader.name() == "searchCriteria"))
   {
     if (reader.tokenType() == QXmlStreamReader::StartElement)
     {
@@ -134,6 +142,10 @@ SearchCriteriaData FilterData::parseSearchCriteria(QXmlStreamReader& reader, con
       {
         propertyValue = parseTagText(reader);
       }
+      else if (tagName.compare("attributeName") == 0)
+      {
+        propertyName = parseTagText(reader);
+      }
     }
     reader.readNext();
   }
@@ -143,8 +155,15 @@ SearchCriteriaData FilterData::parseSearchCriteria(QXmlStreamReader& reader, con
   ValueType valueType = ValueType(typeData["valueType"]);
 
   // get property name
-  QString propertyName;
-  bool hasName = getPropertyName(propertyType, type, propertyName);
+  bool hasName;
+  if (propertyType == PropertyType::UserAttribute)
+  {
+    hasName = !propertyName.isEmpty();
+  }
+  else
+  {
+    hasName = getPropertyName(propertyType, type, propertyName);
+  }
 
   // check if property valid
   bool emptyValue = operatorType != OperatorType::All && propertyValue.isEmpty();
