@@ -157,10 +157,13 @@ void MainDialog::onApplyFilter()
 
 void MainDialog::onExportFilter()
 {
+  const int filterDataRow = m_pUi->listView->currentIndex().row();
+  FilterData* pFilter = &m_filterDataArray[filterDataRow];
+
   QFileDialog fileDialog(
     this,
     QApplication::translate("MainDialog", "Export filter"),
-    "",
+    pFilter->m_filterName,
     QApplication::translate("MainDialog", "Filter"));
   fileDialog.setAcceptMode(QFileDialog::AcceptSave);
   fileDialog.setFileMode(QFileDialog::ExistingFile);
@@ -180,8 +183,7 @@ void MainDialog::onExportFilter()
       exportMessageBox.exec();
       return;
     }
-    const int filterDataRow = m_pUi->listView->currentIndex().row();
-    m_filterDataArray[filterDataRow].exportData(filterFile.get());
+    pFilter->exportData(filterFile.get());
   }
 }
 
