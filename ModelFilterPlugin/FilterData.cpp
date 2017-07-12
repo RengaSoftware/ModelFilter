@@ -58,11 +58,10 @@ FilterData FilterData::importData(QFile* filterFile)
   FilterData data;
   QXmlStreamReader reader;
   reader.setDevice(filterFile);
+  
   while (!reader.atEnd())
   {
     QXmlStreamReader::TokenType token = reader.readNext();
-    if (token == QXmlStreamReader::StartDocument)
-      continue;
 
     if (token == QXmlStreamReader::StartElement)
     {
@@ -89,7 +88,7 @@ GroupData FilterData::parseGroup(QXmlStreamReader& reader)
 {
   GroupData groupData(rengaapi::ModelObjectTypes::UndefinedType);
   reader.readNext();
-  while (!(reader.tokenType() == QXmlStreamReader::EndElement && reader.name() == "group"))
+  while (!reader.atEnd() && !(reader.tokenType() == QXmlStreamReader::EndElement && reader.name() == "group"))
   {
     if (reader.tokenType() == QXmlStreamReader::StartElement)
     {
@@ -124,7 +123,7 @@ SearchCriteriaData FilterData::parseSearchCriteria(QXmlStreamReader& reader, con
   QString propertyValue;
   QString propertyName;
 
-  while (!(reader.tokenType() == QXmlStreamReader::EndElement && reader.name() == "searchCriteria"))
+  while (!reader.atEnd() && !(reader.tokenType() == QXmlStreamReader::EndElement && reader.name() == "searchCriteria"))
   {
     if (reader.tokenType() == QXmlStreamReader::StartElement)
     {
