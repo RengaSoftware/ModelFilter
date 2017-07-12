@@ -48,7 +48,7 @@ bool RoomFilter::isObjectMatchFilter(const SearchCriteriaData& data, rengaapi::M
   case PropertyType::Perimeter:
     return apply(pRoom->quantities().grossPerimeter(), data);
   case PropertyType::Name:
-    return apply(pRoom->roomName(), data);
+    return apply(pRoom->name(), data);
   case PropertyType::RoomNumber:
     return apply(pRoom->roomNumber(), data);
   case PropertyType::UserAttribute:

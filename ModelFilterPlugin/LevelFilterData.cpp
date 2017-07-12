@@ -32,7 +32,7 @@ bool LevelFilter::isObjectMatchFilter(const SearchCriteriaData& data, rengaapi::
   case PropertyType::Elevation:
     return apply(pLevel->elevation(), data, MeasureUnit::Meter);
   case PropertyType::Name:
-    return apply(pLevel->levelName(), data);
+    return apply(pLevel->name(), data);
   case PropertyType::UserAttribute:
     return isUserAttributeMatchFilter(pObject, data);
   default:
