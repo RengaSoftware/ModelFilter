@@ -596,6 +596,10 @@
         <source>all</source>
         <translation type="vanished">All values</translation>
     </message>
+    <message>
+        <source>none</source>
+        <translation type="vanished">No value</translation>
+    </message>
 </context>
 <context>
     <name>railing</name>

@@ -29,7 +29,7 @@ ObjectFilter::~ObjectFilter()
 bool ObjectFilter::apply(const rengabase::LengthMeasureOptional& measure, const SearchCriteriaData& data, MeasureUnit unit)
 {
   if (!measure.hasValue())
-    return false;
+    return data.m_operatorType == None;
 
   double value;
   switch (unit)
@@ -55,7 +55,7 @@ bool ObjectFilter::apply(const rengabase::LengthMeasureOptional& measure, const 
 bool ObjectFilter::apply(const rengabase::AreaMeasureOptional& measure, const SearchCriteriaData& data, MeasureUnit unit)
 {
   if (!measure.hasValue())
-    return false;
+    return data.m_operatorType == None;
 
   double value;
   switch (unit)
@@ -78,7 +78,7 @@ bool ObjectFilter::apply(const rengabase::AreaMeasureOptional& measure, const Se
 bool ObjectFilter::apply(const rengabase::VolumeMeasureOptional& measure, const SearchCriteriaData& data, MeasureUnit unit)
 {
   if (!measure.hasValue())
-    return false;
+    return data.m_operatorType == None;
 
   double value;
   switch (unit)
@@ -118,7 +118,7 @@ bool ObjectFilter::apply(const rengaapi::MaterialId& materialId, const rengabase
   const double mass = countOneLayeredMass(materialId, volumeMeasure);
 
   if (mass < 0)
-    return false;
+    return data.m_operatorType == None;
 
   return apply(mass, data);
 }
@@ -128,7 +128,7 @@ bool ObjectFilter::apply(const rengaapi::MaterialId& materialId, const std::vect
   const double mass = countMultiLayeredMass(materialId, volumeMeasureCollection);
 
   if (mass < 0)
-    return false;
+    return data.m_operatorType == None;
 
   return apply(mass, data);
 }
@@ -179,8 +179,8 @@ bool ObjectFilter::apply(const rengaapi::MaterialId& materialId, const SearchCri
 
 bool ObjectFilter::apply(const QString & value, const SearchCriteriaData& data)
 {
-  if (data.m_value.length() == 0)
-    return true;
+  if (value.length() == 0)
+    return data.m_operatorType == None;
 
   auto& strOperator = OperatorData::stringOperator(data.m_operatorType);
   return strOperator.m_function(value, data.m_value);
@@ -209,7 +209,9 @@ bool ObjectFilter::isUserAttributeMatchFilter(const rengaapi::ModelObject* pObje
           // get value and apply filter
           rengaapi::UserAttributeValue userAttributeValue;
           rengaapi::Status status = pObject->getUserAttributeValue(attributeId, userAttributeValue);
-          assert(status.code() == rengaapi::Status::Code::Success);
+          if (status.code() != rengaapi::Status::Code::Success)
+            return status.code() == rengaapi::Status::Code::UserAttribute_ValueNotSet && data.m_operatorType == OperatorType::None;
+
           if (attributeType == rengaapi::UserAttributeType::Double)
             return apply(userAttributeValue.asDouble(), data);
           else if (attributeType == rengaapi::UserAttributeType::String)

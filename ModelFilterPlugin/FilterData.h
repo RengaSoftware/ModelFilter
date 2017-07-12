@@ -70,6 +70,7 @@ enum OperatorType {
   GR, // greater
   LS, //less
   All,
+  None
 };
 
 struct Property {

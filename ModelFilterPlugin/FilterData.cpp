@@ -165,7 +165,8 @@ SearchCriteriaData FilterData::parseSearchCriteria(QXmlStreamReader& reader, con
   }
 
   // check if property valid
-  bool emptyValue = operatorType != OperatorType::All && propertyValue.isEmpty();
+  // TODO: remove this magic conditions
+  bool emptyValue = operatorType != OperatorType::All && operatorType != OperatorType::None && propertyValue.isEmpty();
   if (!typeNameList.empty() || !hasName || emptyValue)
   {
     propertyType = PropertyType::Invalid;

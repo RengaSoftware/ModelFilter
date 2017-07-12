@@ -344,7 +344,7 @@ void GroupDialog::reloadValueLine(int changedIndex)
   OperatorType type = OperatorType(pItem->data().toInt(&ok));
   assert(ok);
 
-  if (type == OperatorType::All)
+  if (type == OperatorType::All || type == OperatorType::None)
   {
     m_pUi->valueLine->setEnabled(false);
     m_pUi->addButton->setEnabled(true);

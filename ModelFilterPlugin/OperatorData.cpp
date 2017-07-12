@@ -22,7 +22,8 @@ OperatorData::OperatorData()
   std::make_pair(OperatorType::NotPrefix, StringOperatorData("notPrefix", [](const QString one, const QString two) {return !one.startsWith(two); })),
   std::make_pair(OperatorType::Suffix, StringOperatorData("suffix", [](const QString one, const QString two) {return one.endsWith(two); })),
   std::make_pair(OperatorType::NotSuffix, StringOperatorData("notSuffix", [](const QString one, const QString two) {return !one.endsWith(two); })),
-  std::make_pair(OperatorType::All, StringOperatorData("all", [](const QString, const QString) {return true; })) })
+  std::make_pair(OperatorType::All, StringOperatorData("all", [](const QString, const QString) {return true; })),
+  std::make_pair(OperatorType::None, StringOperatorData("none", [](const QString, const QString) {return false; })) })
   , m_doubleOperators({
   std::make_pair(OperatorType::EQ, DoubleOperatorData("eq", DoublePrecise::eq)),
   std::make_pair(OperatorType::NEQ, DoubleOperatorData("neq", DoublePrecise::neq)),
@@ -30,7 +31,8 @@ OperatorData::OperatorData()
   std::make_pair(OperatorType::LEQ, DoubleOperatorData("leq", DoublePrecise::leq)),
   std::make_pair(OperatorType::GR, DoubleOperatorData("greater", DoublePrecise::greater)),
   std::make_pair(OperatorType::LS, DoubleOperatorData("less", DoublePrecise::less)),
-  std::make_pair(OperatorType::All, DoubleOperatorData("all", [](const double, const double) {return true; })) })
+  std::make_pair(OperatorType::All, DoubleOperatorData("all", [](const double, const double) {return true; })),
+  std::make_pair(OperatorType::None, DoubleOperatorData("none", [](const double, const double) {return false; })) })
 {}
 
 std::shared_ptr<OperatorData> OperatorData::Instance()

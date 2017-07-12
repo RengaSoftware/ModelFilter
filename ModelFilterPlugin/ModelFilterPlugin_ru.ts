@@ -596,6 +596,10 @@
         <source>all</source>
         <translation type="vanished">Все значения</translation>
     </message>
+    <message>
+        <source>none</source>
+        <translation type="vanished">Нет значения</translation>
+    </message>
 </context>
 <context>
     <name>railing</name>
