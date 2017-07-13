@@ -54,7 +54,7 @@ Other links
 -----
 
 - [Renga system](http://rengacad.com/)
-- [ModelExplorer issue tracker](https://github.com/RengaSoftware/ModelFilter/issues)
+- [ModelFilter issue tracker](https://github.com/RengaSoftware/ModelFilter/issues)
 
 
 Feel free to use this plugin for work, as a basis for your own development or as an example.
