@@ -34,7 +34,7 @@ filter, after applying a filter, you will get high and thick walls made of concr
 To add a new filter сlick the "Add" button, the "Filter adding" window will open. Here you can manage groups by using "Add", "Edit", "Delete" buttons.
 In "Group adding" window you can set an object type and add a search criteria to the group.
 
-To add the search скшеукшф do following:
+To add the search criteria do following:
 *   Select the property, the operator and the value for the criteria
 *   Push the "Add" button
 
