@@ -12,7 +12,7 @@ The plugin functionality:
 *   filtering objects by user properties.
 *   exporting and importing filters from/into a file. 
 
-For example, you can filter all structural elements made of concrete or steel on some level or several levels or filter all rooms by category. You also can share filters with other users.
+For example, using ModelFilter, you can filter all structural elements made of concrete or steel on some level or several levels or filter all rooms by category. You also can share filters with other users.
 
 Using the filter you can hide or isolate objects. Conditions in filters can be quite complex, however, it is easy to create and understand them.
 
@@ -31,10 +31,12 @@ filter, after applying a filter, you will get high and thick walls made of concr
 
 ### How to create a filter
 
-Creation of a filter is quite simple. In main dialog you can add a new filter by clicking the "Add" button - the "Filter adding" will open.
-Here you can manage groups using buttons "Add", "Edit", "Delete". In "Group adding" dialog you can set an object type and 
-add a search criteria to the group. To add search criteria just select the property, the operator and the value for the criteria and push the "Add" button.
+To add a new filter сlick the "Add" button, the "Filter adding" window will open. Here you can manage groups by using "Add", "Edit", "Delete" buttons.
+In "Group adding" window you can set an object type and add a search criteria to the group.
 
+To add the search скшеукшф do following:
+*   Select the property, the operator and the value for the criteria
+*   Push the "Add" button
 
 How to make plugin working
 -----
