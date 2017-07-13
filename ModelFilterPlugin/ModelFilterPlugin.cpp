@@ -39,11 +39,11 @@ ModelFilterPlugin::ModelFilterPlugin()
   //   put qwindowsd.dll into the "platform" folder in the plugin folder
   //   and set library paths to the application, as shown below
 
-  //QStringList paths = QCoreApplication::libraryPaths();
-  //paths.append("your plugin folder path");
-  //QCoreApplication::setLibraryPaths(paths);
+  QStringList paths = QCoreApplication::libraryPaths();
+  paths.append("g:\\Renga_builds\\phoenix\\x64\\bin\\Plugins\\ModelFilterPlugin\\");
+  QCoreApplication::setLibraryPaths(paths);
 
-  //m_pApp.reset(new QApplication(m_argc, m_argv));
+  m_pApp.reset(new QApplication(m_argc, m_argv));
 #endif
 }
 
