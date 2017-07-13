@@ -6,24 +6,28 @@ ModelFilter - The Renga plugin for filtering Renga objects by different conditio
 About
 -----
 
-This plugin allows you to filter Renga model by different conditions. In this version you can hide or isolate filtered objects. 
-For example you can filter all structural elements made of concrete or steel on some level or several levels. 
-You also can filter objects by user properties, for example you can filter all rooms by category. 
-Furthermore you can export and import filters from/to a file, share them with other users. 
-Conditions in filters can be quite complex, however it is easy to create and understand them.
+This plugin allows you to filter Renga model by different conditions. 
+The plugin functionality:
+*   filtering objects by system object parameters (height, volume, surface area, etc.)
+*   filtering objects by user properties.
+*   exporting and importing filters from/into a file. 
+
+For example, you can filter all structural elements made of concrete or steel on some level or several levels or filter all rooms by category. You also can share filters with other users.
+
+Using the filter you can hide or isolate objects. Conditions in filters can be quite complex, however, it is easy to create and understand them.
 
 ### What the filter consists of
 
-Each filter consists of one or more groups. Each group works (can filter) a single object type.
+Each filter consists of one or more groups. Each group works (can filter) with a single object type.
 A group contains search criteria for this object type, which are conditions for system object parameters 
-(height, volume, surface area) or user defined properties. Search criteria work on the condition **AND**. 
+or user defined properties. Search criteria work on the **AND** condition. 
 
-**Here is an example of a group:** **Walls** _higher than 3 meters_ **AND** _with thickness equal to 200 cm_  **AND** _made of "Concrete"_.
+**Group examples:** 
+*   **Walls** _higher than 3 meters_ **AND** _with thickness equal to 200 cm_  **AND** _made of "Concrete"_.
+*   **Beams** _longer than 2 meters_ **AND** _located on the "Ground floor"_.
 
-**Here is an example of another group:** **Beams** _longer than 2 meters_ **AND** _located on the "Ground floor"_.
-
-Groups in a filter work on the condition **OR**, so, combining groups described above in a single 
-filter, after applying a filter you will get high and thick walls made of concrete and long beams on the "Groud floor".
+Groups in a filter work on the **OR** condition, so combining groups described above in a single 
+filter, after applying a filter, you will get high and thick walls made of concrete and long beams on the "Groud floor".
 
 ### How to create a filter
 
@@ -38,7 +42,7 @@ How to make plugin working
 1. Open Renga installation folder.
 2. Open Plugins directory (create in case of missing).
 3. Create directory ModelFilterPlugin and open it.
-4. Copy plugin files to the just created directory. If you build plugin by your own - all required files located in project output directory.
+4. Copy plugin files to the just created directory. If you build plugin by your own all required files will be located in the project output directory.
 5. Restart Renga.
 
 How to build the plugin
