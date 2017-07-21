@@ -52,7 +52,7 @@ private:
 
 private:
   std::unique_ptr<Ui::MainDialog> m_pUi;
-  std::unique_ptr<QStandardItemModel> m_pListModel;
+  std::unique_ptr<QStandardItemModel> m_pFiltersItemModel;
   std::vector<FilterData>& m_filterDataArray;
   const QDir m_pluginDataDir;
 };

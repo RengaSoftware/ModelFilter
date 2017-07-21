@@ -34,8 +34,8 @@ MainDialog::MainDialog(std::vector<FilterData>& filterDataArray, const QDir& dir
   m_pUi->setupUi(this);
 
   // load list view
-  m_pListModel.reset(new QStandardItemModel);
-  m_pUi->listView->setModel(m_pListModel.get());
+  m_pFiltersItemModel.reset(new QStandardItemModel);
+  m_pUi->listView->setModel(m_pFiltersItemModel.get());
   connect(m_pUi->listView, SIGNAL(doubleClicked(const QModelIndex&)), this, SLOT(onEditFilter()));
   connect(m_pUi->listView->selectionModel(), SIGNAL(selectionChanged(const QItemSelection&, const QItemSelection&)), this, SLOT(updateButtons(const QItemSelection&)));
 
@@ -69,15 +69,15 @@ void MainDialog::onAddFilter()
 
   // add filter to the list
   QStandardItem* filterItem = new QStandardItem(filterData.m_filterName);
-  m_pListModel->appendRow(filterItem);
-  m_pUi->listView->setCurrentIndex(m_pListModel->indexFromItem(filterItem));
+  m_pFiltersItemModel->appendRow(filterItem);
+  m_pUi->listView->setCurrentIndex(m_pFiltersItemModel->indexFromItem(filterItem));
 }
 
 void MainDialog::onEditFilter()
 {
   // get filter item
   QModelIndex selectedItemIndex = m_pUi->listView->currentIndex();
-  QStandardItem* pFilterItem = m_pListModel->itemFromIndex(selectedItemIndex);
+  QStandardItem* pFilterItem = m_pFiltersItemModel->itemFromIndex(selectedItemIndex);
 
   // show FilterDialog
   std::unique_ptr<FilterDialog> pFilterDialog(new FilterDialog(this, m_filterDataArray[selectedItemIndex.row()]));
@@ -86,7 +86,7 @@ void MainDialog::onEditFilter()
     return;
 
   // delete old FilterData
-  const int filterItemRow = m_pListModel->indexFromItem(pFilterItem).row();
+  const int filterItemRow = m_pFiltersItemModel->indexFromItem(pFilterItem).row();
   deleteFilterFile(m_filterDataArray[filterItemRow]);
 
   // set unique filter name
@@ -104,7 +104,7 @@ void MainDialog::onEditFilter()
 
 void MainDialog::onDeleteFilter()
 {
-  QString filterName = " " + m_pListModel->itemFromIndex(m_pUi->listView->currentIndex())->text() + "?";
+  QString filterName = " " + m_pFiltersItemModel->itemFromIndex(m_pUi->listView->currentIndex())->text() + "?";
   QMessageBox deleteMessageBox(
     QMessageBox::Question,
     QApplication::translate("deleteMessageBox", "title"),
@@ -121,7 +121,7 @@ void MainDialog::onDeleteFilter()
 
   // remove filter from tree
   const int filterRow = filterIndex.row();
-  m_pListModel->removeRow(filterRow);
+  m_pFiltersItemModel->removeRow(filterRow);
 
   // remove FilterData
   auto it = m_filterDataArray.begin() + filterRow;
@@ -138,7 +138,7 @@ void MainDialog::onCopyFilter()
   // set unique filter name
   setUniqueName(filterCopy);
   QStandardItem* copyItem = new QStandardItem(filterCopy.m_filterName);
-  m_pListModel->appendRow(copyItem);
+  m_pFiltersItemModel->appendRow(copyItem);
 
   // store FilterData
   m_filterDataArray.push_back(filterCopy);
@@ -228,8 +228,8 @@ void MainDialog::onImportFilter()
     saveFilterFile(filterData);
 
     QStandardItem* item = new QStandardItem(filterData.m_filterName);
-    m_pListModel->appendRow(item);
-    m_pUi->listView->setCurrentIndex(m_pListModel->indexFromItem(item));
+    m_pFiltersItemModel->appendRow(item);
+    m_pUi->listView->setCurrentIndex(m_pFiltersItemModel->indexFromItem(item));
   }
 }
 
@@ -238,12 +238,12 @@ void MainDialog::initFiltersItemModel()
   for (auto& filterData : m_filterDataArray) 
   {
     QStandardItem* item = new QStandardItem(filterData.m_filterName);
-    m_pListModel->appendRow(item);
+    m_pFiltersItemModel->appendRow(item);
   }
 
-  if (m_pListModel->rowCount() > 0)
+  if (m_pFiltersItemModel->rowCount() > 0)
   {
-    m_pUi->listView->setCurrentIndex(m_pListModel->index(0, 0));
+    m_pUi->listView->setCurrentIndex(m_pFiltersItemModel->index(0, 0));
     updateButtons(m_pUi->listView->selectionModel()->selection());
   }
 }
@@ -335,8 +335,8 @@ void MainDialog::updateButtons(const QItemSelection& selectedItems)
 void MainDialog::setUniqueName(FilterData& data)
 {
   std::map<int, QString> filterNames;
-  for (int i = 0; i < m_pListModel->rowCount(); i++)
-    filterNames.insert(std::make_pair(i, m_pListModel->item(i)->text()));
+  for (int i = 0; i < m_pFiltersItemModel->rowCount(); i++)
+    filterNames.insert(std::make_pair(i, m_pFiltersItemModel->item(i)->text()));
   std::wstring uniqueFilterName = CUniqueNameGenerator::generate(filterNames, data.m_filterName.toStdWString(), true);
   data.m_filterName = QString::fromStdWString(uniqueFilterName);
 }
