@@ -7,7 +7,6 @@
 //
 
 #pragma once
-#include <QtCore/QDir>
 #include <QtCore/QItemSelectionModel.h>
 #include <QtGui/QStandardItemModel>
 #include <QtWidgets/QDialog>
@@ -30,7 +29,7 @@ class MainDialog : public QDialog
   Q_OBJECT
 
 public:
-  MainDialog(FiltersManager& filtersManager, const QDir& dir);
+  MainDialog(FiltersManager& filtersManager);
   ~MainDialog();
 
 private slots:
@@ -48,12 +47,9 @@ private:
   objectIdCollection collectObjects(const FilterData& data);
   void setObjectsVisibility(const objectIdCollection& idCollection);
   void setUniqueName(FilterData& data);
-  void saveFilterFile(const FilterData& data);
-  void deleteFilterFile(const FilterData& data);
 
 private:
   std::unique_ptr<Ui::MainDialog> m_pUi;
   std::unique_ptr<QStandardItemModel> m_pFiltersItemModel;
   FiltersManager& m_filtersManager;
-  const QDir m_pluginDataDir;
 };

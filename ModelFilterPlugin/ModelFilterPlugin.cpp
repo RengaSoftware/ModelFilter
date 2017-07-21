@@ -136,7 +136,7 @@ void ModelFilterPlugin::addPluginButtons(const std::wstring& pluginPath)
 
 void ModelFilterPlugin::onFilterButtonClicked()
 {
-  MainDialog mainDialog(*m_pFiltersManager, m_pluginDataDir);
+  MainDialog mainDialog(*m_pFiltersManager);
   mainDialog.exec();
 }
 

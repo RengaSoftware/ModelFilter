@@ -14,6 +14,11 @@ public:
   void deleteFilter(size_t index);
 
 private:
+  void loadFilters();
+  void deleteFilterFile(const FilterData& data);
+  void saveFilterFile(const FilterData& data);
+
+private:
   std::vector<FilterData> m_filterDataArray;
   QDir m_pluginDataDir;
 };
