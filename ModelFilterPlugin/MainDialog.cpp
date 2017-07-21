@@ -25,8 +25,9 @@
 #include <RengaAPI/ObjectVisibility.h>
 #include <RengaAPI/Project.h>
 
-MainDialog::MainDialog(const QDir& dir)
+MainDialog::MainDialog(std::vector<FilterData>& filterDataArray, const QDir& dir)
   : QDialog(nullptr, Qt::WindowTitleHint | Qt::WindowSystemMenuHint | Qt::WindowCloseButtonHint)
+  , m_filterDataArray(filterDataArray)
   , m_pluginDataDir(dir)
 {
   m_pUi.reset(new Ui::MainDialog());
@@ -47,7 +48,7 @@ MainDialog::MainDialog(const QDir& dir)
   connect(m_pUi->importButton, SIGNAL(clicked()), this, SLOT(onImportFilter()));
   connect(m_pUi->okButton, SIGNAL(clicked()), this, SLOT(onApplyFilter()));
 
-  loadLocalFilters();
+  initFiltersItemModel();
 }
 
 MainDialog::~MainDialog()
@@ -232,22 +233,10 @@ void MainDialog::onImportFilter()
   }
 }
 
-void MainDialog::loadLocalFilters() {
-
-  QFileInfoList entryList = m_pluginDataDir.entryInfoList({ "*.rnf" }, QDir::Files | QDir::Readable);
-  // open each .rnf file
-  for (auto& fileInfo : entryList) {
-    std::unique_ptr<QFile> filterFile(new QFile(fileInfo.canonicalFilePath()));
-    if (!filterFile->open(QIODevice::ReadOnly | QIODevice::Text))
-      continue;
-
-    FilterData filterData = FilterData::importData(filterFile.get());
-    if (!filterData.isValid())
-      continue;
-
-    setUniqueName(filterData);
-    m_filterDataArray.push_back(filterData);
-
+void MainDialog::initFiltersItemModel()
+{
+  for (auto& filterData : m_filterDataArray) 
+  {
     QStandardItem* item = new QStandardItem(filterData.m_filterName);
     m_pListModel->appendRow(item);
   }

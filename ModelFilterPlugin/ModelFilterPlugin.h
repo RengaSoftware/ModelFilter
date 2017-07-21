@@ -9,12 +9,14 @@
 #pragma once
 #include <QtCore/QObject>
 #include <QtCore/QTranslator>
+#include <QtCore/QDir>
 
 #ifdef _DEBUG
 #include <QtWidgets/QApplication>
 #endif
 
 #include <IPlugin.h>
+#include <FilterData.h>
 
 class MainDialog;
 class RengaEventsHandler;
@@ -41,10 +43,11 @@ private:
   void addPluginButtons(const std::wstring& pluginPath);
   void subscribeOnRengaEvents();
   bool loadTranslator(const std::wstring& pluginPath);
+  bool getPluginDataDir();
   QString translationFileName();
+  void loadFilters();
 
-  QTranslator m_translator;
-
+private:
 #ifdef _DEBUG
   // NOTE: To debug plugin you should create debug QApplication in plugin.
   std::unique_ptr<QApplication> m_pApp;
@@ -52,7 +55,10 @@ private:
   char** m_argv = 0;
 #endif
 
+  QTranslator m_translator;
   std::unique_ptr<PluginToolButtons> m_pPluginToolButtons;
   std::unique_ptr<RengaEventsHandler> m_pRengaEventsHandler;
   std::unique_ptr<MainDialog> m_pMainDialog;
+  std::vector<FilterData> m_filterDataArray;
+  QDir m_pluginDataDir;
 };

@@ -52,26 +52,15 @@ ModelFilterPlugin::~ModelFilterPlugin()
 
 bool ModelFilterPlugin::initialize(const wchar_t* pluginPath)
 {
-  QString dataLocationPath = QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation);
-  QDir userDataDir(dataLocationPath);
-
-  // check if path correct
-  if (userDataDir == QDir::current())
-    return false;
-
-  // create plugin folder if necessary
-  if (userDataDir.entryList({ pluginSubPath }, QDir::Dirs).empty())
-  {
-    bool pathCreated = userDataDir.mkdir(pluginSubPath);
-    if (!pathCreated)
-      return false;
-  }
-  QDir pluginDataDir = QDir(QString("%1/%2").arg(dataLocationPath).arg(pluginSubPath));
-
   if (!loadTranslator(pluginPath))
     return false;
 
-  m_pMainDialog.reset(new MainDialog(pluginDataDir));
+  if (!getPluginDataDir())
+    return false;
+
+  loadFilters();
+
+  m_pMainDialog.reset(new MainDialog(m_filterDataArray, m_pluginDataDir));
 
   subscribeOnRengaEvents();
   addPluginButtons(pluginPath);
@@ -114,6 +103,20 @@ bool ModelFilterPlugin::loadTranslator(const std::wstring& pluginPath)
   }
 }
 
+bool ModelFilterPlugin::getPluginDataDir()
+{
+  QString dataLocationPath = QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation);
+  QDir userDataDir(dataLocationPath);
+
+  // create plugin folder if necessary
+  if (userDataDir.entryList({ pluginSubPath }, QDir::Dirs).empty())
+    if (!userDataDir.mkdir(pluginSubPath))
+      return false;
+
+  m_pluginDataDir = QDir(QString("%1/%2").arg(dataLocationPath).arg(pluginSubPath));
+  return true;
+}
+
 void ModelFilterPlugin::subscribeOnRengaEvents()
 {
   m_pRengaEventsHandler.reset(new RengaEventsHandler());
@@ -133,3 +136,21 @@ void ModelFilterPlugin::onFilterButtonClicked()
 
 void ModelFilterPlugin::onProjectAboutToClose()
 {}
+
+void ModelFilterPlugin::loadFilters() 
+{
+  QFileInfoList entryList = m_pluginDataDir.entryInfoList({ "*.rnf" }, QDir::Files | QDir::Readable);
+  // open each .rnf file
+  for (auto& fileInfo : entryList) 
+  {
+    std::unique_ptr<QFile> filterFile(new QFile(fileInfo.canonicalFilePath()));
+    if (!filterFile->open(QIODevice::ReadOnly | QIODevice::Text))
+      continue;
+
+    FilterData filterData = FilterData::importData(filterFile.get());
+    if (!filterData.isValid())
+      continue;
+
+    m_filterDataArray.push_back(filterData);
+  }
+}

@@ -29,7 +29,7 @@ class MainDialog : public QDialog
   Q_OBJECT
 
 public:
-  MainDialog(const QDir& dir);
+  MainDialog(std::vector<FilterData>& filterDataArray, const QDir& dir);
   ~MainDialog();
 
 private slots:
@@ -43,7 +43,7 @@ private slots:
   void updateButtons(const QItemSelection& selected);
 
 private:
-  void loadLocalFilters();
+  void initFiltersItemModel();
   objectIdCollection collectObjects(const FilterData& data);
   void setObjectsVisibility(const objectIdCollection& idCollection);
   void setUniqueName(FilterData& data);
@@ -53,6 +53,6 @@ private:
 private:
   std::unique_ptr<Ui::MainDialog> m_pUi;
   std::unique_ptr<QStandardItemModel> m_pListModel;
-  std::vector<FilterData> m_filterDataArray;
+  std::vector<FilterData>& m_filterDataArray;
   const QDir m_pluginDataDir;
 };
