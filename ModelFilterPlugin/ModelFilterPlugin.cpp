@@ -31,6 +31,52 @@ static const QString c_englishLocale = "en_EN";
 static const rengabase::String c_loadLocalizationFileError = L"Cannot open localization file.";
 static const rengabase::String c_error = L"Error";
 
+namespace
+{
+  QString translationFileName()
+  {
+    // get application locale
+    QString appLocale = rengaStringToQString(rengaapi::Localization::currentLocale_());
+
+    // get translation file name
+    if (appLocale == c_russianLocale)
+      return russianLocaleFileName;
+    else if (appLocale == c_englishLocale)
+      return englishLocaleFileName;
+    else
+      return defaultLocaleFileName;
+  }
+
+  bool loadAndInstallTranslator(const std::wstring& pluginPath, QTranslator& translator)
+  {
+    // load QTranslator
+    if (!translator.load(translationFileName(), QString::fromStdWString(pluginPath)))
+    {
+      rengaapi::Message::showMessageBox(rengaapi::Message::Error, c_error, c_loadLocalizationFileError);
+      return false;
+    }
+    else
+    {
+      QApplication::installTranslator(&translator);
+      return true;
+    }
+  }
+
+  bool getPluginDataDir(QDir& pluginDataDir)
+  {
+    QString dataLocationPath = QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation);
+    QDir userDataDir(dataLocationPath);
+
+    // create plugin folder if necessary
+    if (userDataDir.entryList({ pluginSubPath }, QDir::Dirs).empty())
+      if (!userDataDir.mkdir(pluginSubPath))
+        return false;
+
+    pluginDataDir = QDir(QString("%1/%2").arg(dataLocationPath).arg(pluginSubPath));
+    return true;
+  }
+}
+
 ModelFilterPlugin::ModelFilterPlugin()
 {
 #ifdef _DEBUG
@@ -52,69 +98,21 @@ ModelFilterPlugin::~ModelFilterPlugin()
 
 bool ModelFilterPlugin::initialize(const wchar_t* pluginPath)
 {
-  if (!loadTranslator(pluginPath))
+  if (!loadAndInstallTranslator(pluginPath, m_translator))
     return false;
 
-  if (!getPluginDataDir())
+  if (!getPluginDataDir(m_pluginDataDir))
     return false;
 
   loadFilters();
-
-  m_pMainDialog.reset(new MainDialog(m_filterDataArray, m_pluginDataDir));
-
   subscribeOnRengaEvents();
   addPluginButtons(pluginPath);
-
   return true;
 }
 
 void ModelFilterPlugin::stop()
 {
   m_pPluginToolButtons.reset(nullptr);
-  m_pMainDialog.reset(nullptr);
-}
-
-QString ModelFilterPlugin::translationFileName()
-{
-  // get application locale
-  QString appLocale = rengaStringToQString(rengaapi::Localization::currentLocale_());
-
-  // get translation file name
-  if (appLocale == c_russianLocale)
-    return russianLocaleFileName;
-  else if (appLocale == c_englishLocale)
-    return englishLocaleFileName;
-  else
-    return defaultLocaleFileName;
-}
-
-bool ModelFilterPlugin::loadTranslator(const std::wstring& pluginPath)
-{
-  // load QTranslator
-  if (!m_translator.load(translationFileName(), QString::fromStdWString(pluginPath)))
-  {
-    rengaapi::Message::showMessageBox(rengaapi::Message::Error, c_error, c_loadLocalizationFileError);
-    return false;
-  }
-  else
-  {
-    QApplication::installTranslator(&m_translator);
-    return true;
-  }
-}
-
-bool ModelFilterPlugin::getPluginDataDir()
-{
-  QString dataLocationPath = QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation);
-  QDir userDataDir(dataLocationPath);
-
-  // create plugin folder if necessary
-  if (userDataDir.entryList({ pluginSubPath }, QDir::Dirs).empty())
-    if (!userDataDir.mkdir(pluginSubPath))
-      return false;
-
-  m_pluginDataDir = QDir(QString("%1/%2").arg(dataLocationPath).arg(pluginSubPath));
-  return true;
 }
 
 void ModelFilterPlugin::subscribeOnRengaEvents()
@@ -131,7 +129,8 @@ void ModelFilterPlugin::addPluginButtons(const std::wstring& pluginPath)
 
 void ModelFilterPlugin::onFilterButtonClicked()
 {
-  int result = m_pMainDialog->exec();
+  MainDialog mainDialog(m_filterDataArray, m_pluginDataDir);
+  mainDialog.exec();
 }
 
 void ModelFilterPlugin::onProjectAboutToClose()

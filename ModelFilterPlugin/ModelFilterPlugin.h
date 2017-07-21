@@ -42,9 +42,6 @@ private slots:
 private:
   void addPluginButtons(const std::wstring& pluginPath);
   void subscribeOnRengaEvents();
-  bool loadTranslator(const std::wstring& pluginPath);
-  bool getPluginDataDir();
-  QString translationFileName();
   void loadFilters();
 
 private:
@@ -58,7 +55,6 @@ private:
   QTranslator m_translator;
   std::unique_ptr<PluginToolButtons> m_pPluginToolButtons;
   std::unique_ptr<RengaEventsHandler> m_pRengaEventsHandler;
-  std::unique_ptr<MainDialog> m_pMainDialog;
   std::vector<FilterData> m_filterDataArray;
   QDir m_pluginDataDir;
 };
