@@ -47,6 +47,7 @@ private:
   std::unique_ptr<QApplication> m_pApp;
   int m_argc = 0;
   char** m_argv = 0;
+  void createDebugApplicationInstance(const std::wstring& pluginPath);
 #endif
 
   QTranslator m_translator;

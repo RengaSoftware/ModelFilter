@@ -78,26 +78,32 @@ namespace
 }
 
 ModelFilterPlugin::ModelFilterPlugin()
-{
-#ifdef _DEBUG
-  //   NOTE: To debug a plugin you should create a debug QApplication in the plugin, 
-  //   put the debug Qt dlls (can be found in separate repository) into the plugin folder (Renga installation folder/Plugins/PluginName), 
-  //   put qwindowsd.dll into the "platform" folder in the plugin folder
-  //   and set library paths to the application, as shown below
-
-  //QStringList paths = QCoreApplication::libraryPaths();
-  //paths.append("your plugin folder path");
-  //QCoreApplication::setLibraryPaths(paths);
-
-  //m_pApp.reset(new QApplication(m_argc, m_argv));
-#endif
-}
+{}
 
 ModelFilterPlugin::~ModelFilterPlugin()
 {}
 
+#ifdef _DEBUG
+void ModelFilterPlugin::createDebugApplicationInstance(const std::wstring & pluginPath)
+{
+  //   NOTE: To debug a plugin you should create a debug QApplication in the plugin, 
+  //   put the debug Qt dlls into the plugin folder (Renga installation folder/Plugins/PluginName), 
+  //   put qwindowsd.dll into the "platform" folder in the plugin folders
+
+  QStringList paths = QCoreApplication::libraryPaths();
+  paths.append(QString::fromStdWString(pluginPath));
+  QCoreApplication::setLibraryPaths(paths);
+
+  m_pApp.reset(new QApplication(m_argc, m_argv));
+}
+#endif
+
 bool ModelFilterPlugin::initialize(const wchar_t* pluginPath)
 {
+#ifdef _DEBUG
+  createDebugApplicationInstance(std::wstring(pluginPath));
+#endif
+
   if (!loadAndInstallTranslator(pluginPath, m_translator))
     return false;
 
