@@ -16,6 +16,7 @@
 
 class FilterDialog;
 class FilterData;
+class FiltersManager;
 
 typedef std::pair<rengaapi::ObjectIdCollection, rengaapi::ObjectIdCollection> objectIdCollection;
 
@@ -29,7 +30,7 @@ class MainDialog : public QDialog
   Q_OBJECT
 
 public:
-  MainDialog(std::vector<FilterData>& filterDataArray, const QDir& dir);
+  MainDialog(FiltersManager& filtersManager, const QDir& dir);
   ~MainDialog();
 
 private slots:
@@ -47,12 +48,12 @@ private:
   objectIdCollection collectObjects(const FilterData& data);
   void setObjectsVisibility(const objectIdCollection& idCollection);
   void setUniqueName(FilterData& data);
-  void saveFilterFile(FilterData& data);
-  void deleteFilterFile(FilterData& data);
+  void saveFilterFile(const FilterData& data);
+  void deleteFilterFile(const FilterData& data);
 
 private:
   std::unique_ptr<Ui::MainDialog> m_pUi;
   std::unique_ptr<QStandardItemModel> m_pFiltersItemModel;
-  std::vector<FilterData>& m_filterDataArray;
+  FiltersManager& m_filtersManager;
   const QDir m_pluginDataDir;
 };

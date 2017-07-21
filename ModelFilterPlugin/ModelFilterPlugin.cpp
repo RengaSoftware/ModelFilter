@@ -11,7 +11,7 @@
 #include "ModelFilterPlugin.h"
 #include "PluginToolButtons.h"
 #include "RengaEventsHandler.h"
-
+#include "FiltersManager.h"
 
 #include <QtCore/QFile.h>
 #include <QtCore/QStandardPaths.h>
@@ -104,7 +104,8 @@ bool ModelFilterPlugin::initialize(const wchar_t* pluginPath)
   if (!getPluginDataDir(m_pluginDataDir))
     return false;
 
-  loadFilters();
+  m_pFiltersManager.reset(new FiltersManager(m_pluginDataDir));
+
   subscribeOnRengaEvents();
   addPluginButtons(pluginPath);
   return true;
@@ -129,27 +130,9 @@ void ModelFilterPlugin::addPluginButtons(const std::wstring& pluginPath)
 
 void ModelFilterPlugin::onFilterButtonClicked()
 {
-  MainDialog mainDialog(m_filterDataArray, m_pluginDataDir);
+  MainDialog mainDialog(*m_pFiltersManager, m_pluginDataDir);
   mainDialog.exec();
 }
 
 void ModelFilterPlugin::onProjectAboutToClose()
 {}
-
-void ModelFilterPlugin::loadFilters() 
-{
-  QFileInfoList entryList = m_pluginDataDir.entryInfoList({ "*.rnf" }, QDir::Files | QDir::Readable);
-  // open each .rnf file
-  for (auto& fileInfo : entryList) 
-  {
-    std::unique_ptr<QFile> filterFile(new QFile(fileInfo.canonicalFilePath()));
-    if (!filterFile->open(QIODevice::ReadOnly | QIODevice::Text))
-      continue;
-
-    FilterData filterData = FilterData::importData(filterFile.get());
-    if (!filterData.isValid())
-      continue;
-
-    m_filterDataArray.push_back(filterData);
-  }
-}

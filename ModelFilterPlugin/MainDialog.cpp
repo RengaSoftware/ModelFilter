@@ -12,6 +12,7 @@
 #include "ui_MainDialog.h"
 #include "NameGenerator.h"
 #include "ObjectFactory.h"
+#include "FiltersManager.h"
 
 #include <QtCore/QFile.h>
 #include <QtCore/QStandardPaths.h>
@@ -25,9 +26,9 @@
 #include <RengaAPI/ObjectVisibility.h>
 #include <RengaAPI/Project.h>
 
-MainDialog::MainDialog(std::vector<FilterData>& filterDataArray, const QDir& dir)
+MainDialog::MainDialog(FiltersManager& filtersManager, const QDir& dir)
   : QDialog(nullptr, Qt::WindowTitleHint | Qt::WindowSystemMenuHint | Qt::WindowCloseButtonHint)
-  , m_filterDataArray(filterDataArray)
+  , m_filtersManager(filtersManager)
   , m_pluginDataDir(dir)
 {
   m_pUi.reset(new Ui::MainDialog());
@@ -64,7 +65,7 @@ void MainDialog::onAddFilter()
   // store FilterData
   FilterData filterData = pFilterDialog->getFilterDescription();
   setUniqueName(filterData);
-  m_filterDataArray.push_back(filterData);
+  m_filtersManager.addFilter(filterData);
   saveFilterFile(filterData);
 
   // add filter to the list
@@ -80,26 +81,26 @@ void MainDialog::onEditFilter()
   QStandardItem* pFilterItem = m_pFiltersItemModel->itemFromIndex(selectedItemIndex);
 
   // show FilterDialog
-  std::unique_ptr<FilterDialog> pFilterDialog(new FilterDialog(this, m_filterDataArray[selectedItemIndex.row()]));
+  std::unique_ptr<FilterDialog> pFilterDialog(new FilterDialog(this, m_filtersManager.filter(selectedItemIndex.row())));
   int exitValue = pFilterDialog->exec();
   if (exitValue != QDialog::Accepted)
     return;
 
   // delete old FilterData
   const int filterItemRow = m_pFiltersItemModel->indexFromItem(pFilterItem).row();
-  deleteFilterFile(m_filterDataArray[filterItemRow]);
+  deleteFilterFile(m_filtersManager.filter(filterItemRow));
 
   // set unique filter name
   FilterData filterData = pFilterDialog->getFilterDescription();
-  if (m_filterDataArray[filterItemRow].m_filterName.compare(filterData.m_filterName) != 0)
+  if (m_filtersManager.filter(filterItemRow).m_filterName.compare(filterData.m_filterName) != 0)
   {
     setUniqueName(filterData);
     pFilterItem->setText(filterData.m_filterName);
   }
 
   // store FilterData
-  m_filterDataArray[filterItemRow] = filterData;
-  saveFilterFile(m_filterDataArray[filterItemRow]);
+  m_filtersManager.updateFilter(filterItemRow, filterData);
+  saveFilterFile(m_filtersManager.filter(filterItemRow));
 }
 
 void MainDialog::onDeleteFilter()
@@ -124,16 +125,15 @@ void MainDialog::onDeleteFilter()
   m_pFiltersItemModel->removeRow(filterRow);
 
   // remove FilterData
-  auto it = m_filterDataArray.begin() + filterRow;
-  deleteFilterFile(*it);
-  m_filterDataArray.erase(it);
+  deleteFilterFile(m_filtersManager.filter(filterRow));
+  m_filtersManager.deleteFilter(filterRow);
 }
 
 void MainDialog::onCopyFilter()
 {
   // copy original filterData
   const int filterRow = m_pUi->listView->currentIndex().row();
-  FilterData filterCopy = m_filterDataArray[filterRow];
+  FilterData filterCopy = m_filtersManager.filter(filterRow);
 
   // set unique filter name
   setUniqueName(filterCopy);
@@ -141,7 +141,7 @@ void MainDialog::onCopyFilter()
   m_pFiltersItemModel->appendRow(copyItem);
 
   // store FilterData
-  m_filterDataArray.push_back(filterCopy);
+  m_filtersManager.addFilter(filterCopy);
   saveFilterFile(filterCopy);
 }
 
@@ -150,7 +150,7 @@ void MainDialog::onApplyFilter()
   // divide modelObjects on 2 sets
   const int filterRow = m_pUi->listView->currentIndex().row();
   assert(filterRow >= 0);
-  auto idCollection = collectObjects(m_filterDataArray[filterRow]);
+  auto idCollection = collectObjects(m_filtersManager.filter(filterRow));
 
   // apply selected action (hide or show)
   setObjectsVisibility(idCollection);
@@ -159,12 +159,12 @@ void MainDialog::onApplyFilter()
 void MainDialog::onExportFilter()
 {
   const int filterDataRow = m_pUi->listView->currentIndex().row();
-  FilterData* pFilter = &m_filterDataArray[filterDataRow];
+  const FilterData& filterToExport = m_filtersManager.filter(filterDataRow);
 
   QFileDialog fileDialog(
     this,
     QApplication::translate("MainDialog", "Export filter"),
-    pFilter->m_filterName,
+    filterToExport.m_filterName,
     QApplication::translate("MainDialog", "Filter"));
   fileDialog.setAcceptMode(QFileDialog::AcceptSave);
   fileDialog.setFileMode(QFileDialog::ExistingFile);
@@ -184,7 +184,7 @@ void MainDialog::onExportFilter()
       exportMessageBox.exec();
       return;
     }
-    pFilter->exportData(filterFile.get());
+    filterToExport.exportData(filterFile.get());
   }
 }
 
@@ -224,7 +224,7 @@ void MainDialog::onImportFilter()
       return;
     }
     setUniqueName(filterData);
-    m_filterDataArray.push_back(filterData);
+    m_filtersManager.addFilter(filterData);
     saveFilterFile(filterData);
 
     QStandardItem* item = new QStandardItem(filterData.m_filterName);
@@ -235,9 +235,9 @@ void MainDialog::onImportFilter()
 
 void MainDialog::initFiltersItemModel()
 {
-  for (auto& filterData : m_filterDataArray) 
+  for (size_t i = 0; i < m_filtersManager.count(); ++i) 
   {
-    QStandardItem* item = new QStandardItem(filterData.m_filterName);
+    QStandardItem* item = new QStandardItem(m_filtersManager.filter(i).m_filterName);
     m_pFiltersItemModel->appendRow(item);
   }
 
@@ -341,7 +341,7 @@ void MainDialog::setUniqueName(FilterData& data)
   data.m_filterName = QString::fromStdWString(uniqueFilterName);
 }
 
-void MainDialog::saveFilterFile(FilterData& data)
+void MainDialog::saveFilterFile(const FilterData& data)
 {
   QFile filterFile(QString("%1/%2.rnf").arg(m_pluginDataDir.canonicalPath()).arg(data.m_filterName));
   if (filterFile.open(QIODevice::WriteOnly | QIODevice::Text))
@@ -350,7 +350,7 @@ void MainDialog::saveFilterFile(FilterData& data)
     assert(false);
 }
 
-void MainDialog::deleteFilterFile(FilterData& data)
+void MainDialog::deleteFilterFile(const FilterData& data)
 {
   QFile filterFile(QString("%1/%2.rnf").arg(m_pluginDataDir.canonicalPath()).arg(data.m_filterName));
   if (filterFile.exists())

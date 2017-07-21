@@ -190,6 +190,9 @@
     <ClCompile Include="DoublePrecise.cpp">
       <Filter>FilterData</Filter>
     </ClCompile>
+    <ClCompile Include="FiltersManager.cpp">
+      <Filter>FilterData</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="RengaStringToQString.h">
@@ -269,6 +272,9 @@
       <Filter>ModelObjects</Filter>
     </ClInclude>
     <ClInclude Include="DoublePrecise.h">
+      <Filter>FilterData</Filter>
+    </ClInclude>
+    <ClInclude Include="FiltersManager.h">
       <Filter>FilterData</Filter>
     </ClInclude>
   </ItemGroup>

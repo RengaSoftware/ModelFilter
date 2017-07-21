@@ -122,7 +122,7 @@ struct FilterData {
   {}
 
   static FilterData importData(QFile* filterFile);
-  void exportData(QFile* filterFile);
+  void exportData(QFile* filterFile) const;
   bool isValid();
 
 private:

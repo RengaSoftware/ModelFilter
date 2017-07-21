@@ -16,12 +16,10 @@
 #endif
 
 #include <IPlugin.h>
-#include <FilterData.h>
 
-class MainDialog;
 class RengaEventsHandler;
 class PluginToolButtons;
-
+class FiltersManager;
 
 class ModelFilterPlugin : public QObject, public plugins::IPlugin
 {
@@ -42,7 +40,6 @@ private slots:
 private:
   void addPluginButtons(const std::wstring& pluginPath);
   void subscribeOnRengaEvents();
-  void loadFilters();
 
 private:
 #ifdef _DEBUG
@@ -55,6 +52,6 @@ private:
   QTranslator m_translator;
   std::unique_ptr<PluginToolButtons> m_pPluginToolButtons;
   std::unique_ptr<RengaEventsHandler> m_pRengaEventsHandler;
-  std::vector<FilterData> m_filterDataArray;
+  std::unique_ptr<FiltersManager> m_pFiltersManager;
   QDir m_pluginDataDir;
 };

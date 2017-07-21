@@ -11,6 +11,7 @@
 // stl includes
 #include <memory>
 #include <assert.h>
+#include <vector>
 
 // local common includes
 #include "RengaStringToQString.h"

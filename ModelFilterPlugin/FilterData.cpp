@@ -19,7 +19,7 @@ bool GroupData::isValid()
   return m_propertyList.size() > 0;
 }
 
-void FilterData::exportData(QFile* filterFile)
+void FilterData::exportData(QFile* filterFile) const
 {
   QXmlStreamWriter writer(filterFile);
   writer.setAutoFormatting(true);
