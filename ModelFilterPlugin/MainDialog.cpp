@@ -13,6 +13,7 @@
 #include "NameGenerator.h"
 #include "ObjectFactory.h"
 #include "FiltersManager.h"
+#include "FilterAlgo.h"
 
 #include <QtCore/QFile.h>
 #include <QtCore/QStandardPaths.h>
@@ -141,12 +142,22 @@ void MainDialog::onCopyFilter()
 void MainDialog::onApplyFilter()
 {
   // divide modelObjects on 2 sets
-  const int filterRow = m_pUi->listView->currentIndex().row();
-  assert(filterRow >= 0);
-  auto idCollection = collectObjects(m_filtersManager.filter(filterRow));
+  const int filterIndex = m_pUi->listView->currentIndex().row();
+  assert(filterIndex >= 0);
+  const FilterData& filter = m_filtersManager.filter(filterIndex);
 
   // apply selected action (hide or show)
-  setObjectsVisibility(idCollection);
+  bool needShow = m_pUi->isolateRadioButton->isChecked();
+  if (needShow)
+  {
+    IsolateAlgo algo;
+    algo.execute(filter);
+  }
+  else
+  {
+    HideAlgo algo;
+    algo.execute(filter);
+  }
 }
 
 void MainDialog::onExportFilter()
@@ -237,80 +248,6 @@ void MainDialog::initFiltersItemModel()
   {
     m_pUi->listView->setCurrentIndex(m_pFiltersItemModel->index(0, 0));
     updateButtons(m_pUi->listView->selectionModel()->selection());
-  }
-}
-
-objectIdCollection MainDialog::collectObjects(const FilterData& data)
-{
-  // collect 2 separate sets of objectId: first set is match to filter, but second not
-  rengaapi::Model rengaProjectModel = rengaapi::Project::model();
-  rengaapi::ModelObjectCollection objectCollection = rengaProjectModel.objects();
-  rengaapi::ObjectIdCollection matchIdCollection;
-  rengaapi::ObjectIdCollection notMatchIdCollection;
-
-  // check all model objects
-  for (auto pObject : objectCollection)
-  {
-    // apply all groups on object
-    bool isObjectMatchFilter = false;
-    for (auto& groupData : data.m_groupList)
-    {
-      if (groupData.m_groupType != pObject->type())
-        continue;
-
-      // apply all properties from group
-      bool isObjectMatchGroup = true;
-      for (auto& propertyData : groupData.m_propertyList)
-      {
-        // apply filter
-        ObjectFilterFactory m_Factory;
-        std::unique_ptr<ObjectFilter> pObjectBuilder(m_Factory.createObjectFilter(pObject->type()));
-        bool isObjectMatchProperty = pObjectBuilder->isObjectMatchFilter(propertyData, pObject);
-        // if object does not match property -> object does not match group
-        if (!isObjectMatchProperty)
-        {
-          isObjectMatchGroup = false;
-          break;
-        }
-      }
-      // if object match group -> object match filter
-      if (isObjectMatchGroup)
-      {
-        isObjectMatchFilter = true;
-        break;
-      }
-    }
-
-    // check filter matching
-    if (isObjectMatchFilter)
-      matchIdCollection.add(pObject->objectId());
-    else
-      notMatchIdCollection.add(pObject->objectId());
-  }
-  return std::make_pair(matchIdCollection, notMatchIdCollection);
-}
-
-void MainDialog::setObjectsVisibility(const objectIdCollection& idCollection)
-{
-  // show or hide matching objects
-  bool isShow = m_pUi->isolateRadioButton->isChecked();
-
-  rengaapi::View* pView = rengaapi::Application::activeView();
-  switch (pView->type())
-  {
-  case rengaapi::ViewType::View3D:
-    rengaapi::ObjectVisibility::setVisibleIn3DView(idCollection.first, isShow);
-    rengaapi::ObjectVisibility::setVisibleIn3DView(idCollection.second, !isShow);
-    break;
-  case rengaapi::ViewType::Level:
-  {
-    rengaapi::ObjectId levelId = dynamic_cast<rengaapi::LevelView*>(pView)->levelId();
-    rengaapi::ObjectVisibility::setVisibleOnLevel(idCollection.first, levelId, isShow);
-    rengaapi::ObjectVisibility::setVisibleOnLevel(idCollection.second, levelId, !isShow);
-    break;
-  }
-  default:
-    break;
   }
 }
 

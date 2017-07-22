@@ -188,6 +188,7 @@ copy /y $(ProjectDir)Resources\PluginIcon.png $(SolutionDir)$(Configuration)\$(P
     <ClCompile Include="ColumnFilterData.cpp" />
     <ClCompile Include="DoorFilterData.cpp" />
     <ClCompile Include="DoublePrecise.cpp" />
+    <ClCompile Include="FilterAlgo.cpp" />
     <ClCompile Include="FilterData.cpp" />
     <ClCompile Include="FilterDialog.cpp" />
     <ClCompile Include="FilterDialogButtonHandler.cpp" />
@@ -385,6 +386,7 @@ copy /y $(ProjectDir)Resources\PluginIcon.png $(SolutionDir)$(Configuration)\$(P
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o ".\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp" "-fstdafx.h" "-f../../FilterDialogButtonHandler.h"  -DUNICODE -DWIN32 -DWIN64 -DQT_DLL -DMODELFILTERPLUGIN_LIB -DQT_NO_DEBUG -DNDEBUG -D_WINDLL "-I.\GeneratedFiles" "-I." "-I$(QTDIR)\include" "-I.\GeneratedFiles\$(ConfigurationName)\." "-I$(renga_sdk)\Include"</Command>
     </CustomBuild>
     <ClInclude Include="DoublePrecise.h" />
+    <ClInclude Include="FilterAlgo.h" />
     <ClInclude Include="FiltersManager.h" />
     <ClInclude Include="ObjectFilter.h" />
     <ClInclude Include="ObjectProperty.h" />

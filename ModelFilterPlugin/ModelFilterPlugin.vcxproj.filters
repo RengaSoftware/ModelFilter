@@ -193,6 +193,9 @@
     <ClCompile Include="FiltersManager.cpp">
       <Filter>FilterData</Filter>
     </ClCompile>
+    <ClCompile Include="FilterAlgo.cpp">
+      <Filter>FilterData</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="RengaStringToQString.h">
@@ -275,6 +278,9 @@
       <Filter>FilterData</Filter>
     </ClInclude>
     <ClInclude Include="FiltersManager.h">
+      <Filter>FilterData</Filter>
+    </ClInclude>
+    <ClInclude Include="FilterAlgo.h">
       <Filter>FilterData</Filter>
     </ClInclude>
   </ItemGroup>

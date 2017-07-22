@@ -17,8 +17,6 @@ class FilterDialog;
 class FilterData;
 class FiltersManager;
 
-typedef std::pair<rengaapi::ObjectIdCollection, rengaapi::ObjectIdCollection> objectIdCollection;
-
 namespace Ui
 {
   class MainDialog;
@@ -44,8 +42,6 @@ private slots:
 
 private:
   void initFiltersItemModel();
-  objectIdCollection collectObjects(const FilterData& data);
-  void setObjectsVisibility(const objectIdCollection& idCollection);
   void setUniqueName(FilterData& data);
 
 private:
