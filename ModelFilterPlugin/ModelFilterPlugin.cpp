@@ -12,6 +12,10 @@
 #include "PluginToolButtons.h"
 #include "RengaEventsHandler.h"
 #include "FiltersManager.h"
+#include "ContextMenuCommon.h"
+#include "FilterAlgo.h"
+#include "FilterContextMenuHandler.h"
+#include "FilterContextMenuActionItem.h"
 
 #include <QtCore/QFile.h>
 #include <QtCore/QStandardPaths.h>
@@ -30,6 +34,8 @@ static const QString c_englishLocale = "en_EN";
 
 static const rengabase::String c_loadLocalizationFileError = L"Cannot open localization file.";
 static const rengabase::String c_error = L"Error";
+
+static const QString view3DContextMenuId = "C22DCE93 - 4B1D - 4746 - A464 - 77CDB3DDF368";
 
 namespace
 {
@@ -111,7 +117,8 @@ bool ModelFilterPlugin::initialize(const wchar_t* pluginPath)
     return false;
 
   m_pFiltersManager.reset(new FiltersManager(m_pluginDataDir));
-
+  
+  updateContextMenu();
   subscribeOnRengaEvents();
   addPluginButtons(pluginPath);
   return true;
@@ -128,6 +135,35 @@ void ModelFilterPlugin::subscribeOnRengaEvents()
   connect(m_pRengaEventsHandler.get(), SIGNAL(projectAboutToClose()), this, SLOT(onProjectAboutToClose()));
 }
 
+void ModelFilterPlugin::updateContextMenu()
+{
+  m_pContextMenu.reset(new ContextMenu(rengaapi::ViewType::View3D, rengaapi::ContextMenuShowCase::Scene, rengabase::UUID::fromString(QStringToRengaString(view3DContextMenuId))));
+
+  NodeItem* pIsolateSubTree = new NodeItem(QApplication::translate("contextmenu", "Isolate").toStdWString());
+  NodeItem* pHideSubTree = new NodeItem(QApplication::translate("contextmenu", "Hide").toStdWString());
+
+  IFilterAlgoPtr isolateAlgo(new IsolateAlgo());
+  IFilterAlgoPtr hideAlgo(new HideAlgo());
+
+  for (size_t i = 0; i < m_pFiltersManager->count(); ++i)
+  {
+    const FilterData& filter = m_pFiltersManager->filter(i);
+    std::wstring filterName = filter.m_filterName.toStdWString();
+
+    FilterContextMenuHandlerPtr pIsolateHandler(new FilterContextMenuHandler(m_pFiltersManager->filter(i), isolateAlgo));
+    pIsolateSubTree->add(new FilterContextMenuActionItem(filterName, pIsolateHandler));
+
+    FilterContextMenuHandlerPtr pHideHandler(new FilterContextMenuHandler(m_pFiltersManager->filter(i), hideAlgo));
+    pHideSubTree->add(new FilterContextMenuActionItem(filterName, pHideHandler));
+  }
+
+  m_pContextMenu->add(new SeparatorItem());
+  m_pContextMenu->add(pIsolateSubTree);
+  m_pContextMenu->add(pHideSubTree);
+  m_pContextMenu->add(new SeparatorItem());
+  m_pContextMenu->update();
+}
+
 void ModelFilterPlugin::addPluginButtons(const std::wstring& pluginPath)
 {
   m_pPluginToolButtons.reset(new PluginToolButtons(pluginPath));
@@ -137,7 +173,8 @@ void ModelFilterPlugin::addPluginButtons(const std::wstring& pluginPath)
 void ModelFilterPlugin::onFilterButtonClicked()
 {
   MainDialog mainDialog(*m_pFiltersManager);
-  mainDialog.exec();
+  if (mainDialog.exec())
+    updateContextMenu();
 }
 
 void ModelFilterPlugin::onProjectAboutToClose()

@@ -249,6 +249,17 @@
     </message>
 </context>
 <context>
+    <name>contextmenu</name>
+    <message>
+        <source>Isolate</source>
+        <translation type="unfinished">Изолировать</translation>
+    </message>
+    <message>
+        <source>Hide</source>
+        <translation type="unfinished">Скрыть</translation>
+    </message>
+</context>
+<context>
     <name>deleteMessageBox</name>
     <message>
         <source>title</source>

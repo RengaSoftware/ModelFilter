@@ -50,6 +50,9 @@
       <Extensions>ts</Extensions>
       <ParseFiles>false</ParseFiles>
     </Filter>
+    <Filter Include="ContextMenu">
+      <UniqueIdentifier>{07ba60be-5320-44a8-bae1-3c9011d2631c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="RengaStringToQString.cpp">
@@ -196,6 +199,15 @@
     <ClCompile Include="FilterAlgo.cpp">
       <Filter>FilterData</Filter>
     </ClCompile>
+    <ClCompile Include="ContextMenuCommon.cpp">
+      <Filter>ContextMenu</Filter>
+    </ClCompile>
+    <ClCompile Include="FilterContextMenuActionItem.cpp">
+      <Filter>ContextMenu</Filter>
+    </ClCompile>
+    <ClCompile Include="FilterContextMenuHandler.cpp">
+      <Filter>ContextMenu</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="RengaStringToQString.h">
@@ -282,6 +294,15 @@
     </ClInclude>
     <ClInclude Include="FilterAlgo.h">
       <Filter>FilterData</Filter>
+    </ClInclude>
+    <ClInclude Include="ContextMenuCommon.h">
+      <Filter>ContextMenu</Filter>
+    </ClInclude>
+    <ClInclude Include="FilterContextMenuActionItem.h">
+      <Filter>ContextMenu</Filter>
+    </ClInclude>
+    <ClInclude Include="FilterContextMenuHandler.h">
+      <Filter>ContextMenu</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

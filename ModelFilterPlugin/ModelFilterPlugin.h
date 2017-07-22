@@ -20,6 +20,7 @@
 class RengaEventsHandler;
 class PluginToolButtons;
 class FiltersManager;
+class ContextMenu;
 
 class ModelFilterPlugin : public QObject, public plugins::IPlugin
 {
@@ -40,6 +41,7 @@ private slots:
 private:
   void addPluginButtons(const std::wstring& pluginPath);
   void subscribeOnRengaEvents();
+  void updateContextMenu();
 
 private:
 #ifdef _DEBUG
@@ -51,8 +53,10 @@ private:
 #endif
 
   QTranslator m_translator;
+  QDir m_pluginDataDir;
+
   std::unique_ptr<PluginToolButtons> m_pPluginToolButtons;
   std::unique_ptr<RengaEventsHandler> m_pRengaEventsHandler;
   std::unique_ptr<FiltersManager> m_pFiltersManager;
-  QDir m_pluginDataDir;
+  std::unique_ptr<ContextMenu> m_pContextMenu;
 };
