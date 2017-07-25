@@ -139,8 +139,8 @@ void ModelFilterPlugin::updateContextMenu()
 {
   m_pContextMenu.reset(new ContextMenu(rengaapi::ViewType::View3D, rengaapi::ContextMenuShowCase::Scene, rengabase::UUID::fromString(QStringToRengaString(view3DContextMenuId))));
 
-  NodeItem* pIsolateSubTree = new NodeItem(QApplication::translate("contextmenu", "Isolate").toStdWString());
-  NodeItem* pHideSubTree = new NodeItem(QApplication::translate("contextmenu", "Hide").toStdWString());
+  ContextMenu::NodeItem* pIsolateSubTree = new ContextMenu::NodeItem(QApplication::translate("contextmenu", "Isolate").toStdWString());
+  ContextMenu::NodeItem* pHideSubTree = new ContextMenu::NodeItem(QApplication::translate("contextmenu", "Hide").toStdWString());
 
   IFilterAlgoPtr isolateAlgo(new IsolateAlgo());
   IFilterAlgoPtr hideAlgo(new HideAlgo());
@@ -157,10 +157,10 @@ void ModelFilterPlugin::updateContextMenu()
     pHideSubTree->add(new FilterContextMenuActionItem(filterName, pHideHandler));
   }
 
-  m_pContextMenu->add(new SeparatorItem());
+  m_pContextMenu->add(new ContextMenu::SeparatorItem());
   m_pContextMenu->add(pIsolateSubTree);
   m_pContextMenu->add(pHideSubTree);
-  m_pContextMenu->add(new SeparatorItem());
+  m_pContextMenu->add(new ContextMenu::SeparatorItem());
   m_pContextMenu->update();
 }
 

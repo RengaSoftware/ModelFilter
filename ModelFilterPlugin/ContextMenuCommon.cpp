@@ -1,59 +1,43 @@
 #include "stdafx.h"
 #include "ContextMenuCommon.h"
 
-#include <list>
+ContextMenu::BaseItem::~BaseItem()
+{}
 
-
-BaseItem::BaseItem() :
-  m_pParent(nullptr)
-{
-}
-
-BaseItem::~BaseItem()
-{
-}
-
-void BaseItem::setParent(const NodeItem* pParent)
-{
-  m_pParent = pParent;
-}
-
-rengaapi::ContextMenuItem SeparatorItem::createRengaItem() const
+rengaapi::ContextMenuItem ContextMenu::SeparatorItem::createRengaItem() const
 {
   return rengaapi::ContextMenuItem::makeSeparator();
 }
 
-
-ActionItem::ActionItem()
+ContextMenu::ActionItem::ActionItem()
   : m_action(rengaapi::UIControls::createAction())
-{
-}
+{}
 
-ActionItem::ActionItem(const rengaapi::Action& action) :
+ContextMenu::ActionItem::ActionItem(const rengaapi::Action& action) :
   m_action(action)
 {}
 
-rengaapi::ContextMenuItem ActionItem::createRengaItem() const
+rengaapi::ContextMenuItem ContextMenu::ActionItem::createRengaItem() const
 {
   return rengaapi::ContextMenuItem(m_action);
 }
 
-void ActionItem::setAction(const rengaapi::Action & action)
+void ContextMenu::ActionItem::setAction(const rengaapi::Action & action)
 {
   m_action = action;
 }
 
-const rengaapi::Action& ActionItem::action() const
+const rengaapi::Action& ContextMenu::ActionItem::action() const
 {
   return m_action;
 }
 
-NodeItem::NodeItem(const std::wstring& name)
+ContextMenu::NodeItem::NodeItem(const std::wstring& name)
 {
   m_name = name;
 }
 
-rengaapi::ContextMenuItem NodeItem::createRengaItem() const
+rengaapi::ContextMenuItem ContextMenu::NodeItem::createRengaItem() const
 {
   m_childContextMenu = rengaapi::ContextMenuItemCollection();
   for (auto& item : m_childItemContainer)
@@ -62,33 +46,32 @@ rengaapi::ContextMenuItem NodeItem::createRengaItem() const
   return rengaapi::ContextMenuItem(m_name.c_str(), &m_childContextMenu);
 }
 
-void NodeItem::setName(const std::wstring & name)
+void ContextMenu::NodeItem::setName(const std::wstring & name)
 {
   m_name = name;
 }
 
-const std::wstring & NodeItem::name() const
+const std::wstring & ContextMenu::NodeItem::name() const
 {
   return m_name;
 }
 
-void NodeItem::add(BaseItem* pItem)
+void ContextMenu::NodeItem::add(BaseItem* pItem)
 {
   m_childItemContainer.emplace_back(std::unique_ptr<BaseItem>(pItem));
-  m_childItemContainer.back()->setParent(this);
 }
 
-void NodeItem::remove(const std::size_t n)
+void ContextMenu::NodeItem::remove(const std::size_t n)
 {
   m_childItemContainer.erase(m_childItemContainer.begin() + n);
 }
 
-std::size_t NodeItem::size() const
+std::size_t ContextMenu::NodeItem::size() const
 {
   return m_childItemContainer.size();
 }
 
-BaseItem* NodeItem::get(const std::size_t n)
+ContextMenu::BaseItem* ContextMenu::NodeItem::get(const std::size_t n)
 {
   return m_childItemContainer[n].get();
 }
@@ -131,4 +114,3 @@ void ContextMenu::update()
 
   rengaapi::UIControls::addContextMenuItems(m_id, m_contextMenu, m_viewType, m_showCase);
 }
-

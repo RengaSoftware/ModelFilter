@@ -2,7 +2,7 @@
 #include "ContextMenuCommon.h"
 #include "FilterContextMenuHandler.h"
 
-class FilterContextMenuActionItem : public ActionItem
+class FilterContextMenuActionItem : public ContextMenu::ActionItem
 {
 public:
   FilterContextMenuActionItem(const std::wstring& name, FilterContextMenuHandlerPtr handler);
