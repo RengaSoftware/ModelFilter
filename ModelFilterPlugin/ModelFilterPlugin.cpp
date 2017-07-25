@@ -12,7 +12,7 @@
 #include "PluginToolButtons.h"
 #include "RengaEventsHandler.h"
 #include "FiltersManager.h"
-#include "ContextMenuCommon.h"
+#include "ContextMenu.h"
 #include "FilterAlgo.h"
 #include "FilterContextMenuHandler.h"
 #include "FilterContextMenuActionItem.h"

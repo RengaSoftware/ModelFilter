@@ -199,13 +199,13 @@
     <ClCompile Include="FilterAlgo.cpp">
       <Filter>FilterData</Filter>
     </ClCompile>
-    <ClCompile Include="ContextMenuCommon.cpp">
-      <Filter>ContextMenu</Filter>
-    </ClCompile>
     <ClCompile Include="FilterContextMenuActionItem.cpp">
       <Filter>ContextMenu</Filter>
     </ClCompile>
     <ClCompile Include="FilterContextMenuHandler.cpp">
+      <Filter>ContextMenu</Filter>
+    </ClCompile>
+    <ClCompile Include="ContextMenu.cpp">
       <Filter>ContextMenu</Filter>
     </ClCompile>
   </ItemGroup>
@@ -295,13 +295,13 @@
     <ClInclude Include="FilterAlgo.h">
       <Filter>FilterData</Filter>
     </ClInclude>
-    <ClInclude Include="ContextMenuCommon.h">
-      <Filter>ContextMenu</Filter>
-    </ClInclude>
     <ClInclude Include="FilterContextMenuActionItem.h">
       <Filter>ContextMenu</Filter>
     </ClInclude>
     <ClInclude Include="FilterContextMenuHandler.h">
+      <Filter>ContextMenu</Filter>
+    </ClInclude>
+    <ClInclude Include="ContextMenu.h">
       <Filter>ContextMenu</Filter>
     </ClInclude>
   </ItemGroup>

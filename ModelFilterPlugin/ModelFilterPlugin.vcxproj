@@ -123,7 +123,7 @@ copy /y $(ProjectDir)Resources\PluginIcon.png $(SolutionDir)$(Configuration)\$(P
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
-      <OutputFile>g:\Renga_builds\phoenix\x64\bin\Plugins\ModelFilterPlugin\$(ProjectName).rne</OutputFile>
+      <OutputFile>g:\Renga_candidates\phoenix\x64\bin\Plugins\ModelFilterPlugin\$(ProjectName).rne</OutputFile>
       <AdditionalLibraryDirectories>$(renga_sdk)\lib\$(PlatformShortName);$(QTDIR)\lib\$(PlatformShortName);$(SolutionDir)$(Configuration)\$(PlatformShortName);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalDependencies>Qt5Cored.lib;Qt5Widgetsd.lib;Qt5Guid.lib;RengaBase.lib;RengaApi.lib;user32.lib</AdditionalDependencies>
@@ -186,7 +186,7 @@ copy /y $(ProjectDir)Resources\PluginIcon.png $(SolutionDir)$(Configuration)\$(P
   <ItemGroup>
     <ClCompile Include="BeamFilterData.cpp" />
     <ClCompile Include="ColumnFilterData.cpp" />
-    <ClCompile Include="ContextMenuCommon.cpp" />
+    <ClCompile Include="ContextMenu.cpp" />
     <ClCompile Include="DoorFilterData.cpp" />
     <ClCompile Include="DoublePrecise.cpp" />
     <ClCompile Include="FilterAlgo.cpp" />
@@ -388,7 +388,7 @@ copy /y $(ProjectDir)Resources\PluginIcon.png $(SolutionDir)$(Configuration)\$(P
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp</Outputs>
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o ".\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp" "-fstdafx.h" "-f../../FilterDialogButtonHandler.h"  -DUNICODE -DWIN32 -DWIN64 -DQT_DLL -DMODELFILTERPLUGIN_LIB -DQT_NO_DEBUG -DNDEBUG -D_WINDLL "-I.\GeneratedFiles" "-I." "-I$(QTDIR)\include" "-I.\GeneratedFiles\$(ConfigurationName)\." "-I$(renga_sdk)\Include"</Command>
     </CustomBuild>
-    <ClInclude Include="ContextMenuCommon.h" />
+    <ClInclude Include="ContextMenu.h" />
     <ClInclude Include="DoublePrecise.h" />
     <ClInclude Include="FilterAlgo.h" />
     <ClInclude Include="FilterContextMenuActionItem.h" />

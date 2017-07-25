@@ -1,5 +1,5 @@
 #include "stdafx.h"
-#include "ContextMenuCommon.h"
+#include "ContextMenu.h"
 
 ContextMenu::BaseItem::~BaseItem()
 {}
