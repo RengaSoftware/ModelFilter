@@ -146,14 +146,18 @@ void MainDialog::onApplyFilter()
   assert(filterIndex >= 0);
   const FilterData& filter = m_filtersManager.filter(filterIndex);
 
-  // apply selected action (hide or show)
-  bool needShow = m_pUi->isolateRadioButton->isChecked();
-  if (needShow)
+  // apply selected action
+  if (m_pUi->selectRadioButton->isChecked())
   {
-    IsolateAlgo algo;
+    SelectAlgo algo;
     algo.execute(filter);
   }
-  else
+  else if (m_pUi->isolateRadioButton->isChecked())
+  {
+    IsolateAlgo algo;
+    algo.execute(filter); 
+  }
+  else if (m_pUi->hideRadioButton->isChecked())
   {
     HideAlgo algo;
     algo.execute(filter);

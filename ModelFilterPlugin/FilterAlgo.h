@@ -23,3 +23,10 @@ public:
   IsolateAlgo();
   void execute(const FilterData& filter) override;
 };
+
+class SelectAlgo : public IFilterAlgo
+{
+public:
+  SelectAlgo();
+  void execute(const FilterData& filter) override;
+};

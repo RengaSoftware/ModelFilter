@@ -6,6 +6,7 @@
 #include <RengaAPI/ModelObjectCollection.h>
 #include <RengaAPI/Model.h>
 #include <RengaAPI/ObjectVisibility.h>
+#include <RengaAPI/ModelSelection.h>
 #include <RengaAPI/LevelView.h>
 
 #include "ObjectFactory.h"
@@ -109,4 +110,14 @@ void IsolateAlgo::execute(const FilterData& filter)
 {
   FilterResult filterResult = collectObjects(filter);
   setObjectsVisibility(filterResult, true);
+}
+
+SelectAlgo::SelectAlgo()
+{
+}
+
+void SelectAlgo::execute(const FilterData& filter)
+{
+  FilterResult filterResult = collectObjects(filter);
+  rengaapi::ModelSelection::setSelectionInActiveView(filterResult.matchedIds);
 }

@@ -153,6 +153,10 @@
         <source>Filter</source>
         <translation>Filter (*.rnf)</translation>
     </message>
+    <message>
+        <source>Select</source>
+        <translation type="vanished">Select</translation>
+    </message>
 </context>
 <context>
     <name>beam</name>
@@ -252,11 +256,15 @@
     <name>contextmenu</name>
     <message>
         <source>Isolate</source>
-        <translation type="unfinished">Isolate</translation>
+        <translation>Isolate</translation>
     </message>
     <message>
         <source>Hide</source>
-        <translation type="unfinished">Hide</translation>
+        <translation>Hide</translation>
+    </message>
+    <message>
+        <source>Select</source>
+        <translation>Select</translation>
     </message>
 </context>
 <context>

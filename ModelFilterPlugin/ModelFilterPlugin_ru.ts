@@ -153,6 +153,10 @@
         <source>Filter</source>
         <translation>Фильтр (*.rnf)</translation>
     </message>
+    <message>
+        <source>Select</source>
+        <translation type="vanished">Выделить</translation>
+    </message>
 </context>
 <context>
     <name>beam</name>
@@ -252,11 +256,15 @@
     <name>contextmenu</name>
     <message>
         <source>Isolate</source>
-        <translation type="unfinished">Изолировать</translation>
+        <translation>Изолировать</translation>
     </message>
     <message>
         <source>Hide</source>
-        <translation type="unfinished">Скрыть</translation>
+        <translation>Скрыть</translation>
+    </message>
+    <message>
+        <source>Select</source>
+        <translation>Выделить</translation>
     </message>
 </context>
 <context>

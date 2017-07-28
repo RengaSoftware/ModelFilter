@@ -665,16 +665,23 @@ QListView::item:hover {
       <bool>false</bool>
      </property>
      <layout class="QVBoxLayout" name="verticalLayout_2">
-      <property name="topMargin">
-       <number>9</number>
-      </property>
+      <item>
+       <widget class="QRadioButton" name="selectRadioButton">
+        <property name="text">
+         <string>Select</string>
+        </property>
+        <property name="checked">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
       <item>
        <widget class="QRadioButton" name="isolateRadioButton">
         <property name="text">
          <string>Isolate</string>
         </property>
         <property name="checked">
-         <bool>true</bool>
+         <bool>false</bool>
         </property>
        </widget>
       </item>
