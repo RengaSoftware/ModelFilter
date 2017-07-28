@@ -2,10 +2,29 @@
 <!DOCTYPE TS>
 <TS version="2.1" language="ru_RU">
 <context>
+    <name>DeleteDialog</name>
+    <message>
+        <source>WindowName</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>message</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>OK</source>
+        <translation type="unfinished">ОК</translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation type="unfinished">Отмена</translation>
+    </message>
+</context>
+<context>
     <name>FilterDialog</name>
     <message>
         <source>WindowName</source>
-        <translation type="vanished">Добавление фильтра</translation>
+        <translation>Добавление фильтра</translation>
     </message>
     <message>
         <source>EditWindowName</source>
@@ -13,38 +32,38 @@
     </message>
     <message>
         <source>Name</source>
-        <translation type="vanished">Имя:</translation>
+        <translation>Имя:</translation>
     </message>
     <message>
         <source>Filter name</source>
-        <translation type="vanished">Новый фильтр</translation>
+        <translation>Новый фильтр</translation>
     </message>
     <message>
         <source>Add</source>
-        <translation type="vanished">Добавить</translation>
+        <translation>Добавить</translation>
     </message>
     <message>
         <source>Edit</source>
-        <translation type="vanished">Изменить</translation>
+        <translation>Изменить</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation type="vanished">Удалить</translation>
+        <translation>Удалить</translation>
     </message>
     <message>
         <source>OK</source>
-        <translation type="vanished">ОК</translation>
+        <translation>ОК</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="vanished">Отмена</translation>
+        <translation>Отмена</translation>
     </message>
 </context>
 <context>
     <name>GroupDialog</name>
     <message>
         <source>WindowName</source>
-        <translation type="vanished">Добавление группы</translation>
+        <translation>Добавление группы</translation>
     </message>
     <message>
         <source>EditWindowName</source>
@@ -52,50 +71,50 @@
     </message>
     <message>
         <source>Add search criteria in list below:</source>
-        <translation type="vanished">Добавить критерии поиска в список ниже:</translation>
+        <translation>Добавить критерии поиска в список ниже:</translation>
     </message>
     <message>
         <source>Object type:</source>
-        <translation type="vanished">Тип объета:</translation>
+        <translation>Тип объета:</translation>
     </message>
     <message>
         <source>Property:</source>
-        <translation type="vanished">Свойство:</translation>
+        <translation>Свойство:</translation>
     </message>
     <message>
         <source>Operator:</source>
-        <translation type="vanished">Оператор:</translation>
+        <translation>Оператор:</translation>
     </message>
     <message>
         <source>Value:</source>
-        <translation type="vanished">Значение:</translation>
+        <translation>Значение:</translation>
     </message>
     <message>
         <source>Add</source>
-        <translation type="vanished">Добавить</translation>
+        <translation>Добавить</translation>
     </message>
     <message>
         <source>All search criteria</source>
-        <translation type="vanished">Все критерии поиска:</translation>
+        <translation>Все критерии поиска:</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation type="vanished">Удалить</translation>
+        <translation>Удалить</translation>
     </message>
     <message>
         <source>OK</source>
-        <translation type="vanished">ОК</translation>
+        <translation>ОК</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="vanished">Отмена</translation>
+        <translation>Отмена</translation>
     </message>
 </context>
 <context>
     <name>MainDialog</name>
     <message>
         <source>WindowName</source>
-        <translation type="vanished">Выбор фильтра</translation>
+        <translation>Выбор фильтра</translation>
     </message>
     <message>
         <source>Import filter</source>
@@ -103,47 +122,47 @@
     </message>
     <message>
         <source>addToolTip</source>
-        <translation type="vanished">Добавить фильтр</translation>
+        <translation>Добавить фильтр</translation>
     </message>
     <message>
         <source>copyToolTip</source>
-        <translation type="vanished">Копировать фильтр</translation>
+        <translation>Копировать фильтр</translation>
     </message>
     <message>
         <source>editToolTip</source>
-        <translation type="vanished">Редактировать фильтр</translation>
+        <translation>Редактировать фильтр</translation>
     </message>
     <message>
         <source>deleteToolTip</source>
-        <translation type="vanished">Удалить фильтр</translation>
+        <translation>Удалить фильтр</translation>
     </message>
     <message>
         <source>exportToolTip</source>
-        <translation type="vanished">Экспортировать фильтр в файл</translation>
+        <translation>Экспортировать фильтр в файл</translation>
     </message>
     <message>
         <source>importToolTip</source>
-        <translation type="vanished">Импортировать фильтр из файла</translation>
+        <translation>Импортировать фильтр из файла</translation>
     </message>
     <message>
         <source>Chosen objects</source>
-        <translation type="vanished">Отобранные объекты</translation>
+        <translation>Отобранные объекты</translation>
     </message>
     <message>
         <source>Isolate</source>
-        <translation type="vanished">Изолировать</translation>
+        <translation>Изолировать</translation>
     </message>
     <message>
         <source>Hide</source>
-        <translation type="vanished">Скрыть</translation>
+        <translation>Скрыть</translation>
     </message>
     <message>
         <source>OK</source>
-        <translation type="vanished">ОК</translation>
+        <translation>ОК</translation>
     </message>
     <message>
         <source>Close</source>
-        <translation type="vanished">Закрыть</translation>
+        <translation>Закрыть</translation>
     </message>
     <message>
         <source>Export filter</source>
@@ -155,7 +174,7 @@
     </message>
     <message>
         <source>Select</source>
-        <translation type="vanished">Выделить</translation>
+        <translation>Выделить</translation>
     </message>
 </context>
 <context>
@@ -463,63 +482,63 @@
     <name>modelObjects</name>
     <message>
         <source>Levels</source>
-        <translation type="vanished">Уровни</translation>
+        <translation>Уровни</translation>
     </message>
     <message>
         <source>Columns</source>
-        <translation type="vanished">Колонны</translation>
+        <translation>Колонны</translation>
     </message>
     <message>
         <source>Floors</source>
-        <translation type="vanished">Перекрытия</translation>
+        <translation>Перекрытия</translation>
     </message>
     <message>
         <source>Openings</source>
-        <translation type="vanished">Проемы</translation>
+        <translation>Проемы</translation>
     </message>
     <message>
         <source>Roofs</source>
-        <translation type="vanished">Кровли</translation>
+        <translation>Кровли</translation>
     </message>
     <message>
         <source>Beams</source>
-        <translation type="vanished">Балки</translation>
+        <translation>Балки</translation>
     </message>
     <message>
         <source>Stairs</source>
-        <translation type="vanished">Лестницы</translation>
+        <translation>Лестницы</translation>
     </message>
     <message>
         <source>Ramps</source>
-        <translation type="vanished">Пандусы</translation>
+        <translation>Пандусы</translation>
     </message>
     <message>
         <source>Windows</source>
-        <translation type="vanished">Окна</translation>
+        <translation>Окна</translation>
     </message>
     <message>
         <source>Doors</source>
-        <translation type="vanished">Двери</translation>
+        <translation>Двери</translation>
     </message>
     <message>
         <source>Railings</source>
-        <translation type="vanished">Ограждения</translation>
+        <translation>Ограждения</translation>
     </message>
     <message>
         <source>Walls</source>
-        <translation type="vanished">Стены</translation>
+        <translation>Стены</translation>
     </message>
     <message>
         <source>Rooms</source>
-        <translation type="vanished">Помещения</translation>
+        <translation>Помещения</translation>
     </message>
     <message>
         <source>Isolated foundations</source>
-        <translation type="vanished">Одиночные фундаменты</translation>
+        <translation>Одиночные фундаменты</translation>
     </message>
     <message>
         <source>Wall foundations</source>
-        <translation type="vanished">Ленточные фундаменты</translation>
+        <translation>Ленточные фундаменты</translation>
     </message>
 </context>
 <context>
@@ -561,67 +580,67 @@
     <name>operator</name>
     <message>
         <source>eq</source>
-        <translation type="vanished">Равно</translation>
+        <translation>Равно</translation>
     </message>
     <message>
         <source>neq</source>
-        <translation type="vanished">Не равно</translation>
+        <translation>Не равно</translation>
     </message>
     <message>
         <source>geq</source>
-        <translation type="vanished">Больше или равно</translation>
+        <translation>Больше или равно</translation>
     </message>
     <message>
         <source>leq</source>
-        <translation type="vanished">Меньше или равно</translation>
+        <translation>Меньше или равно</translation>
     </message>
     <message>
         <source>greater</source>
-        <translation type="vanished">Больше</translation>
+        <translation>Больше</translation>
     </message>
     <message>
         <source>less</source>
-        <translation type="vanished">Меньше</translation>
+        <translation>Меньше</translation>
     </message>
     <message>
         <source>equal</source>
-        <translation type="vanished">Совпадает</translation>
+        <translation>Совпадает</translation>
     </message>
     <message>
         <source>notEqual</source>
-        <translation type="vanished">Не совпадает</translation>
+        <translation>Не совпадает</translation>
     </message>
     <message>
         <source>contain</source>
-        <translation type="vanished">Содержит</translation>
+        <translation>Содержит</translation>
     </message>
     <message>
         <source>notContain</source>
-        <translation type="vanished">Не содержит</translation>
+        <translation>Не содержит</translation>
     </message>
     <message>
         <source>prefix</source>
-        <translation type="vanished">Начинается с</translation>
+        <translation>Начинается с</translation>
     </message>
     <message>
         <source>notPrefix</source>
-        <translation type="vanished">Не начинается с</translation>
+        <translation>Не начинается с</translation>
     </message>
     <message>
         <source>suffix</source>
-        <translation type="vanished">Заканчивается на</translation>
+        <translation>Заканчивается на</translation>
     </message>
     <message>
         <source>notSuffix</source>
-        <translation type="vanished">Не заканчивается на</translation>
+        <translation>Не заканчивается на</translation>
     </message>
     <message>
         <source>all</source>
-        <translation type="vanished">Все значения</translation>
+        <translation>Все значения</translation>
     </message>
     <message>
         <source>none</source>
-        <translation type="vanished">Нет значения</translation>
+        <translation>Нет значения</translation>
     </message>
 </context>
 <context>

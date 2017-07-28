@@ -53,6 +53,11 @@
     <Filter Include="ContextMenu">
       <UniqueIdentifier>{07ba60be-5320-44a8-bae1-3c9011d2631c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Form Files">
+      <UniqueIdentifier>{99349809-55BA-4b9d-BF79-8FDBB0286EB3}</UniqueIdentifier>
+      <Extensions>ui</Extensions>
+      <ParseFiles>true</ParseFiles>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="RengaStringToQString.cpp">
@@ -304,6 +309,9 @@
     <ClInclude Include="ContextMenu.h">
       <Filter>ContextMenu</Filter>
     </ClInclude>
+    <ClInclude Include="GeneratedFiles\ui_DeleteDialog.h">
+      <Filter>Generated Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="PluginToolButtons.h">
@@ -313,15 +321,6 @@
       <Filter>RengaEvents</Filter>
     </CustomBuild>
     <CustomBuild Include="Resources\resource.qrc">
-      <Filter>Resource Files</Filter>
-    </CustomBuild>
-    <CustomBuild Include="Resources\ui\MainDialog.ui">
-      <Filter>Resource Files</Filter>
-    </CustomBuild>
-    <CustomBuild Include="Resources\ui\FilterDialog.ui">
-      <Filter>Resource Files</Filter>
-    </CustomBuild>
-    <CustomBuild Include="Resources\ui\GroupDialog.ui">
       <Filter>Resource Files</Filter>
     </CustomBuild>
     <CustomBuild Include="GroupDialog.h">
@@ -339,6 +338,18 @@
     <CustomBuild Include="ModelFilterPlugin.h" />
     <CustomBuild Include="FilterDialogButtonHandler.h">
       <Filter>PluginButtons</Filter>
+    </CustomBuild>
+    <CustomBuild Include="Resources\ui\DeleteDialog.ui">
+      <Filter>Form Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="Resources\ui\FilterDialog.ui">
+      <Filter>Form Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="Resources\ui\GroupDialog.ui">
+      <Filter>Form Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="Resources\ui\MainDialog.ui">
+      <Filter>Form Files</Filter>
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>

@@ -12,10 +12,9 @@
 struct DoubleOperatorData
 {
   DoubleOperatorData::DoubleOperatorData(const QString& operatorName, std::function<bool(double, double)> function)
-    : m_function(function)
-  {
-    m_name = QApplication::translate("operator", operatorName.toStdString().data());
-  }
+    : m_function(function),
+    m_name(operatorName)
+  {}
 
   QString m_name;
   const std::function<bool(double, double)> m_function;
@@ -24,10 +23,9 @@ struct DoubleOperatorData
 struct StringOperatorData
 {
   StringOperatorData::StringOperatorData(const QString& operatorName, std::function<bool(QString, QString)> function)
-    : m_function(function)
-  {
-    m_name = QApplication::translate("operator", operatorName.toStdString().data());
-  }
+    : m_function(function),
+    m_name(operatorName)
+  {}
 
   QString m_name;
   const std::function<bool(QString, QString)> m_function;

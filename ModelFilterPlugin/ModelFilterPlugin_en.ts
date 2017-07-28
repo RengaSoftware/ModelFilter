@@ -2,10 +2,29 @@
 <!DOCTYPE TS>
 <TS version="2.1" language="en_US">
 <context>
+    <name>DeleteDialog</name>
+    <message>
+        <source>WindowName</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>message</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>OK</source>
+        <translation type="unfinished">OK</translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation type="unfinished">Cancel</translation>
+    </message>
+</context>
+<context>
     <name>FilterDialog</name>
     <message>
         <source>WindowName</source>
-        <translation type="vanished">Filter adding</translation>
+        <translation>Filter adding</translation>
     </message>
     <message>
         <source>EditWindowName</source>
@@ -13,38 +32,38 @@
     </message>
     <message>
         <source>Name</source>
-        <translation type="vanished">Name:</translation>
+        <translation>Name:</translation>
     </message>
     <message>
         <source>Filter name</source>
-        <translation type="vanished">New filter</translation>
+        <translation>New filter</translation>
     </message>
     <message>
         <source>Add</source>
-        <translation type="vanished">Add</translation>
+        <translation>Add</translation>
     </message>
     <message>
         <source>Edit</source>
-        <translation type="vanished">Edit</translation>
+        <translation>Edit</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation type="vanished">Delete</translation>
+        <translation>Delete</translation>
     </message>
     <message>
         <source>OK</source>
-        <translation type="vanished">OK</translation>
+        <translation>OK</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="vanished">Cancel</translation>
+        <translation>Cancel</translation>
     </message>
 </context>
 <context>
     <name>GroupDialog</name>
     <message>
         <source>WindowName</source>
-        <translation type="vanished">Group adding</translation>
+        <translation>Group adding</translation>
     </message>
     <message>
         <source>EditWindowName</source>
@@ -52,50 +71,50 @@
     </message>
     <message>
         <source>Add search criteria in list below:</source>
-        <translation type="vanished">Add search criteria in list below:</translation>
+        <translation>Add search criteria in list below:</translation>
     </message>
     <message>
         <source>Object type:</source>
-        <translation type="vanished">Object type:</translation>
+        <translation>Object type:</translation>
     </message>
     <message>
         <source>Property:</source>
-        <translation type="vanished">Property:</translation>
+        <translation>Property:</translation>
     </message>
     <message>
         <source>Operator:</source>
-        <translation type="vanished">Operator:</translation>
+        <translation>Operator:</translation>
     </message>
     <message>
         <source>Value:</source>
-        <translation type="vanished">Value:</translation>
+        <translation>Value:</translation>
     </message>
     <message>
         <source>Add</source>
-        <translation type="vanished">Add</translation>
+        <translation>Add</translation>
     </message>
     <message>
         <source>All search criteria</source>
-        <translation type="vanished">All search criteria:</translation>
+        <translation>All search criteria:</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation type="vanished">Delete</translation>
+        <translation>Delete</translation>
     </message>
     <message>
         <source>OK</source>
-        <translation type="vanished">OK</translation>
+        <translation>OK</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="vanished">Cancel</translation>
+        <translation>Cancel</translation>
     </message>
 </context>
 <context>
     <name>MainDialog</name>
     <message>
         <source>WindowName</source>
-        <translation type="vanished">Filter choosing</translation>
+        <translation>Filter choosing</translation>
     </message>
     <message>
         <source>Import filter</source>
@@ -103,47 +122,47 @@
     </message>
     <message>
         <source>addToolTip</source>
-        <translation type="vanished">Add filter</translation>
+        <translation>Add filter</translation>
     </message>
     <message>
         <source>copyToolTip</source>
-        <translation type="vanished">Copy filter</translation>
+        <translation>Copy filter</translation>
     </message>
     <message>
         <source>editToolTip</source>
-        <translation type="vanished">Edit filter</translation>
+        <translation>Edit filter</translation>
     </message>
     <message>
         <source>deleteToolTip</source>
-        <translation type="vanished">Delete filter</translation>
+        <translation>Delete filter</translation>
     </message>
     <message>
         <source>exportToolTip</source>
-        <translation type="vanished">Export filter to file</translation>
+        <translation>Export filter to file</translation>
     </message>
     <message>
         <source>importToolTip</source>
-        <translation type="vanished">Import filter from file</translation>
+        <translation>Import filter from file</translation>
     </message>
     <message>
         <source>Chosen objects</source>
-        <translation type="vanished">Chosen objects</translation>
+        <translation>Chosen objects</translation>
     </message>
     <message>
         <source>Isolate</source>
-        <translation type="vanished">Isolate</translation>
+        <translation>Isolate</translation>
     </message>
     <message>
         <source>Hide</source>
-        <translation type="vanished">Hide</translation>
+        <translation>Hide</translation>
     </message>
     <message>
         <source>OK</source>
-        <translation type="vanished">OK</translation>
+        <translation>OK</translation>
     </message>
     <message>
         <source>Close</source>
-        <translation type="vanished">Close</translation>
+        <translation>Close</translation>
     </message>
     <message>
         <source>Export filter</source>
@@ -155,7 +174,7 @@
     </message>
     <message>
         <source>Select</source>
-        <translation type="vanished">Select</translation>
+        <translation>Select</translation>
     </message>
 </context>
 <context>
@@ -463,63 +482,63 @@
     <name>modelObjects</name>
     <message>
         <source>Levels</source>
-        <translation type="vanished">Levels</translation>
+        <translation>Levels</translation>
     </message>
     <message>
         <source>Columns</source>
-        <translation type="vanished">Columns</translation>
+        <translation>Columns</translation>
     </message>
     <message>
         <source>Floors</source>
-        <translation type="vanished">Floors</translation>
+        <translation>Floors</translation>
     </message>
     <message>
         <source>Openings</source>
-        <translation type="vanished">Openings</translation>
+        <translation>Openings</translation>
     </message>
     <message>
         <source>Roofs</source>
-        <translation type="vanished">Roofs</translation>
+        <translation>Roofs</translation>
     </message>
     <message>
         <source>Beams</source>
-        <translation type="vanished">Beams</translation>
+        <translation>Beams</translation>
     </message>
     <message>
         <source>Stairs</source>
-        <translation type="vanished">Stairs</translation>
+        <translation>Stairs</translation>
     </message>
     <message>
         <source>Ramps</source>
-        <translation type="vanished">Ramps</translation>
+        <translation>Ramps</translation>
     </message>
     <message>
         <source>Windows</source>
-        <translation type="vanished">Windows</translation>
+        <translation>Windows</translation>
     </message>
     <message>
         <source>Doors</source>
-        <translation type="vanished">Doors</translation>
+        <translation>Doors</translation>
     </message>
     <message>
         <source>Railings</source>
-        <translation type="vanished">Railings</translation>
+        <translation>Railings</translation>
     </message>
     <message>
         <source>Walls</source>
-        <translation type="vanished">Walls</translation>
+        <translation>Walls</translation>
     </message>
     <message>
         <source>Rooms</source>
-        <translation type="vanished">Rooms</translation>
+        <translation>Rooms</translation>
     </message>
     <message>
         <source>Isolated foundations</source>
-        <translation type="vanished">Isolated foundations</translation>
+        <translation>Isolated foundations</translation>
     </message>
     <message>
         <source>Wall foundations</source>
-        <translation type="vanished">Wall foundations</translation>
+        <translation>Wall foundations</translation>
     </message>
 </context>
 <context>
@@ -561,67 +580,67 @@
     <name>operator</name>
     <message>
         <source>eq</source>
-        <translation type="vanished">Equals</translation>
+        <translation>Equals</translation>
     </message>
     <message>
         <source>neq</source>
-        <translation type="vanished">Not equals</translation>
+        <translation>Not equals</translation>
     </message>
     <message>
         <source>geq</source>
-        <translation type="vanished">Greater or equal</translation>
+        <translation>Greater or equal</translation>
     </message>
     <message>
         <source>leq</source>
-        <translation type="vanished">Less or equal</translation>
+        <translation>Less or equal</translation>
     </message>
     <message>
         <source>greater</source>
-        <translation type="vanished">Greater</translation>
+        <translation>Greater</translation>
     </message>
     <message>
         <source>less</source>
-        <translation type="vanished">Less</translation>
+        <translation>Less</translation>
     </message>
     <message>
         <source>equal</source>
-        <translation type="vanished">Equals</translation>
+        <translation>Equals</translation>
     </message>
     <message>
         <source>notEqual</source>
-        <translation type="vanished">Not equals</translation>
+        <translation>Not equals</translation>
     </message>
     <message>
         <source>contain</source>
-        <translation type="vanished">Contains</translation>
+        <translation>Contains</translation>
     </message>
     <message>
         <source>notContain</source>
-        <translation type="vanished">Not contains</translation>
+        <translation>Not contains</translation>
     </message>
     <message>
         <source>prefix</source>
-        <translation type="vanished">Begins with</translation>
+        <translation>Begins with</translation>
     </message>
     <message>
         <source>notPrefix</source>
-        <translation type="vanished">Not begins with</translation>
+        <translation>Not begins with</translation>
     </message>
     <message>
         <source>suffix</source>
-        <translation type="vanished">Ends with</translation>
+        <translation>Ends with</translation>
     </message>
     <message>
         <source>notSuffix</source>
-        <translation type="vanished">Not ends with</translation>
+        <translation>Not ends with</translation>
     </message>
     <message>
         <source>all</source>
-        <translation type="vanished">All values</translation>
+        <translation>All values</translation>
     </message>
     <message>
         <source>none</source>
-        <translation type="vanished">No value</translation>
+        <translation>No value</translation>
     </message>
 </context>
 <context>
