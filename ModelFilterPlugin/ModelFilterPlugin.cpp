@@ -139,6 +139,12 @@ void ModelFilterPlugin::updateContextMenu()
 {
   m_pContextMenu.reset(new ContextMenu(rengaapi::ViewType::View3D, rengaapi::ContextMenuShowCase::Scene, rengabase::UUID::fromString(QStringToRengaString(view3DContextMenuId))));
 
+  if (m_pFiltersManager->count() == 0)
+  {
+    m_pContextMenu->update();
+    return;
+  }
+
   ContextMenu::NodeItem* pSelectSubTree = new ContextMenu::NodeItem(QApplication::translate("contextmenu", "Select").toStdWString());
   ContextMenu::NodeItem* pIsolateSubTree = new ContextMenu::NodeItem(QApplication::translate("contextmenu", "Isolate").toStdWString());
   ContextMenu::NodeItem* pHideSubTree = new ContextMenu::NodeItem(QApplication::translate("contextmenu", "Hide").toStdWString());
@@ -179,8 +185,8 @@ void ModelFilterPlugin::addPluginButtons(const std::wstring& pluginPath)
 void ModelFilterPlugin::onFilterButtonClicked()
 {
   MainDialog mainDialog(*m_pFiltersManager);
-  if (mainDialog.exec())
-    updateContextMenu();
+  mainDialog.exec();
+  updateContextMenu();
 }
 
 void ModelFilterPlugin::onProjectAboutToClose()
