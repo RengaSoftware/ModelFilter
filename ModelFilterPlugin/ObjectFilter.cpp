@@ -158,13 +158,15 @@ bool ObjectFilter::apply(const uint number, const SearchCriteriaData& data)
   return apply(static_cast<double>(number), data);
 }
 
-bool ObjectFilter::apply(const double value, const SearchCriteriaData& data)
+bool ObjectFilter::apply(const double propertyValue, const SearchCriteriaData& data)
 {
   if (data.m_value.length() == 0)
     return true;
 
   auto& dblOperator = OperatorData::doubleOperator(data.m_operatorType);
-  return dblOperator.m_function(value, data.m_value.toDouble());
+  auto currentSystemLocale = QLocale::system();
+  auto criteriaValue = currentSystemLocale.toDouble(data.m_value);
+  return dblOperator.m_function(propertyValue, criteriaValue);
 }
 
 bool ObjectFilter::apply(const rengabase::String& rengaString, const SearchCriteriaData& data)

@@ -43,7 +43,22 @@ void FilterData::exportData(QFile* filterFile) const
       }
       writer.writeTextElement("operatorType", QString::number(property.m_operatorType));
       writer.writeTextElement("valueType", QString::number(property.m_property.m_valueType));
-      writer.writeTextElement("value", property.m_value);
+      
+      if (property.m_property.m_valueType == ValueType::Double)
+      {
+        // hack to avoid locale based saving
+        // better to rewrite SearchCriteria, Operator and Property to use different types inside
+        QLocale currentLocale = QLocale::system();
+        QLocale englishLocale(QLocale::English);
+        double value = currentLocale.toDouble(property.m_value);
+        QString englishLocaleDoubleValueInString = englishLocale.toString(value);
+        writer.writeTextElement("value", englishLocaleDoubleValueInString);
+      }
+      else
+      {
+        writer.writeTextElement("value", property.m_value);
+      }
+      
       writer.writeEndElement();
     }
     writer.writeEndElement();
@@ -170,6 +185,16 @@ SearchCriteriaData FilterData::parseSearchCriteria(QXmlStreamReader& reader, con
   if (!typeNameList.empty() || !hasName || emptyValue)
   {
     propertyType = PropertyType::Invalid;
+  }
+
+  // hack to avoid locale based saving
+  // better to rewrite SearchCriteria, Operator and Property to use different types inside
+  if (valueType == ValueType::Double)
+  {
+    QLocale currentLocale = QLocale::system();
+    QLocale englishLocale(QLocale::English);
+    double value = englishLocale.toDouble(propertyValue);
+    propertyValue = currentLocale.toString(value);
   }
 
   return SearchCriteriaData(Property(propertyType, valueType, propertyName), operatorType, propertyValue);
