@@ -104,8 +104,8 @@ void MainDialog::onDeleteFilter()
   QString filterName = " " + m_pFiltersItemModel->itemFromIndex(m_pUi->listView->currentIndex())->text() + "?";
   QMessageBox deleteMessageBox(
     QMessageBox::Question,
-    QApplication::translate("deleteMessageBox", "title"),
-    QApplication::translate("deleteMessageBox", "text").append(filterName),
+    QApplication::translate("mf_deleteMessageBox", "title"),
+    QApplication::translate("mf_deleteMessageBox", "text").append(filterName),
     QMessageBox::Ok | QMessageBox::Cancel,
     this);
   int exitValue = deleteMessageBox.exec();
@@ -185,8 +185,8 @@ void MainDialog::onExportFilter()
     {
       QMessageBox exportMessageBox(
         QMessageBox::Icon::Critical,
-        QApplication::translate("exportMessageBox", "title"),
-        QApplication::translate("exportMessageBox", "openError"),
+        QApplication::translate("mf_exportMessageBox", "title"),
+        QApplication::translate("mf_exportMessageBox", "openError"),
         QMessageBox::Ok,
         this);
       exportMessageBox.exec();
@@ -213,8 +213,8 @@ void MainDialog::onImportFilter()
     {
       QMessageBox importMessageBox(
         QMessageBox::Icon::Critical,
-        QApplication::translate("importMessageBox", "title"),
-        QApplication::translate("importMessageBox", "openError"),
+        QApplication::translate("mf_importMessageBox", "title"),
+        QApplication::translate("mf_importMessageBox", "openError"),
         QMessageBox::Ok,
         this);
       importMessageBox.exec();
@@ -224,8 +224,8 @@ void MainDialog::onImportFilter()
     if (!filterData.isValid()) {
       QMessageBox importMessageBox(
         QMessageBox::Icon::Critical,
-        QApplication::translate("importMessageBox", "title"),
-        QApplication::translate("importMessageBox", "parseError"),
+        QApplication::translate("mf_importMessageBox", "title"),
+        QApplication::translate("mf_importMessageBox", "parseError"),
         QMessageBox::Ok,
         this);
       importMessageBox.exec();

@@ -14,17 +14,17 @@
 IsolatedFoundationProperty::IsolatedFoundationProperty()
   : ObjectProperty()
 {
-  properties = { Property(PropertyType::Name, ValueType::String, QApplication::translate("isolatedFoundation", "name")),
-    Property(PropertyType::Material, ValueType::String, QApplication::translate("isolatedFoundation", "material")),
-    Property(PropertyType::Mark, ValueType::String, QApplication::translate("isolatedFoundation", "mark")),
-    Property(PropertyType::LevelHeight, ValueType::String, QApplication::translate("isolatedFoundation", "level")),
-    Property(PropertyType::Offset, ValueType::Double, QApplication::translate("isolatedFoundation", "offset")),
-    Property(PropertyType::Width, ValueType::Double, QApplication::translate("isolatedFoundation", "overallWidth")),
-    Property(PropertyType::Depth, ValueType::Double, QApplication::translate("isolatedFoundation", "overallDepth")),
-    Property(PropertyType::Height, ValueType::Double, QApplication::translate("isolatedFoundation", "overallHeight")),
-    Property(PropertyType::FootprintArea, ValueType::Double, QApplication::translate("isolatedFoundation", "netFootprintArea")),
-    Property(PropertyType::Volume, ValueType::Double, QApplication::translate("isolatedFoundation", "netVolume")),
-    Property(PropertyType::Mass, ValueType::Double, QApplication::translate("isolatedFoundation", "mass")) };
+  properties = { Property(PropertyType::Name, ValueType::String, QApplication::translate("mf_isolatedFoundation", "name")),
+    Property(PropertyType::Material, ValueType::String, QApplication::translate("mf_isolatedFoundation", "material")),
+    Property(PropertyType::Mark, ValueType::String, QApplication::translate("mf_isolatedFoundation", "mark")),
+    Property(PropertyType::LevelHeight, ValueType::String, QApplication::translate("mf_isolatedFoundation", "level")),
+    Property(PropertyType::Offset, ValueType::Double, QApplication::translate("mf_isolatedFoundation", "offset")),
+    Property(PropertyType::Width, ValueType::Double, QApplication::translate("mf_isolatedFoundation", "overallWidth")),
+    Property(PropertyType::Depth, ValueType::Double, QApplication::translate("mf_isolatedFoundation", "overallDepth")),
+    Property(PropertyType::Height, ValueType::Double, QApplication::translate("mf_isolatedFoundation", "overallHeight")),
+    Property(PropertyType::FootprintArea, ValueType::Double, QApplication::translate("mf_isolatedFoundation", "netFootprintArea")),
+    Property(PropertyType::Volume, ValueType::Double, QApplication::translate("mf_isolatedFoundation", "netVolume")),
+    Property(PropertyType::Mass, ValueType::Double, QApplication::translate("mf_isolatedFoundation", "mass")) };
 }
 
 PropertyList IsolatedFoundationProperty::getObjectProperties()

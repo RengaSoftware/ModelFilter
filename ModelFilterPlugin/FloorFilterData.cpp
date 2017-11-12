@@ -14,16 +14,16 @@
 FloorProperty::FloorProperty()
   : ObjectProperty()
 {
-  properties = { Property(PropertyType::Name, ValueType::String, QApplication::translate("floor", "name")),
-    Property(PropertyType::Material, ValueType::String, QApplication::translate("floor", "material")),
-    Property(PropertyType::Mark, ValueType::String, QApplication::translate("floor", "mark")),
-    Property(PropertyType::LevelHeight, ValueType::String, QApplication::translate("floor", "level")),
-    Property(PropertyType::Offset, ValueType::Double, QApplication::translate("floor", "offset")),
-    Property(PropertyType::Thickness, ValueType::Double, QApplication::translate("floor", "thickness")),
-    Property(PropertyType::Volume, ValueType::Double, QApplication::translate("floor", "netVolume")),
-    Property(PropertyType::Perimeter, ValueType::Double, QApplication::translate("floor", "perimeter")),
-    Property(PropertyType::Area, ValueType::Double, QApplication::translate("floor", "netArea")),
-    Property(PropertyType::Mass, ValueType::Double, QApplication::translate("floor", "mass")) };
+  properties = { Property(PropertyType::Name, ValueType::String, QApplication::translate("mf_floor", "name")),
+    Property(PropertyType::Material, ValueType::String, QApplication::translate("mf_floor", "material")),
+    Property(PropertyType::Mark, ValueType::String, QApplication::translate("mf_floor", "mark")),
+    Property(PropertyType::LevelHeight, ValueType::String, QApplication::translate("mf_floor", "level")),
+    Property(PropertyType::Offset, ValueType::Double, QApplication::translate("mf_floor", "offset")),
+    Property(PropertyType::Thickness, ValueType::Double, QApplication::translate("mf_floor", "thickness")),
+    Property(PropertyType::Volume, ValueType::Double, QApplication::translate("mf_floor", "netVolume")),
+    Property(PropertyType::Perimeter, ValueType::Double, QApplication::translate("mf_floor", "perimeter")),
+    Property(PropertyType::Area, ValueType::Double, QApplication::translate("mf_floor", "netArea")),
+    Property(PropertyType::Mass, ValueType::Double, QApplication::translate("mf_floor", "mass")) };
 }
 
 PropertyList FloorProperty::getObjectProperties()

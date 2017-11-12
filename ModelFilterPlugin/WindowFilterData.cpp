@@ -14,14 +14,14 @@
 WindowProperty::WindowProperty()
   : ObjectProperty()
 {
-  properties = { Property(PropertyType::Name, ValueType::String, QApplication::translate("window", "name")),
-                 Property(PropertyType::Mark, ValueType::String, QApplication::translate("window", "mark")),
-                 Property(PropertyType::LevelHeight, ValueType::String, QApplication::translate("window", "level")),
-                 Property(PropertyType::Offset, ValueType::Double, QApplication::translate("window", "offset")),
-                 Property(PropertyType::Height, ValueType::Double, QApplication::translate("window", "overallHeight")),
-                 Property(PropertyType::Width, ValueType::Double, QApplication::translate("window", "overallWidth")),
-                 Property(PropertyType::Perimeter, ValueType::Double, QApplication::translate("window", "perimeter")),
-                 Property(PropertyType::Area, ValueType::Double, QApplication::translate("window", "area")) };
+  properties = { Property(PropertyType::Name, ValueType::String, QApplication::translate("mf_window", "name")),
+                 Property(PropertyType::Mark, ValueType::String, QApplication::translate("mf_window", "mark")),
+                 Property(PropertyType::LevelHeight, ValueType::String, QApplication::translate("mf_window", "level")),
+                 Property(PropertyType::Offset, ValueType::Double, QApplication::translate("mf_window", "offset")),
+                 Property(PropertyType::Height, ValueType::Double, QApplication::translate("mf_window", "overallHeight")),
+                 Property(PropertyType::Width, ValueType::Double, QApplication::translate("mf_window", "overallWidth")),
+                 Property(PropertyType::Perimeter, ValueType::Double, QApplication::translate("mf_window", "perimeter")),
+                 Property(PropertyType::Area, ValueType::Double, QApplication::translate("mf_window", "area")) };
 }
 
 PropertyList WindowProperty::getObjectProperties()

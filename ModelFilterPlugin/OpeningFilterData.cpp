@@ -14,14 +14,14 @@
 OpeningProperty::OpeningProperty()
   : ObjectProperty()
 {
-  properties = { Property(PropertyType::Name, ValueType::String, QApplication::translate("opening", "name")),
-    Property(PropertyType::Mark, ValueType::String, QApplication::translate("opening", "mark")),
-    Property(PropertyType::LevelHeight, ValueType::String, QApplication::translate("opening", "level")),
-    Property(PropertyType::Offset, ValueType::Double, QApplication::translate("opening", "offset")),
-    Property(PropertyType::Thickness, ValueType::Double, QApplication::translate("opening", "thickness")),
-    Property(PropertyType::Volume, ValueType::Double, QApplication::translate("opening", "volume")),
-    Property(PropertyType::Perimeter, ValueType::Double, QApplication::translate("opening", "perimeter")),
-    Property(PropertyType::Area , ValueType::Double, QApplication::translate("opening", "area")) };
+  properties = { Property(PropertyType::Name, ValueType::String, QApplication::translate("mf_opening", "name")),
+    Property(PropertyType::Mark, ValueType::String, QApplication::translate("mf_opening", "mark")),
+    Property(PropertyType::LevelHeight, ValueType::String, QApplication::translate("mf_opening", "level")),
+    Property(PropertyType::Offset, ValueType::Double, QApplication::translate("mf_opening", "offset")),
+    Property(PropertyType::Thickness, ValueType::Double, QApplication::translate("mf_opening", "thickness")),
+    Property(PropertyType::Volume, ValueType::Double, QApplication::translate("mf_opening", "volume")),
+    Property(PropertyType::Perimeter, ValueType::Double, QApplication::translate("mf_opening", "perimeter")),
+    Property(PropertyType::Area , ValueType::Double, QApplication::translate("mf_opening", "area")) };
 }
 
 PropertyList OpeningProperty::getObjectProperties()

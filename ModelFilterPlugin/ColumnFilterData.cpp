@@ -14,17 +14,17 @@
 ColumnProperty::ColumnProperty()
   : ObjectProperty()
 {
-  properties = { Property(PropertyType::Name, ValueType::String, QApplication::translate("column", "name")),
-    Property(PropertyType::Material, ValueType::String, QApplication::translate("column", "material")),
-    Property(PropertyType::Mark, ValueType::String, QApplication::translate("column", "mark")),
-    Property(PropertyType::LevelHeight, ValueType::String, QApplication::translate("column", "level")),
-    Property(PropertyType::Offset, ValueType::Double, QApplication::translate("column", "offset")),
-    Property(PropertyType::Length, ValueType::Double, QApplication::translate("column", "length")),
-    Property(PropertyType::Volume, ValueType::Double, QApplication::translate("column", "netVolume")),
-    Property(PropertyType::CrossSectionArea, ValueType::Double, QApplication::translate("column", "crossSectionArea")),
-    Property(PropertyType::OuterSurfaceArea, ValueType::Double, QApplication::translate("column", "outerSurfaceArea")),
-    Property(PropertyType::Perimeter, ValueType::Double, QApplication::translate("column", "perimeter")),
-    Property(PropertyType::Mass, ValueType::Double, QApplication::translate("column", "mass")) };
+  properties = { Property(PropertyType::Name, ValueType::String, QApplication::translate("mf_column", "name")),
+    Property(PropertyType::Material, ValueType::String, QApplication::translate("mf_column", "material")),
+    Property(PropertyType::Mark, ValueType::String, QApplication::translate("mf_column", "mark")),
+    Property(PropertyType::LevelHeight, ValueType::String, QApplication::translate("mf_column", "level")),
+    Property(PropertyType::Offset, ValueType::Double, QApplication::translate("mf_column", "offset")),
+    Property(PropertyType::Length, ValueType::Double, QApplication::translate("mf_column", "length")),
+    Property(PropertyType::Volume, ValueType::Double, QApplication::translate("mf_column", "netVolume")),
+    Property(PropertyType::CrossSectionArea, ValueType::Double, QApplication::translate("mf_column", "crossSectionArea")),
+    Property(PropertyType::OuterSurfaceArea, ValueType::Double, QApplication::translate("mf_column", "outerSurfaceArea")),
+    Property(PropertyType::Perimeter, ValueType::Double, QApplication::translate("mf_column", "perimeter")),
+    Property(PropertyType::Mass, ValueType::Double, QApplication::translate("mf_column", "mass")) };
 }
 
 PropertyList ColumnProperty::getObjectProperties()

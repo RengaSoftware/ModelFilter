@@ -14,21 +14,21 @@
 StairProperty::StairProperty()
   : ObjectProperty()
 {
-  properties = { Property(PropertyType::Name, ValueType::String, QApplication::translate("stair", "name")),
-    Property(PropertyType::Material, ValueType::String, QApplication::translate("stair", "material")),
-    Property(PropertyType::Mark, ValueType::String, QApplication::translate("stair", "mark")),
-    Property(PropertyType::LevelHeight, ValueType::String, QApplication::translate("stair", "level")),
-    Property(PropertyType::Offset, ValueType::Double, QApplication::translate("stair", "offset")),
-    Property(PropertyType::Height, ValueType::Double, QApplication::translate("stair", "height")),
-    Property(PropertyType::Width, ValueType::Double, QApplication::translate("stair", "width")),
-    Property(PropertyType::Volume, ValueType::Double, QApplication::translate("stair", "netVolume")),
-    Property(PropertyType::NumberOfRiser, ValueType::Double, QApplication::translate("stair", "numberOfRiser")),
-    Property(PropertyType::NumberOfTreads, ValueType::Double, QApplication::translate("stair", "numberOfTreads")),
-    Property(PropertyType::RiserHeight, ValueType::Double, QApplication::translate("stair", "riserHeight")),
-    Property(PropertyType::TreadLength, ValueType::Double, QApplication::translate("stair", "treadLength")),
-    Property(PropertyType::Area, ValueType::Double, QApplication::translate("stair", "netArea")),
-    Property(PropertyType::FloorArea, ValueType::Double, QApplication::translate("stair", "netFloorArea")),
-    Property(PropertyType::Mass, ValueType::Double, QApplication::translate("stair", "mass")) };
+  properties = { Property(PropertyType::Name, ValueType::String, QApplication::translate("mf_stair", "name")),
+    Property(PropertyType::Material, ValueType::String, QApplication::translate("mf_stair", "material")),
+    Property(PropertyType::Mark, ValueType::String, QApplication::translate("mf_stair", "mark")),
+    Property(PropertyType::LevelHeight, ValueType::String, QApplication::translate("mf_stair", "level")),
+    Property(PropertyType::Offset, ValueType::Double, QApplication::translate("mf_stair", "offset")),
+    Property(PropertyType::Height, ValueType::Double, QApplication::translate("mf_stair", "height")),
+    Property(PropertyType::Width, ValueType::Double, QApplication::translate("mf_stair", "width")),
+    Property(PropertyType::Volume, ValueType::Double, QApplication::translate("mf_stair", "netVolume")),
+    Property(PropertyType::NumberOfRiser, ValueType::Double, QApplication::translate("mf_stair", "numberOfRiser")),
+    Property(PropertyType::NumberOfTreads, ValueType::Double, QApplication::translate("mf_stair", "numberOfTreads")),
+    Property(PropertyType::RiserHeight, ValueType::Double, QApplication::translate("mf_stair", "riserHeight")),
+    Property(PropertyType::TreadLength, ValueType::Double, QApplication::translate("mf_stair", "treadLength")),
+    Property(PropertyType::Area, ValueType::Double, QApplication::translate("mf_stair", "netArea")),
+    Property(PropertyType::FloorArea, ValueType::Double, QApplication::translate("mf_stair", "netFloorArea")),
+    Property(PropertyType::Mass, ValueType::Double, QApplication::translate("mf_stair", "mass")) };
 }
 
 PropertyList StairProperty::getObjectProperties()

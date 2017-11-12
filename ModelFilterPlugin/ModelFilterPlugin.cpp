@@ -145,9 +145,9 @@ void ModelFilterPlugin::updateContextMenu()
     return;
   }
 
-  ContextMenu::NodeItem* pSelectSubTree = new ContextMenu::NodeItem(QApplication::translate("contextmenu", "Select").toStdWString());
-  ContextMenu::NodeItem* pIsolateSubTree = new ContextMenu::NodeItem(QApplication::translate("contextmenu", "Isolate").toStdWString());
-  ContextMenu::NodeItem* pHideSubTree = new ContextMenu::NodeItem(QApplication::translate("contextmenu", "Hide").toStdWString());
+  ContextMenu::NodeItem* pSelectSubTree = new ContextMenu::NodeItem(QApplication::translate("mf_contextmenu", "Select").toStdWString());
+  ContextMenu::NodeItem* pIsolateSubTree = new ContextMenu::NodeItem(QApplication::translate("mf_contextmenu", "Isolate").toStdWString());
+  ContextMenu::NodeItem* pHideSubTree = new ContextMenu::NodeItem(QApplication::translate("mf_contextmenu", "Hide").toStdWString());
 
   IFilterAlgoPtr selectAlgo(new SelectAlgo());
   IFilterAlgoPtr isolateAlgo(new IsolateAlgo());

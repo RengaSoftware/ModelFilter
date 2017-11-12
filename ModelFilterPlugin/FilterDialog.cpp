@@ -33,9 +33,9 @@ FilterDialog::FilterDialog(QDialog* parent)
   QHeaderView* pHeader = m_pUi->treeView->header();
   pHeader->setSelectionMode(QAbstractItemView::SingleSelection);
   const std::vector<QString> headerLabels = {
-    QApplication::translate("header", "property"),
-    QApplication::translate("header", "operator"),
-    QApplication::translate("header", "value")
+    QApplication::translate("mf_header", "property"),
+    QApplication::translate("mf_header", "operator"),
+    QApplication::translate("mf_header", "value")
   };
   for (size_t i = 0; i < c_treeViewColumnsCount; i++)
   {

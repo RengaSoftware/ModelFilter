@@ -14,9 +14,9 @@
 LevelProperty::LevelProperty()
   : ObjectProperty()
 {
-  properties = { Property(PropertyType::Name, ValueType::String, QApplication::translate("level", "name")),
-    Property(PropertyType::Elevation, ValueType::Double, QApplication::translate("level", "elevation")),
-    Property(PropertyType::LevelName, ValueType::String, QApplication::translate("level", "levelName")) };
+  properties = { Property(PropertyType::Name, ValueType::String, QApplication::translate("mf_level", "name")),
+    Property(PropertyType::Elevation, ValueType::Double, QApplication::translate("mf_level", "elevation")),
+    Property(PropertyType::LevelName, ValueType::String, QApplication::translate("mf_level", "levelName")) };
 }
 
 PropertyList LevelProperty::getObjectProperties()

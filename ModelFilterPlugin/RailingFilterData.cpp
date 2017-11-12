@@ -14,12 +14,12 @@
 RailingProperty::RailingProperty()
   : ObjectProperty()
 {
-  properties = { Property(PropertyType::Name, ValueType::String, QApplication::translate("railing", "name")),
-    Property(PropertyType::Mark, ValueType::String, QApplication::translate("railing", "mark")),
-    Property(PropertyType::LevelHeight, ValueType::String, QApplication::translate("railing", "level")),
-    Property(PropertyType::Offset, ValueType::Double, QApplication::translate("railing", "offset")),
-    Property(PropertyType::Height, ValueType::Double, QApplication::translate("railing", "height")),
-    Property(PropertyType::Length, ValueType::Double, QApplication::translate("railing", "length")) };
+  properties = { Property(PropertyType::Name, ValueType::String, QApplication::translate("mf_railing", "name")),
+    Property(PropertyType::Mark, ValueType::String, QApplication::translate("mf_railing", "mark")),
+    Property(PropertyType::LevelHeight, ValueType::String, QApplication::translate("mf_railing", "level")),
+    Property(PropertyType::Offset, ValueType::Double, QApplication::translate("mf_railing", "offset")),
+    Property(PropertyType::Height, ValueType::Double, QApplication::translate("mf_railing", "height")),
+    Property(PropertyType::Length, ValueType::Double, QApplication::translate("mf_railing", "length")) };
 
 }
 

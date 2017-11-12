@@ -14,25 +14,25 @@ std::shared_ptr<OperatorData> OperatorData::m_instance = nullptr;
 
 OperatorData::OperatorData()
   : m_stringOperators({
-  std::make_pair(OperatorType::Equal, StringOperatorData(QApplication::translate("operator", "equal"), [](const QString one, const QString two) {return one.compare(two) == 0; })),
-  std::make_pair(OperatorType::NotEqual, StringOperatorData(QApplication::translate("operator", "notEqual"), [](const QString one, const QString two) {return one.compare(two) != 0; })),
-  std::make_pair(OperatorType::Contain, StringOperatorData(QApplication::translate("operator", "contain"), [](const QString one, const QString two) {return one.contains(two); })),
-  std::make_pair(OperatorType::NotContain, StringOperatorData(QApplication::translate("operator", "notContain"), [](const QString one, const QString two) {return !one.contains(two); })),
-  std::make_pair(OperatorType::Prefix, StringOperatorData(QApplication::translate("operator", "prefix"), [](const QString one, const QString two) {return one.startsWith(two); })),
-  std::make_pair(OperatorType::NotPrefix, StringOperatorData(QApplication::translate("operator", "notPrefix"), [](const QString one, const QString two) {return !one.startsWith(two); })),
-  std::make_pair(OperatorType::Suffix, StringOperatorData(QApplication::translate("operator", "suffix"), [](const QString one, const QString two) {return one.endsWith(two); })),
-  std::make_pair(OperatorType::NotSuffix, StringOperatorData(QApplication::translate("operator", "notSuffix"), [](const QString one, const QString two) {return !one.endsWith(two); })),
-  std::make_pair(OperatorType::All, StringOperatorData(QApplication::translate("operator", "all"), [](const QString, const QString) {return true; })),
-  std::make_pair(OperatorType::None, StringOperatorData(QApplication::translate("operator", "none"), [](const QString, const QString) {return false; })) })
+  std::make_pair(OperatorType::Equal, StringOperatorData(QApplication::translate("mf_operator", "equal"), [](const QString one, const QString two) {return one.compare(two) == 0; })),
+  std::make_pair(OperatorType::NotEqual, StringOperatorData(QApplication::translate("mf_operator", "notEqual"), [](const QString one, const QString two) {return one.compare(two) != 0; })),
+  std::make_pair(OperatorType::Contain, StringOperatorData(QApplication::translate("mf_operator", "contain"), [](const QString one, const QString two) {return one.contains(two); })),
+  std::make_pair(OperatorType::NotContain, StringOperatorData(QApplication::translate("mf_operator", "notContain"), [](const QString one, const QString two) {return !one.contains(two); })),
+  std::make_pair(OperatorType::Prefix, StringOperatorData(QApplication::translate("mf_operator", "prefix"), [](const QString one, const QString two) {return one.startsWith(two); })),
+  std::make_pair(OperatorType::NotPrefix, StringOperatorData(QApplication::translate("mf_operator", "notPrefix"), [](const QString one, const QString two) {return !one.startsWith(two); })),
+  std::make_pair(OperatorType::Suffix, StringOperatorData(QApplication::translate("mf_operator", "suffix"), [](const QString one, const QString two) {return one.endsWith(two); })),
+  std::make_pair(OperatorType::NotSuffix, StringOperatorData(QApplication::translate("mf_operator", "notSuffix"), [](const QString one, const QString two) {return !one.endsWith(two); })),
+  std::make_pair(OperatorType::All, StringOperatorData(QApplication::translate("mf_operator", "all"), [](const QString, const QString) {return true; })),
+  std::make_pair(OperatorType::None, StringOperatorData(QApplication::translate("mf_operator", "none"), [](const QString, const QString) {return false; })) })
   , m_doubleOperators({
-  std::make_pair(OperatorType::EQ, DoubleOperatorData(QApplication::translate("operator", "eq"), DoublePrecise::eq)),
-  std::make_pair(OperatorType::NEQ, DoubleOperatorData(QApplication::translate("operator", "neq"), DoublePrecise::neq)),
-  std::make_pair(OperatorType::GEQ, DoubleOperatorData(QApplication::translate("operator", "geq"), DoublePrecise::geq)),
-  std::make_pair(OperatorType::LEQ, DoubleOperatorData(QApplication::translate("operator", "leq"), DoublePrecise::leq)),
-  std::make_pair(OperatorType::GR, DoubleOperatorData(QApplication::translate("operator", "greater"), DoublePrecise::greater)),
-  std::make_pair(OperatorType::LS, DoubleOperatorData(QApplication::translate("operator", "less"), DoublePrecise::less)),
-  std::make_pair(OperatorType::All, DoubleOperatorData(QApplication::translate("operator", "all"), [](const double, const double) {return true; })),
-  std::make_pair(OperatorType::None, DoubleOperatorData(QApplication::translate("operator", "none"), [](const double, const double) {return false; })) })
+  std::make_pair(OperatorType::EQ, DoubleOperatorData(QApplication::translate("mf_operator", "eq"), DoublePrecise::eq)),
+  std::make_pair(OperatorType::NEQ, DoubleOperatorData(QApplication::translate("mf_operator", "neq"), DoublePrecise::neq)),
+  std::make_pair(OperatorType::GEQ, DoubleOperatorData(QApplication::translate("mf_operator", "geq"), DoublePrecise::geq)),
+  std::make_pair(OperatorType::LEQ, DoubleOperatorData(QApplication::translate("mf_operator", "leq"), DoublePrecise::leq)),
+  std::make_pair(OperatorType::GR, DoubleOperatorData(QApplication::translate("mf_operator", "greater"), DoublePrecise::greater)),
+  std::make_pair(OperatorType::LS, DoubleOperatorData(QApplication::translate("mf_operator", "less"), DoublePrecise::less)),
+  std::make_pair(OperatorType::All, DoubleOperatorData(QApplication::translate("mf_operator", "all"), [](const double, const double) {return true; })),
+  std::make_pair(OperatorType::None, DoubleOperatorData(QApplication::translate("mf_operator", "none"), [](const double, const double) {return false; })) })
 {}
 
 std::shared_ptr<OperatorData> OperatorData::Instance()

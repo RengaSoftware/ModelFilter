@@ -14,15 +14,15 @@
 RoofProperty::RoofProperty()
   : ObjectProperty()
 {
-  properties = { Property(PropertyType::Name, ValueType::String, QApplication::translate("roof", "name")),
-    Property(PropertyType::Material, ValueType::String, QApplication::translate("roof", "material")),
-    Property(PropertyType::Mark, ValueType::String, QApplication::translate("roof", "mark")),
-    Property(PropertyType::LevelHeight, ValueType::String, QApplication::translate("roof", "level")),
-    Property(PropertyType::Offset, ValueType::Double, QApplication::translate("roof", "offset")),
-    Property(PropertyType::Thickness, ValueType::Double, QApplication::translate("roof", "thickness")),
-    Property(PropertyType::Volume, ValueType::Double, QApplication::translate("roof", "netVolume")),
-    Property(PropertyType::TotalSurfaceArea, ValueType::Double, QApplication::translate("roof", "totalSurfaceArea")),
-    Property(PropertyType::Mass, ValueType::Double, QApplication::translate("roof", "mass")) };
+  properties = { Property(PropertyType::Name, ValueType::String, QApplication::translate("mf_roof", "name")),
+    Property(PropertyType::Material, ValueType::String, QApplication::translate("mf_roof", "material")),
+    Property(PropertyType::Mark, ValueType::String, QApplication::translate("mf_roof", "mark")),
+    Property(PropertyType::LevelHeight, ValueType::String, QApplication::translate("mf_roof", "level")),
+    Property(PropertyType::Offset, ValueType::Double, QApplication::translate("mf_roof", "offset")),
+    Property(PropertyType::Thickness, ValueType::Double, QApplication::translate("mf_roof", "thickness")),
+    Property(PropertyType::Volume, ValueType::Double, QApplication::translate("mf_roof", "netVolume")),
+    Property(PropertyType::TotalSurfaceArea, ValueType::Double, QApplication::translate("mf_roof", "totalSurfaceArea")),
+    Property(PropertyType::Mass, ValueType::Double, QApplication::translate("mf_roof", "mass")) };
 }
 
 PropertyList RoofProperty::getObjectProperties()

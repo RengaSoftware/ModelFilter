@@ -14,18 +14,18 @@
 RampProperty::RampProperty()
   : ObjectProperty()
 {
-  properties = { Property(PropertyType::Name, ValueType::String, QApplication::translate("ramp", "name")),
-    Property(PropertyType::Material, ValueType::String, QApplication::translate("ramp", "material")),
-    Property(PropertyType::Mark, ValueType::String, QApplication::translate("ramp", "mark")),
-    Property(PropertyType::LevelHeight, ValueType::String, QApplication::translate("ramp", "level")),
-    Property(PropertyType::Offset, ValueType::Double, QApplication::translate("ramp", "offset")),
-    Property(PropertyType::Height, ValueType::Double, QApplication::translate("ramp", "height")),
-    Property(PropertyType::Width, ValueType::Double, QApplication::translate("ramp", "width")),
-    Property(PropertyType::Thickness, ValueType::Double, QApplication::translate("ramp", "thickness")),
-    Property(PropertyType::Volume, ValueType::Double, QApplication::translate("ramp", "netVolume")),
-    Property(PropertyType::Area, ValueType::Double, QApplication::translate("ramp", "netArea")),
-    Property(PropertyType::FloorArea, ValueType::Double, QApplication::translate("ramp", "netFloorArea")),
-    Property(PropertyType::Mass, ValueType::Double, QApplication::translate("ramp", "mass")) };
+  properties = { Property(PropertyType::Name, ValueType::String, QApplication::translate("mf_ramp", "name")),
+    Property(PropertyType::Material, ValueType::String, QApplication::translate("mf_ramp", "material")),
+    Property(PropertyType::Mark, ValueType::String, QApplication::translate("mf_ramp", "mark")),
+    Property(PropertyType::LevelHeight, ValueType::String, QApplication::translate("mf_ramp", "level")),
+    Property(PropertyType::Offset, ValueType::Double, QApplication::translate("mf_ramp", "offset")),
+    Property(PropertyType::Height, ValueType::Double, QApplication::translate("mf_ramp", "height")),
+    Property(PropertyType::Width, ValueType::Double, QApplication::translate("mf_ramp", "width")),
+    Property(PropertyType::Thickness, ValueType::Double, QApplication::translate("mf_ramp", "thickness")),
+    Property(PropertyType::Volume, ValueType::Double, QApplication::translate("mf_ramp", "netVolume")),
+    Property(PropertyType::Area, ValueType::Double, QApplication::translate("mf_ramp", "netArea")),
+    Property(PropertyType::FloorArea, ValueType::Double, QApplication::translate("mf_ramp", "netFloorArea")),
+    Property(PropertyType::Mass, ValueType::Double, QApplication::translate("mf_ramp", "mass")) };
 }
 
 PropertyList RampProperty::getObjectProperties()

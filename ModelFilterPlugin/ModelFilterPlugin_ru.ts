@@ -178,7 +178,7 @@
     </message>
 </context>
 <context>
-    <name>beam</name>
+    <name>mf_beam</name>
     <message>
         <source>name</source>
         <translation>Имя</translation>
@@ -225,7 +225,7 @@
     </message>
 </context>
 <context>
-    <name>column</name>
+    <name>mf_column</name>
     <message>
         <source>name</source>
         <translation>Имя</translation>
@@ -272,7 +272,7 @@
     </message>
 </context>
 <context>
-    <name>contextmenu</name>
+    <name>mf_contextmenu</name>
     <message>
         <source>Isolate</source>
         <translation>Изолировать</translation>
@@ -287,7 +287,7 @@
     </message>
 </context>
 <context>
-    <name>deleteMessageBox</name>
+    <name>mf_deleteMessageBox</name>
     <message>
         <source>title</source>
         <translation>Удаление фильтра</translation>
@@ -298,7 +298,7 @@
     </message>
 </context>
 <context>
-    <name>door</name>
+    <name>mf_door</name>
     <message>
         <source>name</source>
         <translation>Имя</translation>
@@ -333,7 +333,7 @@
     </message>
 </context>
 <context>
-    <name>exportMessageBox</name>
+    <name>mf_exportMessageBox</name>
     <message>
         <source>title</source>
         <translation>Ошибка экспорта</translation>
@@ -344,7 +344,7 @@
     </message>
 </context>
 <context>
-    <name>floor</name>
+    <name>mf_floor</name>
     <message>
         <source>name</source>
         <translation>Имя</translation>
@@ -387,7 +387,7 @@
     </message>
 </context>
 <context>
-    <name>header</name>
+    <name>mf_header</name>
     <message>
         <source>property</source>
         <translation>Свойство</translation>
@@ -402,7 +402,7 @@
     </message>
 </context>
 <context>
-    <name>importMessageBox</name>
+    <name>mf_importMessageBox</name>
     <message>
         <source>title</source>
         <translation>Ошибка импорта</translation>
@@ -417,7 +417,7 @@
     </message>
 </context>
 <context>
-    <name>isolatedFoundation</name>
+    <name>mf_isolatedFoundation</name>
     <message>
         <source>name</source>
         <translation>Имя</translation>
@@ -464,7 +464,7 @@
     </message>
 </context>
 <context>
-    <name>level</name>
+    <name>mf_level</name>
     <message>
         <source>name</source>
         <translation>Имя</translation>
@@ -479,7 +479,7 @@
     </message>
 </context>
 <context>
-    <name>modelObjects</name>
+    <name>mf_modelObjects</name>
     <message>
         <source>Levels</source>
         <translation>Уровни</translation>
@@ -542,7 +542,7 @@
     </message>
 </context>
 <context>
-    <name>opening</name>
+    <name>mf_opening</name>
     <message>
         <source>name</source>
         <translation>Имя</translation>
@@ -577,7 +577,7 @@
     </message>
 </context>
 <context>
-    <name>operator</name>
+    <name>mf_operator</name>
     <message>
         <source>eq</source>
         <translation>Равно</translation>
@@ -644,7 +644,7 @@
     </message>
 </context>
 <context>
-    <name>railing</name>
+    <name>mf_railing</name>
     <message>
         <source>name</source>
         <translation>Имя</translation>
@@ -671,7 +671,7 @@
     </message>
 </context>
 <context>
-    <name>ramp</name>
+    <name>mf_ramp</name>
     <message>
         <source>name</source>
         <translation>Имя</translation>
@@ -722,7 +722,7 @@
     </message>
 </context>
 <context>
-    <name>roof</name>
+    <name>mf_roof</name>
     <message>
         <source>name</source>
         <translation>Имя</translation>
@@ -761,7 +761,7 @@
     </message>
 </context>
 <context>
-    <name>room</name>
+    <name>mf_room</name>
     <message>
         <source>name</source>
         <translation>Имя</translation>
@@ -800,7 +800,7 @@
     </message>
 </context>
 <context>
-    <name>stair</name>
+    <name>mf_stair</name>
     <message>
         <source>name</source>
         <translation>Имя</translation>
@@ -863,7 +863,7 @@
     </message>
 </context>
 <context>
-    <name>wall</name>
+    <name>mf_wall</name>
     <message>
         <source>name</source>
         <translation>Имя</translation>
@@ -914,7 +914,7 @@
     </message>
 </context>
 <context>
-    <name>wallFoundation</name>
+    <name>mf_wallFoundation</name>
     <message>
         <source>name</source>
         <translation>Имя</translation>
@@ -965,7 +965,7 @@
     </message>
 </context>
 <context>
-    <name>window</name>
+    <name>mf_window</name>
     <message>
         <source>name</source>
         <translation>Имя</translation>

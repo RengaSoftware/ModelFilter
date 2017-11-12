@@ -15,17 +15,17 @@
 BeamProperty::BeamProperty()
   : ObjectProperty()
 {
-  properties = { Property(PropertyType::Name, ValueType::String, QApplication::translate("beam", "name")),
-    Property(PropertyType::Material, ValueType::String, QApplication::translate("beam", "material")),
-    Property(PropertyType::Mark, ValueType::String, QApplication::translate("beam", "mark")),
-    Property(PropertyType::LevelHeight, ValueType::String, QApplication::translate("beam", "level")),
-    Property(PropertyType::Offset, ValueType::Double, QApplication::translate("beam", "offset")),
-    Property(PropertyType::Length, ValueType::Double, QApplication::translate("beam", "length")),
-    Property(PropertyType::Volume, ValueType::Double, QApplication::translate("beam", "netVolume")),
-    Property(PropertyType::CrossSectionArea, ValueType::Double, QApplication::translate("beam", "crossSectionArea")),
-    Property(PropertyType::OuterSurfaceArea, ValueType::Double, QApplication::translate("beam", "outerSurfaceArea")),
-    Property(PropertyType::Perimeter, ValueType::Double, QApplication::translate("beam", "perimeter")),
-    Property(PropertyType::Mass, ValueType::Double, QApplication::translate("beam", "mass")) };
+  properties = { Property(PropertyType::Name, ValueType::String, QApplication::translate("mf_beam", "name")),
+    Property(PropertyType::Material, ValueType::String, QApplication::translate("mf_beam", "material")),
+    Property(PropertyType::Mark, ValueType::String, QApplication::translate("mf_beam", "mark")),
+    Property(PropertyType::LevelHeight, ValueType::String, QApplication::translate("mf_beam", "level")),
+    Property(PropertyType::Offset, ValueType::Double, QApplication::translate("mf_beam", "offset")),
+    Property(PropertyType::Length, ValueType::Double, QApplication::translate("mf_beam", "length")),
+    Property(PropertyType::Volume, ValueType::Double, QApplication::translate("mf_beam", "netVolume")),
+    Property(PropertyType::CrossSectionArea, ValueType::Double, QApplication::translate("mf_beam", "crossSectionArea")),
+    Property(PropertyType::OuterSurfaceArea, ValueType::Double, QApplication::translate("mf_beam", "outerSurfaceArea")),
+    Property(PropertyType::Perimeter, ValueType::Double, QApplication::translate("mf_beam", "perimeter")),
+    Property(PropertyType::Mass, ValueType::Double, QApplication::translate("mf_beam", "mass")) };
 
 }
 

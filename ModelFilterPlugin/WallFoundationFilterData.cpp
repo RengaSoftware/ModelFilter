@@ -14,18 +14,18 @@
 WallFoundationProperty::WallFoundationProperty()
   : ObjectProperty()
 {
-  properties = { Property(PropertyType::Name, ValueType::String, QApplication::translate("wallFoundation", "name")),
-    Property(PropertyType::Material, ValueType::String, QApplication::translate("wallFoundation", "material")),
-    Property(PropertyType::Mark, ValueType::String, QApplication::translate("wallFoundation", "mark")),
-    Property(PropertyType::LevelHeight, ValueType::String, QApplication::translate("wallFoundation", "level")),
-    Property(PropertyType::Offset, ValueType::Double, QApplication::translate("wallFoundation", "offset")),
-    Property(PropertyType::Width, ValueType::Double, QApplication::translate("wallFoundation", "overallWidth")),
-    Property(PropertyType::Height, ValueType::Double, QApplication::translate("wallFoundation", "overallHeight")),
-    Property(PropertyType::Length, ValueType::Double, QApplication::translate("wallFoundation", "length")),
-    Property(PropertyType::FootprintArea, ValueType::Double, QApplication::translate("wallFoundation", "netFootprintArea")),
-    Property(PropertyType::SideArea, ValueType::Double, QApplication::translate("wallFoundation", "netSideArea")),
-    Property(PropertyType::Volume, ValueType::Double, QApplication::translate("wallFoundation", "netVolume")),
-    Property(PropertyType::Mass, ValueType::Double, QApplication::translate("wallFoundation", "mass")) };
+  properties = { Property(PropertyType::Name, ValueType::String, QApplication::translate("mf_wallFoundation", "name")),
+    Property(PropertyType::Material, ValueType::String, QApplication::translate("mf_wallFoundation", "material")),
+    Property(PropertyType::Mark, ValueType::String, QApplication::translate("mf_wallFoundation", "mark")),
+    Property(PropertyType::LevelHeight, ValueType::String, QApplication::translate("mf_wallFoundation", "level")),
+    Property(PropertyType::Offset, ValueType::Double, QApplication::translate("mf_wallFoundation", "offset")),
+    Property(PropertyType::Width, ValueType::Double, QApplication::translate("mf_wallFoundation", "overallWidth")),
+    Property(PropertyType::Height, ValueType::Double, QApplication::translate("mf_wallFoundation", "overallHeight")),
+    Property(PropertyType::Length, ValueType::Double, QApplication::translate("mf_wallFoundation", "length")),
+    Property(PropertyType::FootprintArea, ValueType::Double, QApplication::translate("mf_wallFoundation", "netFootprintArea")),
+    Property(PropertyType::SideArea, ValueType::Double, QApplication::translate("mf_wallFoundation", "netSideArea")),
+    Property(PropertyType::Volume, ValueType::Double, QApplication::translate("mf_wallFoundation", "netVolume")),
+    Property(PropertyType::Mass, ValueType::Double, QApplication::translate("mf_wallFoundation", "mass")) };
 }
 
 PropertyList WallFoundationProperty::getObjectProperties()

@@ -14,18 +14,18 @@
 WallProperty::WallProperty()
   : ObjectProperty()
 {
-  properties = { Property(PropertyType::Name, ValueType::String, QApplication::translate("wall", "name")),
-    Property(PropertyType::Material, ValueType::String, QApplication::translate("wall", "material")),
-    Property(PropertyType::Mark, ValueType::String, QApplication::translate("wall", "mark")),
-    Property(PropertyType::LevelHeight, ValueType::String, QApplication::translate("wall", "level")),
-    Property(PropertyType::Offset, ValueType::Double, QApplication::translate("wall", "offset")),
-    Property(PropertyType::Length, ValueType::Double, QApplication::translate("wall", "length")),
-    Property(PropertyType::Thickness, ValueType::Double, QApplication::translate("wall", "thickness")),
-    Property(PropertyType::Height, ValueType::Double, QApplication::translate("wall", "height")),
-    Property(PropertyType::Volume, ValueType::Double, QApplication::translate("wall", "netVolume")),
-    Property(PropertyType::FootprintArea, ValueType::Double, QApplication::translate("wall", "netFootprintArea")),
-    Property(PropertyType::SideArea, ValueType::Double, QApplication::translate("wall", "netSideArea")),
-    Property(PropertyType::Mass, ValueType::Double, QApplication::translate("wall", "mass")) };
+  properties = { Property(PropertyType::Name, ValueType::String, QApplication::translate("mf_wall", "name")),
+    Property(PropertyType::Material, ValueType::String, QApplication::translate("mf_wall", "material")),
+    Property(PropertyType::Mark, ValueType::String, QApplication::translate("mf_wall", "mark")),
+    Property(PropertyType::LevelHeight, ValueType::String, QApplication::translate("mf_wall", "level")),
+    Property(PropertyType::Offset, ValueType::Double, QApplication::translate("mf_wall", "offset")),
+    Property(PropertyType::Length, ValueType::Double, QApplication::translate("mf_wall", "length")),
+    Property(PropertyType::Thickness, ValueType::Double, QApplication::translate("mf_wall", "thickness")),
+    Property(PropertyType::Height, ValueType::Double, QApplication::translate("mf_wall", "height")),
+    Property(PropertyType::Volume, ValueType::Double, QApplication::translate("mf_wall", "netVolume")),
+    Property(PropertyType::FootprintArea, ValueType::Double, QApplication::translate("mf_wall", "netFootprintArea")),
+    Property(PropertyType::SideArea, ValueType::Double, QApplication::translate("mf_wall", "netSideArea")),
+    Property(PropertyType::Mass, ValueType::Double, QApplication::translate("mf_wall", "mass")) };
 }
 
 PropertyList WallProperty::getObjectProperties()

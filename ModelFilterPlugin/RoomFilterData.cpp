@@ -14,15 +14,15 @@
 RoomProperty::RoomProperty()
   : ObjectProperty()
 {
-  properties = { Property(PropertyType::Name, ValueType::String, QApplication::translate("room", "name")),
-    Property(PropertyType::RoomNumber, ValueType::String, QApplication::translate("room", "roomNumber")),
-    Property(PropertyType::LevelHeight, ValueType::String, QApplication::translate("room", "level")),
-    Property(PropertyType::Offset, ValueType::Double, QApplication::translate("room", "offset")),
-    Property(PropertyType::Height, ValueType::Double, QApplication::translate("room", "nominalHeight")),
-    Property(PropertyType::Volume, ValueType::Double, QApplication::translate("room", "grossVolume")),
-    Property(PropertyType::FloorArea, ValueType::Double, QApplication::translate("room", "grossFloorArea")),
-    Property(PropertyType::Perimeter, ValueType::Double, QApplication::translate("room", "grossPerimeter")),
-    Property(PropertyType::RoomName, ValueType::String, QApplication::translate("room", "roomName")) };
+  properties = { Property(PropertyType::Name, ValueType::String, QApplication::translate("mf_room", "name")),
+    Property(PropertyType::RoomNumber, ValueType::String, QApplication::translate("mf_room", "roomNumber")),
+    Property(PropertyType::LevelHeight, ValueType::String, QApplication::translate("mf_room", "level")),
+    Property(PropertyType::Offset, ValueType::Double, QApplication::translate("mf_room", "offset")),
+    Property(PropertyType::Height, ValueType::Double, QApplication::translate("mf_room", "nominalHeight")),
+    Property(PropertyType::Volume, ValueType::Double, QApplication::translate("mf_room", "grossVolume")),
+    Property(PropertyType::FloorArea, ValueType::Double, QApplication::translate("mf_room", "grossFloorArea")),
+    Property(PropertyType::Perimeter, ValueType::Double, QApplication::translate("mf_room", "grossPerimeter")),
+    Property(PropertyType::RoomName, ValueType::String, QApplication::translate("mf_room", "roomName")) };
 }
 
 PropertyList RoomProperty::getObjectProperties()
