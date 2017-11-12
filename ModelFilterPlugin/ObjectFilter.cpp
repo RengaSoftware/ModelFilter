@@ -164,8 +164,11 @@ bool ObjectFilter::apply(const double propertyValue, const SearchCriteriaData& d
     return true;
 
   auto& dblOperator = OperatorData::doubleOperator(data.m_operatorType);
-  auto currentSystemLocale = QLocale::system();
-  auto criteriaValue = currentSystemLocale.toDouble(data.m_value);
+  // Qt bug:
+  // Numlock decimal separator do not return decimal separator in current locale but return coma or point depending on current language
+  // so we decided to use point always as decimal separator, that's why we should set parse value in English locale
+  auto englishLocale = QLocale(QLocale::English);
+  auto criteriaValue = englishLocale.toDouble(data.m_value);
   return dblOperator.m_function(propertyValue, criteriaValue);
 }
 

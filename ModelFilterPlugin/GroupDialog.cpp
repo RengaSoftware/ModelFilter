@@ -14,6 +14,27 @@
 
 static const unsigned int c_treeViewColumnsCount = 3;
 
+class DoublePropertyValueValidator : public QDoubleValidator
+{
+public:
+  DoublePropertyValueValidator()
+  {
+    setLocale(QLocale(QLocale::English));
+  }
+
+  QValidator::State validate(QString& input, int &pos) const
+  {
+    if (QDoubleValidator::validate(input, pos) == QValidator::State::Invalid)
+      return QValidator::State::Invalid;
+    bool isConvertedToDoubleInEnglishLocale = false;
+    QLocale(QLocale::English).toDouble(input, &isConvertedToDoubleInEnglishLocale);
+    if (isConvertedToDoubleInEnglishLocale)
+      return QValidator::State::Acceptable;
+    else
+      return QValidator::State::Invalid;
+  }
+};
+
 GroupDialog::GroupDialog(QDialog* parent)
   : QDialog(parent, Qt::WindowTitleHint | Qt::WindowSystemMenuHint | Qt::WindowCloseButtonHint)
 {
@@ -331,7 +352,17 @@ void GroupDialog::reloadOperatorBox()
 
   connect(m_pUi->operatorBox, SIGNAL(currentIndexChanged(int)), this, SLOT(onOperatorBoxIndexChanged(int)));
 
-  m_pUi->valueLine->setValidator(valueType == ValueType::Double ? new QDoubleValidator() : nullptr);
+  if (valueType == ValueType::Double)
+  {
+    // DoubleValidator::setLocale(QLocale(QLocale::English)) does not work, it allows coma
+    // Custom validator added
+    auto pDoubleValidator = new DoublePropertyValueValidator();
+    m_pUi->valueLine->setValidator(pDoubleValidator);
+  }
+  else
+  {
+    m_pUi->valueLine->setValidator(nullptr);
+  }
   reloadValueLine(m_pUi->operatorBox->currentIndex());
 }
 

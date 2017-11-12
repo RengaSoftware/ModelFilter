@@ -65,7 +65,7 @@
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
-      <OutputFile>g:\Renga_candidates\phoenix\x64\bin\Plugins\ModelFilterPlugin\$(ProjectName).rne</OutputFile>
+      <OutputFile>$(SolutionDir)$(ConfigurationName)\$(PlatformShortName)\$(ProjectName).rne</OutputFile>
       <AdditionalLibraryDirectories>$(renga_sdk)\lib\$(PlatformShortName);$(QTDIR)\lib\$(PlatformShortName);$(SolutionDir)$(Configuration)\$(PlatformShortName);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalDependencies>Qt5Cored.lib;Qt5Widgetsd.lib;Qt5Guid.lib;RengaBase.lib;RengaApi.lib;user32.lib</AdditionalDependencies>

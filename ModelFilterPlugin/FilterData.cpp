@@ -46,13 +46,9 @@ void FilterData::exportData(QFile* filterFile) const
       
       if (property.m_property.m_valueType == ValueType::Double)
       {
-        // hack to avoid locale based saving
+        // saving double value in English locale
         // better to rewrite SearchCriteria, Operator and Property to use different types inside
-        QLocale currentLocale = QLocale::system();
-        QLocale englishLocale(QLocale::English);
-        double value = currentLocale.toDouble(property.m_value);
-        QString englishLocaleDoubleValueInString = englishLocale.toString(value);
-        writer.writeTextElement("value", englishLocaleDoubleValueInString);
+        writer.writeTextElement("value", property.m_value);
       }
       else
       {
@@ -187,16 +183,8 @@ SearchCriteriaData FilterData::parseSearchCriteria(QXmlStreamReader& reader, con
     propertyType = PropertyType::Invalid;
   }
 
-  // hack to avoid locale based saving
+  // if it is double value it should be in English locale
   // better to rewrite SearchCriteria, Operator and Property to use different types inside
-  if (valueType == ValueType::Double)
-  {
-    QLocale currentLocale = QLocale::system();
-    QLocale englishLocale(QLocale::English);
-    double value = englishLocale.toDouble(propertyValue);
-    propertyValue = currentLocale.toString(value);
-  }
-
   return SearchCriteriaData(Property(propertyType, valueType, propertyName), operatorType, propertyValue);
 }
 
