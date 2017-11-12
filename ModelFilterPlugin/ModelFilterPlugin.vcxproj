@@ -76,6 +76,9 @@ copy /y $(ProjectDir)ModelFilterPlugin_ru.qm $(SolutionDir)$(Configuration)\$(Pl
 copy /y $(ProjectDir)ModelFilterPlugin_en.qm $(SolutionDir)$(Configuration)\$(PlatformShortName)\ModelFilterPlugin_en.qm
 copy /y $(ProjectDir)Resources\PluginIcon.png $(SolutionDir)$(Configuration)\$(PlatformShortName)\PluginIcon.png</Command>
     </PostBuildEvent>
+    <PreBuildEvent>
+      <Command>update_translations.bat</Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -101,6 +104,9 @@ copy /y $(ProjectDir)ModelFilterPlugin_ru.qm $(SolutionDir)$(Configuration)\$(Pl
 copy /y $(ProjectDir)ModelFilterPlugin_en.qm $(SolutionDir)$(Configuration)\$(PlatformShortName)\ModelFilterPlugin_en.qm
 copy /y $(ProjectDir)Resources\PluginIcon.png $(SolutionDir)$(Configuration)\$(PlatformShortName)\PluginIcon.png</Command>
     </PostBuildEvent>
+    <PreBuildEvent>
+      <Command>update_translations.bat</Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="BeamFilterData.cpp" />
