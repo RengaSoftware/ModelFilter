@@ -10,11 +10,11 @@ This plugin allows you to filter Renga model by different conditions.
 The plugin functionality:
 *   filtering objects by system object parameters (height, volume, surface area, etc.)
 *   filtering objects by user properties.
-*   exporting and importing filters from/into a file. 
+*   exporting and importing filters from/into a file.
 
 For example, using ModelFilter, you can filter all structural elements made of concrete or steel on some level or several levels or filter all rooms by category. You also can share filters with other users.
 
-Using the filter you can hide or isolate objects. Conditions in filters can be quite complex, however, it is easy to create and understand them.
+Using the filter you can hide, isolate or select objects using Filters dialog or context menu. Conditions in filters can be quite complex, however, it is easy to create and understand them.
 
 ### What the filter consists of
 
