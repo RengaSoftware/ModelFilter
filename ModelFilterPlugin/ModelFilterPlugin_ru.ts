@@ -75,7 +75,7 @@
     </message>
     <message>
         <source>Object type:</source>
-        <translation>Тип объета:</translation>
+        <translation>Тип объекта:</translation>
     </message>
     <message>
         <source>Property:</source>
