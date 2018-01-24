@@ -35,7 +35,7 @@ static const QString c_englishLocale = "en_EN";
 static const rengabase::String c_loadLocalizationFileError = L"Cannot open localization file.";
 static const rengabase::String c_error = L"Error";
 
-static const QString view3DContextMenuId = "C22DCE93 - 4B1D - 4746 - A464 - 77CDB3DDF368";
+static const QString view3DContextMenuId = "C22DCE93-4B1D-4746-A464-77CDB3DDF368";
 
 namespace
 {
